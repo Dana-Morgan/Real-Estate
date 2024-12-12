@@ -13,4 +13,6 @@ module com.example.realestate {
 
     opens com.example.realestate to javafx.fxml;
     exports com.example.realestate;
+    exports com.example.realestate.controllers;
+    opens com.example.realestate.controllers to javafx.fxml;
 }
