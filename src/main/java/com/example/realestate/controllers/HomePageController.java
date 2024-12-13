@@ -27,7 +27,7 @@ public class HomePageController {
         loadPage(event, "/com/example/realestate/views/ListingPage.fxml");
     }
     public void goToCustomerTable(ActionEvent event) throws IOException {
-        loadPage(event, "/com/example/realestate/views/CustomerTable.fxml");
+        loadPage(event, "/com/example/realestate/views/customerTable.fxml");
     }
     public void goToCustomerInteractionTable(ActionEvent event) throws IOException {
         loadPage(event, "/com/example/realestate/views/CustomerInteractionTable.fxml");
