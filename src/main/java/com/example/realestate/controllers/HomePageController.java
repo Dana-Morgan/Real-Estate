@@ -38,6 +38,12 @@ public class HomePageController {
     public void goTopropertiesTable(ActionEvent event) throws IOException {
         loadPage(event, "/com/example/realestate/views/propertiesTable.fxml");
     }
+    public void goToAgentTable(ActionEvent event) throws IOException {
+        loadPage(event, "/com/example/realestate/views/Create-Account.fxml");
+    }
+    public void goToLoginPage(ActionEvent event) throws IOException {
+        loadPage(event, "/com/example/realestate/views/Login.fxml");
+    }
     private void loadPage(ActionEvent event, String fxmlFile) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
         Parent root = loader.load();
