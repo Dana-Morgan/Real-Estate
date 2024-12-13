@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.HomePageController">
+
+    <!-- Center content with the form -->
+    <center>
+        <HBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
+            <TextField promptText="Location" style="-fx-font-size: 14px; -fx-pref-width: 150px;" />
+            <TextField promptText="Property Type" style="-fx-font-size: 14px; -fx-pref-width: 150px;" />
+            <TextField promptText="No. of Rooms" style="-fx-font-size: 14px; -fx-pref-width: 150px;" />
+            <TextField promptText="Size" style="-fx-font-size: 14px; -fx-pref-width: 150px;" />
+            <Button style="-fx-background-color: #ADC867; -fx-text-fill: white; -fx-font-weight: bold;" text="Submit Listing" onAction="#goToListingPage"/>
+        </HBox>
+    </center>
+
+
+
+</BorderPane>
