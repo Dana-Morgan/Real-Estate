@@ -11,8 +11,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AgreementDetailsController implements Initializable {
+
+    private static final Logger LOGGER = Logger.getLogger(AgreementDetailsController.class.getName());
 
     @FXML
     private TextField displayID;
@@ -39,7 +43,7 @@ public class AgreementDetailsController implements Initializable {
     private Button saveAD;
 
     @FXML
-    private Button back;
+    private Button backAD;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -49,23 +53,27 @@ public class AgreementDetailsController implements Initializable {
         offerStatus.getItems().addAll("Pending", "Accepted", "Rejected");
         offerStatus.setValue("Pending");
 
-        saveAD.setOnAction(event -> openAgreementTable());
+        backAD.setOnAction(event -> navigateTo("/com/example/realestate/views/AgreementTable.fxml", "Agreement Table"));
+        saveAD.setOnAction(event -> navigateTo("/com/example/realestate/views/AgreementTable.fxml", "Agreement Table"));
     }
 
-    private void openAgreementTable() {
+    private void navigateTo(String fxmlPath, String title) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/AgreementTable.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
-            Scene scene = new Scene(root, 1280, 832);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle("Agreement Table");
+
+            Stage stage;
+            if ("Agreement Table".equals(title)) {
+                stage = new Stage();
+            } else {
+                stage = (Stage) backAD.getScene().getWindow();
+            }
+
+            stage.setScene(new Scene(root, 1280, 832));
+            stage.setTitle(title);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Error: Unable to load AgreementTable.fxml. Check the file path or syntax.");
+            LOGGER.log(Level.SEVERE, "Error: Unable to load " + fxmlPath, e);
         }
-
-
     }
 }
