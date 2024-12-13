@@ -30,7 +30,7 @@ public class customerTableController {
     }
 
     private void navigateToAddCustomerDetails() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("addCustomerDetails.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/customerTable.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) AddNewCustomer_btn.getScene().getWindow();
         stage.setScene(new Scene(root));
