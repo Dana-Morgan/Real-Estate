@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.realestate.controllers.AgreementDetailsController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.AgreementDetailsController">
 
     <children>
         <Label layoutX="95.0" layoutY="62.0" text="Add Agreement Details">
@@ -18,7 +20,7 @@
             </font>
         </Label>
         <Line endX="1093.0" layoutX="130.0" layoutY="140.0" startX="-100.0" />
-        <Button layoutX="1144.0" layoutY="95.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #55407D;" text="Back" textFill="WHITE">
+        <Button fx:id="backAD" layoutX="1144.0" layoutY="95.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #55407D;" text="Back" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="12.0" />
             </font>
