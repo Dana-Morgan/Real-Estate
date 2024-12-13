@@ -2,6 +2,7 @@ module com.example.realestate {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+adda    requires java.logging;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
