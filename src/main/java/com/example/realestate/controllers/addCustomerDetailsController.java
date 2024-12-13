@@ -52,6 +52,7 @@ public class addCustomerDetailsController {
     private Button Back_btn;
 
 
+
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ActivityStatus.getItems().addAll("tenant", "Inactive", "Buyer");
         ActivityStatus.setValue("tenant");
@@ -71,8 +72,7 @@ public class addCustomerDetailsController {
     @FXML
     private void goBack() {
         try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("customerTable.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/customerTable.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) Back_btn.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -80,6 +80,17 @@ public class addCustomerDetailsController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/customerTable.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) AddCustomer_btn.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Customer Table");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
     @FXML
     protected void onHelloButtonClick() {
