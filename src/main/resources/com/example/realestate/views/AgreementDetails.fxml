@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.AgreementDetailsController">
+
+    <children>
+        <Label layoutX="95.0" layoutY="62.0" text="Add Agreement Details">
+            <font>
+                <Font name="System Bold Italic" size="45.0" />
+            </font>
+        </Label>
+        <Line endX="1093.0" layoutX="130.0" layoutY="140.0" startX="-100.0" />
+        <Button fx:id="backAD" layoutX="1144.0" layoutY="95.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #55407D;" text="Back" textFill="WHITE">
+            <font>
+                <Font name="System Bold Italic" size="12.0" />
+            </font>
+        </Button>
+        <Button fx:id="saveAD" layoutX="449.0" layoutY="653.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="356.0" style="-fx-background-color: #ADC867;" text="SAVE" textFill="WHITE">
+            <font>
+                <Font name="System Bold Italic" size="24.0" />
+            </font>
+        </Button>
+        <TextField fx:id="displayID" layoutX="145.0" layoutY="260.0" prefHeight="55.0" prefWidth="300.0">
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+        </TextField>
+        <TextField fx:id="customerID" layoutX="515.0" layoutY="260.0" prefHeight="55.0" prefWidth="300.0">
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+        </TextField>
+        <TextField fx:id="propertyID" layoutX="145.0" layoutY="375.0" prefHeight="55.0" prefWidth="300.0">
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+        </TextField>
+        <ChoiceBox fx:id="offerStatus" layoutX="515.0" layoutY="490.0" prefHeight="55.0" prefWidth="300.0" />
+        <ChoiceBox fx:id="offerType" layoutX="145.0" layoutY="490.0" prefHeight="55.0" prefWidth="300.0" />
+        <TextArea fx:id="additionalNotesAD" layoutX="875.0" layoutY="258.0" prefHeight="113.0" prefWidth="300.0" />
+        <Label layoutX="145.0" layoutY="242.0" text="Display ID ">
+            <font>
+                <Font name="System Italic" size="12.0" />
+            </font>
+        </Label>
+        <Label layoutX="145.0" layoutY="357.0" text="Property ID">
+            <font>
+                <Font name="System Italic" size="12.0" />
+            </font>
+        </Label>
+        <Label layoutX="145.0" layoutY="473.0" text="Offer type">
+            <font>
+                <Font name="System Italic" size="12.0" />
+            </font>
+        </Label>
+        <Label layoutX="515.0" layoutY="241.0" text="Customer ID">
+            <font>
+                <Font name="System Italic" size="12.0" />
+            </font>
+        </Label>
+        <Label layoutX="515.0" layoutY="357.0" text="Presentation Date">
+            <font>
+                <Font name="System Italic" size="12.0" />
+            </font>
+        </Label>
+        <Label layoutX="515.0" layoutY="472.0" text="Offer status">
+            <font>
+                <Font name="System Italic" size="12.0" />
+            </font>
+        </Label>
+        <Label layoutX="885.0" layoutY="240.0" text="Additional  notes ">
+            <font>
+                <Font name="System Italic" size="12.0" />
+            </font>
+        </Label>
+        <DatePicker fx:id="presentationDate" layoutX="514.0" layoutY="376.0" prefHeight="55.0" prefWidth="300.0" />
+    </children>
+</AnchorPane>
