@@ -38,11 +38,14 @@ public class HomePageController {
     public void goTopropertiesTable(ActionEvent event) throws IOException {
         loadPage(event, "/com/example/realestate/views/propertiesTable.fxml");
     }
+    public void goToAgentTable(ActionEvent event) throws IOException {
+        loadPage(event, "/com/example/realestate/views/Create-Account.fxml");
+    }
     private void loadPage(ActionEvent event, String fxmlFile) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
         Parent root = loader.load();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root, 1280, 832); // أبعاد النافذة
+        scene = new Scene(root, 1280, 832);
         stage.setScene(scene);
         stage.show();
     }

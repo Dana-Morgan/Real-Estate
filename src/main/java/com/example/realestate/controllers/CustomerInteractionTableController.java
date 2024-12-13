@@ -27,7 +27,7 @@ public class CustomerInteractionTableController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backbtnCIT.setOnAction(event -> navigateTo("/com/example/realestate/views/CustomerInteractionDetails.fxml", "Customer Interaction Details")); // after merging change it to navigate ti hime page
+        backbtnCIT.setOnAction(event -> navigateTo("/com/example/realestate/views/HomePage.fxml", "Home Page"));
         addInteractionbtn.setOnAction(event -> navigateTo("/com/example/realestate/views/CustomerInteractionDetails.fxml", "Add Interaction"));
     }
 
