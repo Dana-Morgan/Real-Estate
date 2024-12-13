@@ -58,7 +58,7 @@ public class CreateAccountForAgentController {
     @FXML
     void createAccount(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePage.fxml"));
             Parent newPageRoot = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(newPageRoot);
@@ -89,7 +89,7 @@ public class CreateAccountForAgentController {
             Stage currentStage = (Stage) backbut1.getScene().getWindow();
 
             // Go back to the Login page (previous scene)
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePage.fxml"));
             Parent loginRoot = loader.load();
 
             // Set the new scene (Login page)
