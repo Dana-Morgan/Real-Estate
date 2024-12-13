@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <fx:include source="Navbar.fxml" />
+    </top>
+    <center>
+        <VBox spacing="20" alignment="CENTER" style="-fx-padding: 30; -fx-background-color: #f4f4f4;">
+            <TableView fx:id="propertyTable" prefHeight="600" prefWidth="800" style="-fx-border-color:#55407D; -fx-border-width: 2; -fx-background-color: white;">
+                <columns>
+                    <TableColumn prefWidth="200" style="-fx-background-color: #55407D; -fx-text-fill: white; -fx-alignment: CENTER; -fx-border-width: 1 1 1 0; -fx-border-color: #333333;" text="Properties" />
+                    <TableColumn prefWidth="150" style="-fx-background-color: #55407D; -fx-text-fill: white; -fx-alignment: CENTER; -fx-border-width: 1 1 1 0; -fx-border-color: #333333;" text="Property Type" />
+                    <TableColumn prefWidth="150" style="-fx-background-color: #55407D; -fx-text-fill: white; -fx-alignment: CENTER; -fx-border-width: 1 1 1 0; -fx-border-color: #333333;" text="Number Of Rooms" />
+                    <TableColumn prefWidth="200" style="-fx-background-color: #55407D; -fx-text-fill: white; -fx-alignment: CENTER; -fx-border-width: 1 1 1 0; -fx-border-color: #333333;" text="Property Features" />
+                    <TableColumn prefWidth="130" style="-fx-background-color: #55407D; -fx-text-fill: white; -fx-alignment: CENTER; -fx-border-width: 1 1 1 0; -fx-border-color: #333333;" text="Area" />
+                    <TableColumn prefWidth="160" style="-fx-background-color: #55407D; -fx-text-fill: white; -fx-alignment: CENTER; -fx-border-width: 1 0 1 0; -fx-border-color: #333333;" text="Property Status" />
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+    <style>
+        -fx-pref-width: 1000;
+        -fx-pref-height: 700;
+        -fx-background-color: #f4f4f4; /* Light background for better contrast */
+    </style>
+</BorderPane>
