@@ -14,20 +14,15 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class CustomerInteractionTableController implements Initializable {
 
     private static final Logger LOGGER = Logger.getLogger(CustomerInteractionTableController.class.getName());
-
-    @FXML
-    private Button backbtnCIT;
 
     @FXML
     private Button addInteractionbtn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backbtnCIT.setOnAction(event -> navigateTo("/com/example/realestate/views/HomePage.fxml", "Home Page"));
         addInteractionbtn.setOnAction(event -> navigateTo("/com/example/realestate/views/CustomerInteractionDetails.fxml", "Add Interaction"));
     }
 
@@ -36,16 +31,9 @@ public class CustomerInteractionTableController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
 
-            Stage stage;
-            if ("Add Interaction".equals(title)) {
-                stage = new Stage();
-            } else {
-                stage = (Stage) backbtnCIT.getScene().getWindow();
-            }
-
-            stage.setScene(new Scene(root, 1280, 832));
+            Stage stage = (Stage) addInteractionbtn.getScene().getWindow();  // الحصول على الـ Stage الحالي
+            stage.setScene(new Scene(root, 1280, 832));  // تغيير المحتوى في نفس النافذة
             stage.setTitle(title);
-            stage.show();
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Error: Unable to load " + fxmlPath, e);
         }
