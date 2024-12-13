@@ -11,9 +11,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CustomerInteractionDetailsController implements Initializable {
+
+    private static final Logger LOGGER = Logger.getLogger(CustomerInteractionDetailsController.class.getName());
+
     @FXML
     private TextField ineractionID;
 
@@ -35,43 +39,31 @@ public class CustomerInteractionDetailsController implements Initializable {
     @FXML
     private Button backCID;
 
-    @FXML
-    private void handleBackButtonAction() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/CustomerInteractionDetails.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) backCID.getScene().getWindow();
-            stage.setScene(new Scene(root, 1280, 832));
-            stage.setTitle("CustomerInteractionDetails");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Error: Unable to load CustomerInteractionDetails.fxml.");
-        }
-    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         interactionType.getItems().addAll("calls", "follow-up", "inquiry");
         interactionType.setValue("calls");
-        backCID.setOnAction(event -> handleBackButtonAction());
-        saveCID.setOnAction(event -> openCustomerInteractionTable());
-
+        backCID.setOnAction(event -> navigateTo("/com/example/realestate/views/CustomerInteractionTable.fxml", "Customer Interaction Table"));
+        saveCID.setOnAction(event -> navigateTo("/com/example/realestate/views/CustomerInteractionTable.fxml", "Agreement Table"));
     }
 
-private void openCustomerInteractionTable() {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/CustomerInteractionTable.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root, 1280, 832);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setTitle("Agreement Table");
-        stage.show();
-    } catch (IOException e) {
-        e.printStackTrace();
-        System.err.println("Error: Unable to load AgreementTable.fxml. Check the file path or syntax.");
+    private void navigateTo(String fxmlPath, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+
+            Stage stage;
+            if ("Agreement Table".equals(title)) {
+                stage = new Stage();
+            } else {
+                stage = (Stage) backCID.getScene().getWindow();
+            }
+
+            stage.setScene(new Scene(root, 1280, 832));
+            stage.setTitle(title);
+            stage.show();
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Error: Unable to load " + fxmlPath, e);
+        }
     }
-
-
-}
 }
