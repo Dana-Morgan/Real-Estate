@@ -30,7 +30,6 @@ public class AgreementTableController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
-
             Stage stage = (Stage) addAgreementbtn.getScene().getWindow();
             stage.setScene(new Scene(root, 1280, 832));
             stage.setTitle(title);
