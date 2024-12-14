@@ -62,16 +62,9 @@ public class AgreementDetailsController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
 
-            Stage stage;
-            if ("Agreement Table".equals(title)) {
-                stage = new Stage();
-            } else {
-                stage = (Stage) backAD.getScene().getWindow();
-            }
-
+            Stage stage = (Stage) backAD.getScene().getWindow();
             stage.setScene(new Scene(root, 1280, 832));
             stage.setTitle(title);
-            stage.show();
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Error: Unable to load " + fxmlPath, e);
         }
