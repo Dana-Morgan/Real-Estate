@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.AgreementTableController">
+    <children>
+        <fx:include source="Navbar.fxml" />
+
+        <Label layoutX="408.0" layoutY="55.0" prefHeight="55.0" prefWidth="464.0" text="agreements table">
+            <font>
+                <Font name="System Bold Italic" size="50.0" />
+            </font>
+        </Label>
+        <TableView layoutX="10.0" layoutY="256.0" prefHeight="490.0" prefWidth="1260.0">
+            <columns>
+                <TableColumn minWidth="130.0" prefWidth="75.0" text="Display ID " />
+                <TableColumn minWidth="130.0" prefWidth="75.0" text="Customer ID" />
+                <TableColumn minWidth="130.0" prefWidth="75.0" text="Property ID" />
+                <TableColumn minWidth="135.0" prefWidth="75.0" text="Offer Type" />
+                <TableColumn minWidth="135.0" prefWidth="75.0" text="Offer status" />
+                <TableColumn minWidth="190.0" prefWidth="75.0" text="Presentation Date" />
+                <TableColumn minWidth="200.0" prefWidth="75.0" text="Additional  notes " />
+                <TableColumn minWidth="103.0" prefWidth="76.0001220703125" text="Update " />
+                <TableColumn minWidth="103.0" prefWidth="74.39990234375" text="Delete" />
+            </columns>
+        </TableView>
+        <Button fx:id="addAgreementbtn" layoutX="1145.0" layoutY="193.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="123.0" style="-fx-background-color: ADC867;" text="Add  Agreement" textFill="WHITE">
+            <font>
+                <Font name="System Bold Italic" size="12.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>
