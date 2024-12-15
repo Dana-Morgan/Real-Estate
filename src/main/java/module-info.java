@@ -3,6 +3,7 @@ module com.example.realestate {
     requires javafx.fxml;
     requires javafx.web;
     requires java.logging;
+    opens com.example.realestate.models to javafx.base;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
