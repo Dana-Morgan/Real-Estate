@@ -3,7 +3,6 @@ package com.example.realestate.models;
 import java.time.LocalDate;
 
 public class Agreement {
-
     private String displayID;
     private String customerID;
     private String propertyID;
@@ -11,9 +10,6 @@ public class Agreement {
     private String offerStatus;
     private LocalDate presentationDate;
     private String additionalNotes;
-
-    public Agreement() {
-    }
 
     public Agreement(String displayID, String customerID, String propertyID, String offerType, String offerStatus, LocalDate presentationDate, String additionalNotes) {
         this.displayID = displayID;
