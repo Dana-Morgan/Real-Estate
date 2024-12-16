@@ -13,13 +13,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import com.example.realestate.models.Interaction;
 
 public class CustomerInteractionDetailsController implements Initializable {
 
     private static final Logger LOGGER = Logger.getLogger(CustomerInteractionDetailsController.class.getName());
 
     @FXML
-    private TextField ineractionID;
+    private TextField interactionID;
 
     @FXML
     private TextField customerID;
@@ -44,26 +45,27 @@ public class CustomerInteractionDetailsController implements Initializable {
         interactionType.getItems().addAll("calls", "follow-up", "inquiry");
         interactionType.setValue("calls");
         backCID.setOnAction(event -> navigateTo("/com/example/realestate/views/CustomerInteractionTable.fxml", "Customer Interaction Table"));
-        saveCID.setOnAction(event -> navigateTo("/com/example/realestate/views/CustomerInteractionTable.fxml", "Agreement Table"));
+        saveCID.setOnAction(event -> navigateTo("/com/example/realestate/views/CustomerInteractionTable.fxml", "Customer Table"));
     }
 
     private void navigateTo(String fxmlPath, String title) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
-
-            Stage stage;
-            if ("Agreement Table".equals(title)) {
-                stage = new Stage();
-            } else {
-                stage = (Stage) backCID.getScene().getWindow();
-            }
-
+            Stage stage = (Stage) backCID.getScene().getWindow();
             stage.setScene(new Scene(root, 1280, 832));
             stage.setTitle(title);
             stage.show();
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Error: Unable to load " + fxmlPath, e);
         }
+    }
+
+    public void setInteractionDetails(Interaction interaction) {
+        interactionID.setText(interaction.getInteractionID());
+        customerID.setText(interaction.getCustomerID());
+        interactionType.setValue(interaction.getInteractionType());
+        interactionDate.setValue(interaction.getInteractionDate());
+        addtionalnotesCID.setText(interaction.getAdditionalNotes());
     }
 }
