@@ -21,7 +21,7 @@
         </Button>
         <TableView layoutX="73.0" layoutY="278.0" prefHeight="511.0" prefWidth="1134.0">
             <columns>
-                <TableColumn prefWidth="92.79999542236328" style="-fx-background-color: #55407D;" text="Customer ID " />
+                <TableColumn prefWidth="92.79999542236328" text="Customer ID " />
                 <TableColumn prefWidth="96.800048828125" text="CustomerName" />
                 <TableColumn prefWidth="104.79998779296875" text="Activity status" />
                 <TableColumn prefWidth="89.60003662109375" text="Add Date" />
