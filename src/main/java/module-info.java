@@ -11,9 +11,19 @@ module com.example.realestate {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.persistence;
+    requires org.hibernate.orm.core;
+    requires java.naming;
+    requires java.sql;
+
 
     opens com.example.realestate to javafx.fxml;
+    opens com.example.realestate.utils to javafx.fxml;
+    opens com.example.realestate.models to org.hibernate.orm.core;
+
     exports com.example.realestate;
+    exports com.example.realestate.utils;
+    exports com.example.realestate.models;
     exports com.example.realestate.controllers;
     opens com.example.realestate.controllers to javafx.fxml;
 }

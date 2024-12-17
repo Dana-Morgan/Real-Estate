@@ -1,6 +1,7 @@
 package com.example.realestate.controllers;
 
 import com.example.realestate.models.Agent;
+import com.example.realestate.services.AgentDOAImpl;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -55,9 +56,18 @@ public class CreateAccountForAgentController {
 
     @FXML
     private Button backbut1;
+    private AgentDOAImpl agentDOA = new AgentDOAImpl();
     @FXML
     void createAccount(ActionEvent event) {
         try {
+            Agent agent = new Agent();
+            agent.setName(NameSignUp.getText());
+            agent.setEmail(EmailSignUp.getText());
+            agent.setPhone(PhoneSignUp.getText());
+            agent.setPassword(PasswordSignUp.getText());
+            agent.setLicenseNumber(LicenseSignUp.getText());
+
+            agentDOA.save(agent);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePage.fxml"));
             Parent newPageRoot = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
