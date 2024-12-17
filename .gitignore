@@ -37,4 +37,5 @@ build/
 ### Mac OS ###
 .DS_Store
 
-/hibernate.cfg.xml/
+# Ignore Hibernate configuration file
+src/main/resources/hibernate.cfg.xml
