@@ -27,16 +27,7 @@ public class Agent {
     private String LicenseNumber;
 
 
-    /*
-    public Agent(int AgentId, String name, String email, String phone, String password, String licenseNumber) {
-        this.AgentId = AgentId;
-        this.name = name;
-        Email = email;
-        Phone = phone;
-        Password = password;
-        LicenseNumber = licenseNumber;
-    }
-     */
+
 
     public int getAgentId() {
         return AgentId;
