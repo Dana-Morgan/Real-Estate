@@ -27,7 +27,7 @@
                   <TableColumn fx:id="idTabel" prefWidth="63.199947357177734" text="ID" />
                   <TableColumn fx:id="NameColumn" prefWidth="97.60003662109375" text="Name" />
                   <TableColumn fx:id="EmailColumn" prefWidth="101.60003662109375" text="Email" />
-                  <TableColumn fx:id="PhonColumn" prefWidth="122.39990234375" text="Phone" />
+                  <TableColumn fx:id="PhoneColumn" prefWidth="122.39990234375" text="Phone" />
                   <TableColumn fx:id="LNColumn" prefWidth="107.19992065429688" text="Licencse Number" />
                   <TableColumn fx:id="UpdateAgent" prefWidth="75.0" text="Update" />
                   <TableColumn fx:id="DeleteAgent" prefWidth="75.0" text="Delete" />

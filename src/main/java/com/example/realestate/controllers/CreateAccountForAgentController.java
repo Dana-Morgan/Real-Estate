@@ -2,6 +2,10 @@ package com.example.realestate.controllers;
 
 import com.example.realestate.models.Agent;
 import com.example.realestate.services.AgentDOAImpl;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,8 +17,12 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
+import java.util.List;
 
 public class CreateAccountForAgentController {
+
+    @FXML
+    private TableView<Agent> agentTabel;
 
     @FXML
     private TableColumn<Agent, Integer> idTabel;
@@ -57,28 +65,49 @@ public class CreateAccountForAgentController {
     @FXML
     private Button backbut1;
     private AgentDOAImpl agentDOA = new AgentDOAImpl();
+    private ObservableList<Agent> agentList = FXCollections.observableArrayList();
+
+    @FXML
+    void initialize() {
+        // Initialize table columns
+        idTabel.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getAgentId()));
+        NameColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getName()));
+        EmailColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getEmail()));
+        PhoneColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getPhone()));
+        LNColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getLicenseNumber()));
+
+
+        // Load data into the table
+        loadAgentData();
+    }
     @FXML
     void createAccount(ActionEvent event) {
-        try {
-            Agent agent = new Agent();
-            agent.setName(NameSignUp.getText());
-            agent.setEmail(EmailSignUp.getText());
-            agent.setPhone(PhoneSignUp.getText());
-            agent.setPassword(PasswordSignUp.getText());
-            agent.setLicenseNumber(LicenseSignUp.getText());
+        Agent agent = new Agent();
+        agent.setName(NameSignUp.getText());
+        agent.setEmail(EmailSignUp.getText());
+        agent.setPhone(PhoneSignUp.getText());
+        agent.setPassword(PasswordSignUp.getText());
+        agent.setLicenseNumber(LicenseSignUp.getText());
 
-            agentDOA.save(agent);
+        agentDOA.save(agent);
+        loadAgentData();
+        agentDOA.getAll();
+            /*
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePage.fxml"));
             Parent newPageRoot = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(newPageRoot);
             stage.setScene(scene);
             stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
+             */
+    }
+    private void loadAgentData() {
+        // Fetch data from the database
+        List<Agent> agents = agentDOA.getAll();
+        agentList.setAll(agents);
+        agentTabel.setItems(agentList);
+    }
 
     @FXML
     void cancel(ActionEvent event) {

@@ -5,6 +5,7 @@ import com.example.realestate.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import javax.persistence.Query;
 import java.util.List;
 
 public class AgentDOAImpl implements AgentDOA{
@@ -44,12 +45,39 @@ public class AgentDOAImpl implements AgentDOA{
     }
 
     @Override
-    public List<Agent> getAll(Agent agent) {
-        return List.of();
+    public List<Agent> getAll( ) {
+        SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
+        Session session = sessionFactory.openSession();
+        return session.createQuery("SELECT u from Agent u").list();
     }
 
     @Override
     public Agent getByEmail(String Email) {
-        return null;
+        SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
+        Session session = sessionFactory.openSession();
+        return session.get(Agent.class, Email);
     }
-}
+
+
+
+        @Override
+        public Agent login(String email, String password) {
+            SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
+            Session session = sessionFactory.openSession();
+            Agent agent = null;
+
+            try {
+                String hql = "FROM Agent WHERE Email = :email AND Password = :password";
+                Query query = session.createQuery(hql);
+                query.setParameter("email", email);
+                query.setParameter("password", password);
+                agent = (Agent) ((org.hibernate.query.Query<?>) query).uniqueResult();
+            } catch (Exception e) {
+                e.printStackTrace(); // Corrected here
+            } finally {
+                session.close();
+            }
+
+            return agent; // Returns null if no agent is found with given email and password
+        }
+    }
