@@ -1,5 +1,6 @@
 package com.example.realestate.utils;
 
+import com.example.realestate.models.Admin;
 import com.example.realestate.models.Agent;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -17,6 +18,7 @@ public class HibernateUtil {
     private HibernateUtil(){
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Agent.class);
+        configuration.addAnnotatedClass(Admin.class);
         configuration.configure();
         serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties()).build();

@@ -1,6 +1,8 @@
 package com.example.realestate.controllers;
 
+import com.example.realestate.models.Admin;
 import com.example.realestate.models.Agent;
+import com.example.realestate.services.AdminDOAImpl;
 import com.example.realestate.services.AgentDOAImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,6 +34,7 @@ public class LoginController {
     @FXML
     private PasswordField passordLogin;
     private AgentDOAImpl agentDAO = new AgentDOAImpl(); // Instantiate AgentDOAImpl
+    private AdminDOAImpl adminDOA = new AdminDOAImpl(); // Instantiate AgentDOAImpl
     private MouseEvent event;
 
     @FXML
@@ -58,8 +61,9 @@ public class LoginController {
 
         // Call login method to check credentials
         Agent agent = agentDAO.login(email, password);
+        Admin admin = adminDOA.login(email, password);
 
-        if (agent != null) {
+        if (agent != null || admin != null ) {
             // If login is successful, navigate to the HomePage
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePage.fxml"));
