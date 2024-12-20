@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -8,81 +7,39 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.GridPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.AgreementDetailsController">
-
+<AnchorPane prefHeight="832.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.AgreementDetailsController">
     <children>
-        <Label layoutX="95.0" layoutY="62.0" text="Add Agreement Details">
-            <font>
-                <Font name="System Bold Italic" size="45.0" />
-            </font>
-        </Label>
-        <Line endX="1093.0" layoutX="130.0" layoutY="140.0" startX="-100.0" />
-        <Button fx:id="backAD" layoutX="1144.0" layoutY="95.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #55407D;" text="Back" textFill="WHITE">
-            <font>
-                <Font name="System Bold Italic" size="12.0" />
-            </font>
-        </Button>
-        <Button fx:id="saveAD" layoutX="449.0" layoutY="653.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="356.0" style="-fx-background-color: #ADC867;" text="SAVE" textFill="WHITE">
-            <font>
-                <Font name="System Bold Italic" size="24.0" />
-            </font>
-        </Button>
-        <TextField fx:id="displayID" layoutX="145.0" layoutY="260.0" prefHeight="55.0" prefWidth="300.0">
-            <opaqueInsets>
-                <Insets />
-            </opaqueInsets>
-        </TextField>
-        <TextField fx:id="customerID" layoutX="515.0" layoutY="260.0" prefHeight="55.0" prefWidth="300.0">
-            <opaqueInsets>
-                <Insets />
-            </opaqueInsets>
-        </TextField>
-        <TextField fx:id="propertyID" layoutX="145.0" layoutY="375.0" prefHeight="55.0" prefWidth="300.0">
-            <opaqueInsets>
-                <Insets />
-            </opaqueInsets>
-        </TextField>
-        <ChoiceBox fx:id="offerStatus" layoutX="515.0" layoutY="490.0" prefHeight="55.0" prefWidth="300.0" />
-        <ChoiceBox fx:id="offerType" layoutX="145.0" layoutY="490.0" prefHeight="55.0" prefWidth="300.0" />
-        <TextArea fx:id="additionalNotesAD" layoutX="875.0" layoutY="258.0" prefHeight="113.0" prefWidth="300.0" />
-        <Label layoutX="145.0" layoutY="242.0" text="Display ID ">
-            <font>
-                <Font name="System Italic" size="12.0" />
-            </font>
-        </Label>
-        <Label layoutX="145.0" layoutY="357.0" text="Property ID">
-            <font>
-                <Font name="System Italic" size="12.0" />
-            </font>
-        </Label>
-        <Label layoutX="145.0" layoutY="473.0" text="Offer type">
-            <font>
-                <Font name="System Italic" size="12.0" />
-            </font>
-        </Label>
-        <Label layoutX="515.0" layoutY="241.0" text="Customer ID">
-            <font>
-                <Font name="System Italic" size="12.0" />
-            </font>
-        </Label>
-        <Label layoutX="515.0" layoutY="357.0" text="Presentation Date">
-            <font>
-                <Font name="System Italic" size="12.0" />
-            </font>
-        </Label>
-        <Label layoutX="515.0" layoutY="472.0" text="Offer status">
-            <font>
-                <Font name="System Italic" size="12.0" />
-            </font>
-        </Label>
-        <Label layoutX="885.0" layoutY="240.0" text="Additional  notes ">
-            <font>
-                <Font name="System Italic" size="12.0" />
-            </font>
-        </Label>
-        <DatePicker fx:id="presentationDate" layoutX="514.0" layoutY="376.0" prefHeight="55.0" prefWidth="300.0" />
+        <Button fx:id="backAD" text="Back" prefWidth="100" style="-fx-background-color: #7F5B97; -fx-text-fill: white; -fx-font-size: 14px;" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="50.0"/>
+
+        <Label text="Add Agreement Details" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="120.0" style="-fx-font-family: 'Arial'; -fx-font-size: 45px; -fx-font-weight: bold; -fx-text-fill: #333;" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <GridPane vgap="10" hgap="20" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="200.0" AnchorPane.bottomAnchor="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3" style="-fx-padding: 20;">
+            <Label text="Display ID" style="-fx-font-size: 14px;" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+            <TextField fx:id="displayID" promptText="Enter Display ID" style="-fx-pref-width: 300px; -fx-pref-height: 55px; -fx-font-size: 14px;" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+
+            <Label text="Property ID" style="-fx-font-size: 14px;" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+            <TextField fx:id="propertyID" promptText="Enter Property ID" style="-fx-pref-width: 300px; -fx-pref-height: 55px; -fx-font-size: 14px;" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+
+            <Label text="Offer Type" style="-fx-font-size: 14px;" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
+            <ChoiceBox fx:id="offerType" style="-fx-pref-width: 300px; -fx-pref-height: 55px; -fx-font-size: 14px;" GridPane.columnIndex="0" GridPane.rowIndex="9"/>
+
+            <Label text="Customer ID" style="-fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+            <TextField fx:id="customerID" promptText="Enter Customer ID" style="-fx-pref-width: 300px; -fx-pref-height: 55px; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+            <Label text="Presentation Date" style="-fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+            <DatePicker fx:id="presentationDate" promptText="Select Date" style="-fx-pref-width: 300px; -fx-pref-height: 55px;" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+
+            <Label text="Offer Status" style="-fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+            <ChoiceBox fx:id="offerStatus" style="-fx-pref-width: 300px; -fx-pref-height: 55px; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+
+            <Label text="Additional Notes" style="-fx-font-size: 14px;" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+            <TextArea fx:id="additionalNotesAD" prefHeight="80" promptText="Enter additional notes" style="-fx-pref-width: 300px; -fx-font-size: 14px;" GridPane.columnIndex="2" GridPane.rowIndex="5" GridPane.rowSpan="5"/>
+
+            <GridPane vgap="50" GridPane.columnIndex="0" GridPane.rowIndex="14" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="50.0" hgap="20">
+                <Button fx:id="saveAD" prefWidth="200" style="-fx-background-color: #A1D76E; -fx-text-fill: white; -fx-font-size: 14px;" text="Save" GridPane.columnIndex="1"/>
+            </GridPane>
+        </GridPane>
     </children>
 </AnchorPane>

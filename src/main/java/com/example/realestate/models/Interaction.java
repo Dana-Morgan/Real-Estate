@@ -1,16 +1,13 @@
 package com.example.realestate.models;
+
 import java.time.LocalDate;
 
 public class Interaction {
-
     private String interactionID;
     private String customerID;
     private String interactionType;
     private LocalDate interactionDate;
     private String additionalNotes;
-
-    public Interaction() {
-    }
 
     public Interaction(String interactionID, String customerID, String interactionType, LocalDate interactionDate, String additionalNotes) {
         this.interactionID = interactionID;
@@ -19,6 +16,7 @@ public class Interaction {
         this.interactionDate = interactionDate;
         this.additionalNotes = additionalNotes;
     }
+
     public String getInteractionID() {
         return interactionID;
     }
@@ -58,5 +56,4 @@ public class Interaction {
     public void setAdditionalNotes(String additionalNotes) {
         this.additionalNotes = additionalNotes;
     }
-
-   }
+}

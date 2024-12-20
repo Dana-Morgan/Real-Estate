@@ -1,43 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-
-
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.realestate.controllers.CustomerInteractionTableController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="832.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.CustomerInteractionTableController">
 
-    <children>
-        <Label layoutX="297.0" layoutY="55.0" prefHeight="74.0" prefWidth="686.0" text="customer interaction table">
-            <font>
-                <Font name="System Bold Italic" size="50.0" />
-            </font>
-        </Label>
-        <TableView layoutX="75.0" layoutY="257.0" prefHeight="490.0" prefWidth="1130.0">
-            <columns>
-                <TableColumn minWidth="130.0" prefWidth="75.0" text="interaction ID " />
-                <TableColumn minWidth="130.0" prefWidth="75.0" text="Customer ID" />
-                <TableColumn minWidth="135.0" prefWidth="75.0" text="interaction type " />
-                <TableColumn minWidth="135.0" prefWidth="75.0" text="interaction type " />
-                <TableColumn minWidth="190.0" prefWidth="75.0" text="interaction  date" />
-                <TableColumn minWidth="200.0" prefWidth="75.0" text="Additional  notes " />
-                <TableColumn minWidth="103.0" prefWidth="76.0001220703125" text="Update " />
-                <TableColumn minWidth="103.0" prefWidth="74.39990234375" text="Delete" />
-            </columns>
-        </TableView>
-        <Button fx:id="addInteractionbtn" layoutX="1081.0" layoutY="191.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="123.0" style="-fx-background-color: ADC867;" text="Add  Interaction" textFill="WHITE">
-            <font>
-                <Font name="System Bold Italic" size="12.0" />
-            </font>
-        </Button>
-        <Button fx:id="backbtnCIT" layoutX="23.0" layoutY="21.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: #55407D;" text="back" textFill="WHITE">
-            <font>
-                <Font name="System Bold Italic" size="12.0" />
-            </font>
-        </Button>
-    </children>
+    <fx:include source="Navbar.fxml" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+    <Label text="Customer Interactions" AnchorPane.topAnchor="80" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+        <font>
+            <Font name="System Bold Italic" size="50.0" />
+        </font>
+    </Label>
+    <Button fx:id="addInteractionbtn" AnchorPane.topAnchor="160" AnchorPane.rightAnchor="20" prefHeight="40.0" prefWidth="123.0" style="-fx-background-color: #ADC867;" text="Add Interaction" textFill="WHITE">
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font>
+    </Button>
+    <TableView fx:id="interactionTable" AnchorPane.topAnchor="220" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="60">
+        <columns>
+            <TableColumn fx:id="interactionIDColumn" text="Interaction ID" />
+            <TableColumn fx:id="customerIDColumn" text="Customer ID" />
+            <TableColumn fx:id="interactionTypeColumn" text="Interaction Type" />
+            <TableColumn fx:id="interactionDateColumn" text="Interaction Date" />
+            <TableColumn fx:id="additionalNotesColumn" text="Additional Notes" />
+            <TableColumn fx:id="updateColumn" text="Update" />
+            <TableColumn fx:id="deleteColumn" text="Delete" />
+        </columns>
+    </TableView>
 </AnchorPane>
