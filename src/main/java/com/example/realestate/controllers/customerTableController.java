@@ -1,5 +1,6 @@
 package com.example.realestate.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,27 +19,17 @@ public class customerTableController {
     @FXML
     private Label CustomerTableL;
 
-    @FXML
-    private void initialize() {
-        AddNewCustomer_btn.setOnAction(event -> {
-            try {
-                navigateToAddCustomerDetails();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }
 
-    private void navigateToAddCustomerDetails() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/customerTable.fxml"));
-        Parent root = loader.load();
+
+    public void navigateToAddCustomerDetails(ActionEvent event) throws IOException {
         Stage stage = (Stage) AddNewCustomer_btn.getScene().getWindow();
-        stage.setScene(new Scene(root));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/addCustomerDetails.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
         stage.setTitle("Add Customer Details");
+        stage.show();
+
     }
 
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
 }
