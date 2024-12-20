@@ -3,13 +3,13 @@ package com.example.realestate.models;
 import java.time.LocalDate;
 
 public class Interaction {
-    private String interactionID;
+    private int interactionID;
     private String customerID;
     private String interactionType;
     private LocalDate interactionDate;
     private String additionalNotes;
 
-    public Interaction(String interactionID, String customerID, String interactionType, LocalDate interactionDate, String additionalNotes) {
+    public Interaction(int interactionID, String customerID, String interactionType, LocalDate interactionDate, String additionalNotes) {
         this.interactionID = interactionID;
         this.customerID = customerID;
         this.interactionType = interactionType;
@@ -17,11 +17,11 @@ public class Interaction {
         this.additionalNotes = additionalNotes;
     }
 
-    public String getInteractionID() {
+    public int getInteractionID() {
         return interactionID;
     }
 
-    public void setInteractionID(String interactionID) {
+    public void setInteractionID(int interactionID) {
         this.interactionID = interactionID;
     }
 
