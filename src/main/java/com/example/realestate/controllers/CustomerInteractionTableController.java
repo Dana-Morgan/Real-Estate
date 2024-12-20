@@ -64,9 +64,9 @@ public class CustomerInteractionTableController implements Initializable {
         additionalNotesColumn.setCellValueFactory(new PropertyValueFactory<>("additionalNotes"));
 
         interactionList = FXCollections.observableArrayList(
-                new Interaction("I001", "C123", "Phone Call", LocalDate.of(2023, 12, 1), "Discussed property details"),
-                new Interaction("I002", "C124", "Email", LocalDate.of(2023, 12, 5), "Sent pricing info"),
-                new Interaction("I003", "C125", "Meeting", LocalDate.of(2023, 12, 10), "Reviewed contracts")
+                new Interaction(1, "C123", "Phone Call", LocalDate.of(2023, 12, 1), "Discussed property details"),
+                new Interaction(2, "C124", "Email", LocalDate.of(2023, 12, 5), "Sent pricing info"),
+                new Interaction(3, "C125", "Meeting", LocalDate.of(2023, 12, 10), "Reviewed contracts")
         );
 
         interactionTable.setItems(interactionList);

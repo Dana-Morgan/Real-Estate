@@ -34,7 +34,7 @@
                 <Font name="System Italic" size="13.0" />
             </font>
         </Label>
-        <Button fx:id="addPropertyBtn" layoutX="1100.0" layoutY="163.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="123.0" style="-fx-background-color: #ADC867;" text="Add Property" textFill="WHITE">
+        <Button fx:id="addPropertyBtn" layoutX="1100.0" layoutY="163.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="123.0" style="-fx-background-color: #ADC867;" text="Add Property" textFill="WHITE" onAction="#goToPF">
             <font>
                 <Font name="System Bold" size="13.0" />
             </font>

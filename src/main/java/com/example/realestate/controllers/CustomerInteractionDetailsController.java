@@ -62,7 +62,7 @@ public class CustomerInteractionDetailsController implements Initializable {
     }
 
     public void setInteractionDetails(Interaction interaction) {
-        interactionID.setText(interaction.getInteractionID());
+        interactionID.setText(String.valueOf(interaction.getInteractionID()));
         customerID.setText(interaction.getCustomerID());
         interactionType.setValue(interaction.getInteractionType());
         interactionDate.setValue(interaction.getInteractionDate());
