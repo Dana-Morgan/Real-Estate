@@ -15,6 +15,7 @@ module com.example.realestate {
     requires org.hibernate.orm.core;
     requires java.naming;
     requires java.sql;
+    requires mysql.connector.java;
 
 
     opens com.example.realestate to javafx.fxml;
