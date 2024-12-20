@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import com.example.realestate.models.Agreement;
 
 public class AgreementDetailsController implements Initializable {
 
@@ -57,23 +58,27 @@ public class AgreementDetailsController implements Initializable {
         saveAD.setOnAction(event -> navigateTo("/com/example/realestate/views/AgreementTable.fxml", "Agreement Table"));
     }
 
+
     private void navigateTo(String fxmlPath, String title) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
-
-            Stage stage;
-            if ("Agreement Table".equals(title)) {
-                stage = new Stage();
-            } else {
-                stage = (Stage) backAD.getScene().getWindow();
-            }
-
+            Stage stage = (Stage) backAD.getScene().getWindow();
             stage.setScene(new Scene(root, 1280, 832));
             stage.setTitle(title);
             stage.show();
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Error: Unable to load " + fxmlPath, e);
         }
+    }
+
+    public void setAgreementDetails(Agreement agreement) {
+        displayID.setText(agreement.getDisplayID());
+        customerID.setText(agreement.getCustomerID());
+        propertyID.setText(agreement.getPropertyID());
+        offerType.setValue(agreement.getOfferType());
+        offerStatus.setValue(agreement.getOfferStatus());
+        presentationDate.setValue(agreement.getPresentationDate());
+        additionalNotesAD.setText(agreement.getAdditionalNotes());
     }
 }
