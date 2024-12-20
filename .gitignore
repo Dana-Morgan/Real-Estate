@@ -31,11 +31,12 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+# Ignore Hibernate configuration file
+src/main/resources/hibernate.cfg.xml
+
 ### VS Code ###
 .vscode/
 
 ### Mac OS ###
 .DS_Store
 
-# Ignore Hibernate configuration file
-src/main/resources/hibernate.cfg.xml
