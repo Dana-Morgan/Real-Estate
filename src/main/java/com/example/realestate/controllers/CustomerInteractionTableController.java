@@ -73,14 +73,12 @@ public class CustomerInteractionTableController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // تعيين الخصائص لكل عمود في الـ TableView
         interactionIDColumn.setCellValueFactory(new PropertyValueFactory<>("interactionID"));
         customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         interactionTypeColumn.setCellValueFactory(new PropertyValueFactory<>("interactionType"));
         interactionDateColumn.setCellValueFactory(new PropertyValueFactory<>("interactionDate"));
         additionalNotesColumn.setCellValueFactory(new PropertyValueFactory<>("additionalNotes"));
 
-        // تعيين زر "تحديث" في العمود
         updateColumn.setCellFactory(column -> {
             TableCell<Interaction, String> cell = new TableCell<Interaction, String>() {
                 private final Button updateButton = new Button("Update");
@@ -105,7 +103,6 @@ public class CustomerInteractionTableController implements Initializable {
             return cell;
         });
 
-        // تعيين زر "حذف" في العمود
         deleteColumn.setCellFactory(column -> {
             TableCell<Interaction, String> cell = new TableCell<Interaction, String>() {
                 private final Button deleteButton = new Button("Delete");
@@ -130,7 +127,6 @@ public class CustomerInteractionTableController implements Initializable {
             return cell;
         });
 
-        // ربط العرض مع عرض الـ TableView بشكل ديناميكي
         interactionIDColumn.prefWidthProperty().bind(interactionTable.widthProperty().divide(7));
         customerIDColumn.prefWidthProperty().bind(interactionTable.widthProperty().divide(7));
         interactionTypeColumn.prefWidthProperty().bind(interactionTable.widthProperty().divide(7));
@@ -153,7 +149,7 @@ public class CustomerInteractionTableController implements Initializable {
             String additionalNotes = additionalNotesArea.getText();
 
             Interaction interaction = new Interaction(customerID, interactionType, interactionDate, additionalNotes);
-            interactionDOA.save(interaction);  // استخدام InteractionDOA لحفظ التفاعل
+            interactionDOA.save(interaction);
 
             refreshTable();
             clearFields();
@@ -166,14 +162,13 @@ public class CustomerInteractionTableController implements Initializable {
     private void handleDeleteInteraction() {
         Interaction selectedInteraction = interactionTable.getSelectionModel().getSelectedItem();
         if (selectedInteraction != null) {
-            interactionDOA.delete(selectedInteraction);  // حذف التفاعل من قاعدة البيانات
-
+            interactionDOA.delete(selectedInteraction);
             refreshTable();
         }
     }
 
     private void refreshTable() {
-        ObservableList<Interaction> interactionList = FXCollections.observableArrayList(interactionDOA.getAll());  // استخدام InteractionDOA لجلب جميع التفاعلات
+        ObservableList<Interaction> interactionList = FXCollections.observableArrayList(interactionDOA.getAll());
         interactionTable.setItems(interactionList);
     }
 
@@ -220,10 +215,8 @@ public class CustomerInteractionTableController implements Initializable {
 
     @FXML
     private void handleDeleteInteractionPage(Interaction interaction) {
-        // حذف التفاعل من قاعدة البيانات
         interactionDOA.delete(interaction);
 
-        // تحديث الجدول بعد الحذف
         refreshTable();
     }
 }
