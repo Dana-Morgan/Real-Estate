@@ -37,3 +37,6 @@ src/main/resources/hibernate.cfg.xml
 
 ### Mac OS ###
 .DS_Store
+
+# Ignore Hibernate configuration file
+src/main/resources/hibernate.cfg.xml

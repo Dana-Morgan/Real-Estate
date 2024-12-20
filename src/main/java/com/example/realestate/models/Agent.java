@@ -1,22 +1,33 @@
 package com.example.realestate.models;
 
+import javax.persistence.*;
+
+
+@Entity
+@Table(name = "agents")
 public class Agent {
+
+    @Id
+    @GeneratedValue
     private int AgentId;
+
+    @Column(name="name")
     private String name;
-    private int Email;
-    private int Phone;
+
+    @Column(name="email")
+    private String Email;
+
+    @Column(name="phone")
+    private String Phone;
+
+    @Column(name="password")
     private String Password;
+
+    @Column(name="licensenumber")
     private String LicenseNumber;
 
 
-    public Agent(int AgentId, String name, int email, int phone, String password, String licenseNumber) {
-        this.AgentId = AgentId;
-        this.name = name;
-        Email = email;
-        Phone = phone;
-        Password = password;
-        LicenseNumber = licenseNumber;
-    }
+
 
     public int getAgentId() {
         return AgentId;
@@ -34,19 +45,19 @@ public class Agent {
         this.name = name;
     }
 
-    public int getEmail() {
+    public String getEmail() {
         return Email;
     }
 
-    public void setEmail(int email) {
+    public void setEmail(String email) {
         Email = email;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return Phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         Phone = phone;
     }
 
