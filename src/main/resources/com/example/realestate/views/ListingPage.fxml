@@ -33,12 +33,12 @@
 
                     <TableView fx:id="propertyTable" prefHeight="600" prefWidth="1043.0" style="-fx-border-color:#55407D; -fx-border-width: 2; -fx-background-color: white;">
                         <columns>
-                            <TableColumn prefWidth="200" style="-fx-background-color: #55407D; -fx-text-fill: white; -fx-alignment: CENTER; -fx-border-width: 1 1 1 0; -fx-border-color: #333333;" text="Properties" />
-                            <TableColumn prefWidth="150" style="-fx-background-color: #55407D; -fx-text-fill: white; -fx-alignment: CENTER; -fx-border-width: 1 1 1 0; -fx-border-color: #333333;" text="Property Type" />
-                            <TableColumn prefWidth="150" style="-fx-background-color: #55407D; -fx-text-fill: white; -fx-alignment: CENTER; -fx-border-width: 1 1 1 0; -fx-border-color: #333333;" text="Number Of Rooms" />
-                            <TableColumn prefWidth="243.19998168945312" style="-fx-background-color: #55407D; -fx-text-fill: white; -fx-alignment: CENTER; -fx-border-width: 1 1 1 0; -fx-border-color: #333333;" text="Property Features" />
-                            <TableColumn prefWidth="165.5999755859375" style="-fx-background-color: #55407D; -fx-text-fill: white; -fx-alignment: CENTER; -fx-border-width: 1 1 1 0; -fx-border-color: #333333;" text="Area" />
-                            <TableColumn prefWidth="267.2000732421875" style="-fx-background-color: #55407D; -fx-text-fill: white; -fx-alignment: CENTER; -fx-border-width: 1 0 1 0; -fx-border-color: #333333;" text="Property Status" />
+                            <TableColumn prefWidth="200" style=" -fx-text-fill: white; -fx-alignment: CENTER; -fx-border-width: 1 1 1 0; -fx-border-color: #333333;" text="Properties" />
+                            <TableColumn prefWidth="150" style="-fx-text-fill: white; -fx-alignment: CENTER; -fx-border-width: 1 1 1 0; -fx-border-color: #333333;" text="Property Type" />
+                            <TableColumn prefWidth="150" style=" -fx-text-fill: white; -fx-alignment: CENTER; -fx-border-width: 1 1 1 0; -fx-border-color: #333333;" text="Number Of Rooms" />
+                            <TableColumn prefWidth="243.19998168945312" style=" -fx-text-fill: white; -fx-alignment: CENTER; -fx-border-width: 1 1 1 0; -fx-border-color: #333333;" text="Property Features" />
+                            <TableColumn prefWidth="165.5999755859375" style="-fx-text-fill: white; -fx-alignment: CENTER; -fx-border-width: 1 1 1 0; -fx-border-color: #333333;" text="Area" />
+                            <TableColumn prefWidth="267.2000732421875" style=" -fx-text-fill: white; -fx-alignment: CENTER; -fx-border-width: 1 0 1 0; -fx-border-color: #333333;" text="Property Status" />
                         </columns>
                     </TableView>
                 </VBox>
