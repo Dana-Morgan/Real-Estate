@@ -36,6 +36,7 @@ src/main/resources/hibernate.cfg.xml
 
 ### VS Code ###
 .vscode/
+src/main/resources/hibernate.cfg.xml
 
 ### Mac OS ###
 .DS_Store
