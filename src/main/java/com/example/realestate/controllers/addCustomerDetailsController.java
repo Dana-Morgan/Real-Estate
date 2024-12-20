@@ -2,6 +2,7 @@ package com.example.realestate.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -11,7 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class addCustomerDetailsController {
+public class addCustomerDetailsController implements Initializable {
     @FXML
     private Label welcomeText;
     @FXML
@@ -52,7 +53,6 @@ public class addCustomerDetailsController {
     private Button Back_btn;
 
 
-
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ActivityStatus.getItems().addAll("tenant", "Inactive", "Buyer");
         ActivityStatus.setValue("tenant");
@@ -75,16 +75,6 @@ public class addCustomerDetailsController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/customerTable.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) Back_btn.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Customer Table");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/customerTable.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) AddCustomer_btn.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Customer Table");
         } catch (IOException e) {
