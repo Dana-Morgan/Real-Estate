@@ -15,11 +15,19 @@
             <Font name="System Bold Italic" size="30.0" />
         </font>
     </Label>
-    <Button fx:id="addInteractionbtn" prefHeight="39.0" prefWidth="213.0" style="-fx-background-color: #ADC867;" text="Add Interaction" textFill="WHITE" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="160">
+    <Button fx:id="addInteractionbtn"
+            prefHeight="39.0" prefWidth="213.0"
+            style="-fx-background-color: #ADC867;"
+            text="Add Interaction"
+            textFill="WHITE"
+            AnchorPane.rightAnchor="20"
+            AnchorPane.topAnchor="160"
+            onAction="#handleAddInteractionPage">
         <font>
             <Font name="System Bold" size="12.0" />
         </font>
     </Button>
+
     <TableView fx:id="interactionTable" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="60" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="220">
         <columns>
             <TableColumn fx:id="interactionIDColumn" text="Interaction ID" prefWidth="100.0" style="-fx-alignment: CENTER;" />
