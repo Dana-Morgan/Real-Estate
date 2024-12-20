@@ -26,7 +26,7 @@ public class AgreementTableController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        backbtnAT.setOnAction(event -> navigateTo("/com/example/realestate/views/CustomerInteractionTable.fxml", "Customer Interaction Table"));
+        backbtnAT.setOnAction(event -> navigateTo("/com/example/realestate/views/HomePage.fxml", "Home Page"));
         addAgreementbtn.setOnAction(event -> navigateTo("/com/example/realestate/views/AgreementDetails.fxml", "Add Agreement"));
     }
 
