@@ -63,6 +63,12 @@ public class CreateAccountForAgentController {
     private Button canclebut;
 
     @FXML
+    private TableColumn<Agent, Void> UpdateAgent;
+
+    @FXML
+    private TableColumn<Agent, Void> DeleteAgent;
+
+    @FXML
     private Button backbut1;
     private AgentDOAImpl agentDOA = new AgentDOAImpl();
     private ObservableList<Agent> agentList = FXCollections.observableArrayList();
@@ -75,7 +81,8 @@ public class CreateAccountForAgentController {
         EmailColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getEmail()));
         PhoneColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getPhone()));
         LNColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getLicenseNumber()));
-
+        addUpdateButtonToTable();
+        addDeleteButtonToTable();
 
         // Load data into the table
         loadAgentData();
@@ -107,6 +114,68 @@ public class CreateAccountForAgentController {
         List<Agent> agents = agentDOA.getAll();
         agentList.setAll(agents);
         agentTabel.setItems(agentList);
+    }
+    private void addUpdateButtonToTable() {
+        UpdateAgent.setCellFactory(column -> {
+            return new TableCell<Agent, Void>() {
+                private final Button updateButton = new Button("Update");
+
+                {
+                    updateButton.setOnAction(event -> {
+                        Agent agent = getTableView().getItems().get(getIndex());
+                        updateAgent(agent); // Handle update logic
+                    });
+                }
+
+                @Override
+                protected void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        setGraphic(updateButton);
+                    }
+                }
+            };
+        });
+    }
+
+    private void addDeleteButtonToTable() {
+        DeleteAgent.setCellFactory(column -> {
+            return new TableCell<Agent, Void>() {
+                private final Button deleteButton = new Button("Delete");
+
+                {
+                    deleteButton.setOnAction(event -> {
+                        Agent agent = getTableView().getItems().get(getIndex());
+                        deleteAgent(agent); // Handle delete logic
+                    });
+                }
+
+                @Override
+                protected void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        setGraphic(deleteButton);
+                    }
+                }
+            };
+        });
+    }
+
+    private void updateAgent(Agent agent) {
+        // Implement the logic to update the agent
+        System.out.println("Updating agent: " + agent.getName());
+        // You can open a new dialog with pre-filled values or update inline
+    }
+
+    private void deleteAgent(Agent agent) {
+        // Implement the logic to delete the agent
+        agentDOA.delete(agent);  // Assuming you have a delete method in the DAO
+        loadAgentData(); // Refresh table
+        System.out.println("Deleted agent: " + agent.getName());
     }
 
     @FXML

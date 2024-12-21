@@ -41,7 +41,11 @@ public class AgentDOAImpl implements AgentDOA{
 
     @Override
     public void delete(Agent agent) {
-
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.delete(agent);
+            session.getTransaction().commit();
+        }
     }
 
     @Override
