@@ -54,6 +54,7 @@ public class AddProFormController implements Initializable {
     @FXML
     public TextField UploadImage;
     public Button Update_btn;
+    public TextField title;
     private Scene scene;
 
     @Override
