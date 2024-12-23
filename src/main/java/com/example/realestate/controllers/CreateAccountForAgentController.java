@@ -2,6 +2,7 @@ package com.example.realestate.controllers;
 
 import com.example.realestate.models.Agent;
 import com.example.realestate.services.AgentDOAImpl;
+import com.example.realestate.validation.ValiditionAgentAccount;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
@@ -34,6 +35,8 @@ public class CreateAccountForAgentController {
     private TableColumn<Agent, String> PhoneColumn;
     @FXML
     private TableColumn<Agent, String> LNColumn;
+    @FXML
+    private TableColumn<Agent, String> passwordColumn;
 
     @FXML
     private Button CreateBut;
@@ -81,6 +84,7 @@ public class CreateAccountForAgentController {
         EmailColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getEmail()));
         PhoneColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getPhone()));
         LNColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getLicenseNumber()));
+        passwordColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getPassword()));
         addUpdateButtonToTable();
         addDeleteButtonToTable();
 
@@ -89,6 +93,16 @@ public class CreateAccountForAgentController {
     }
     @FXML
     void createAccount(ActionEvent event) {
+        String name = NameSignUp.getText();
+        String email = EmailSignUp.getText();
+        String phone = PhoneSignUp.getText();
+        String password = PasswordSignUp.getText();
+        String license = LicenseSignUp.getText();
+        String validationMessage = ValiditionAgentAccount.validateAllInputs(name, email, phone, password, license);
+        if (validationMessage != null) {
+            showAlert("Validation Error", validationMessage); // Show validation error
+            return; // Stop account creation if validation fails
+        }
         Agent agent = new Agent();
         agent.setName(NameSignUp.getText());
         agent.setEmail(EmailSignUp.getText());
@@ -114,6 +128,13 @@ public class CreateAccountForAgentController {
         List<Agent> agents = agentDOA.getAll();
         agentList.setAll(agents);
         agentTabel.setItems(agentList);
+    }
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
     private void addUpdateButtonToTable() {
         UpdateAgent.setCellFactory(column -> {
