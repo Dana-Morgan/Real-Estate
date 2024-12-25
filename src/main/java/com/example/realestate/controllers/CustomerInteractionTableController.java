@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.application.Platform;
 
 import java.io.IOException;
 import java.net.URL;
@@ -110,7 +111,7 @@ public class CustomerInteractionTableController implements Initializable {
                 {
                     deleteButton.setOnAction(event -> {
                         Interaction interaction = getTableView().getItems().get(getIndex());
-                        handleDeleteInteractionPage(interaction);
+                        handleDeleteInteraction(interaction);
                     });
                 }
 
@@ -148,23 +149,42 @@ public class CustomerInteractionTableController implements Initializable {
             LocalDate interactionDate = interactionDateField.getValue();
             String additionalNotes = additionalNotesArea.getText();
 
+            if (customerID <= 0 || interactionType.isEmpty() || interactionDate == null) {
+                showAlert(Alert.AlertType.ERROR, "Validation Error", "All fields except Additional Notes are required.");
+                return;
+            }
+
             Interaction interaction = new Interaction(customerID, interactionType, interactionDate, additionalNotes);
             interactionDOA.save(interaction);
 
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Interaction added successfully!");
             refreshTable();
             clearFields();
         } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to add interaction. Please check your input.");
             e.printStackTrace();
         }
     }
 
     @FXML
-    private void handleDeleteInteraction() {
-        Interaction selectedInteraction = interactionTable.getSelectionModel().getSelectedItem();
-        if (selectedInteraction != null) {
-            interactionDOA.delete(selectedInteraction);
-            refreshTable();
+    private void handleDeleteInteraction(Interaction interaction) {
+        if (interaction != null) {
+            interactionDOA.delete(interaction);
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Interaction deleted successfully!");
+
+            // تحديث الجدول بعد الحذف
+            Platform.runLater(this::refreshTable); // تحديث الجدول في الـ UI thread
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Error", "Please select an interaction to delete.");
         }
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     private void refreshTable() {
@@ -211,12 +231,5 @@ public class CustomerInteractionTableController implements Initializable {
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Error: Unable to load CustomerInteractionDetails.fxml", e);
         }
-    }
-
-    @FXML
-    private void handleDeleteInteractionPage(Interaction interaction) {
-        interactionDOA.delete(interaction);
-
-        refreshTable();
     }
 }
