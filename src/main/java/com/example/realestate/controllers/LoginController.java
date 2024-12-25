@@ -40,7 +40,7 @@ public class LoginController {
     @FXML
     void handleResetPassword(MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/reset-password.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/forgetpassword.fxml"));
             Scene newScene = new Scene(loader.load());
 
             Stage stage = (Stage) ((Text) event.getSource()).getScene().getWindow();
