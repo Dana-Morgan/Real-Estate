@@ -30,9 +30,9 @@
             <TableColumn prefWidth="86.4000244140625" text="Update" />
         </columns>
     </TableView>
-    <Label fx:id="CustomerTableL" layoutX="429.0" layoutY="76.0" prefHeight="18.0" prefWidth="434.0" text="CUSTOMER TABLE">
+    <Label fx:id="CustomerTableL" layoutX="70.0" layoutY="150.0" prefHeight="18.0" prefWidth="434.0" text="CUSTOMER TABLE">
         <font>
-            <Font name="System Bold" size="40.0" />
+            <Font name="System Bold" size="30.0" />
         </font>
     </Label>
 </AnchorPane>

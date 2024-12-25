@@ -36,12 +36,22 @@ public class AgentDOAImpl implements AgentDOA{
 
     @Override
     public void update(Agent agent) {
-
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.update(agent);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void delete(Agent agent) {
-
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.delete(agent);
+            session.getTransaction().commit();
+        }
     }
 
     @Override
@@ -56,6 +66,25 @@ public class AgentDOAImpl implements AgentDOA{
         SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
         Session session = sessionFactory.openSession();
         return session.get(Agent.class, Email);
+    }
+
+    public boolean emailExists(String email) {
+        Session session = sessionFactory.openSession();
+        boolean exists = false;
+
+        try {
+            String hql = "SELECT COUNT(a) FROM Agent a WHERE a.Email = :email";
+            Query query = session.createQuery(hql);
+            query.setParameter("email", email);
+            Long count = (Long) query.getSingleResult();
+            exists = count > 0; // If count > 0, email exists
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        return exists;
     }
 
 
