@@ -3,6 +3,8 @@ package com.example.realestate.controllers;
 import com.example.realestate.models.Agent;
 import com.example.realestate.services.AgentDOAImpl;
 import com.example.realestate.validation.ValiditionAgentAccount;
+import com.mysql.cj.Session;
+import com.mysql.cj.x.protobuf.MysqlxSession;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
@@ -19,6 +21,7 @@ import javafx.event.ActionEvent;
 
 import java.io.IOException;
 import java.util.List;
+
 
 public class CreateAccountForAgentController {
 
@@ -92,36 +95,81 @@ public class CreateAccountForAgentController {
         loadAgentData();
     }
     @FXML
+    private void onUpdateButtonClick() {
+        // Get the selected agent from TableView
+        Agent selectedAgent = agentTabel.getSelectionModel().getSelectedItem();
+        /*
+        if (selectedAgent == null) {
+            // Show alert if no agent is selected
+            showAlert("No agent selected", "Please select an agent to update.");
+            return;
+        }
+
+         */
+
+        try {
+            // Load the update form
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/AgentUpdateForm.fxml"));
+            Parent root = loader.load();
+
+            // Get controller and pass the selected agent
+            AgentUpdateController controller = loader.getController();
+            controller.setAgent(selectedAgent, new AgentDOAImpl());
+
+            // Show update form in a new stage
+            Stage stage = new Stage();
+            stage.setTitle("Update Agent");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            // Refresh the TableView after updating
+            agentTabel.setItems(FXCollections.observableArrayList(new AgentDOAImpl().getAll()));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     void createAccount(ActionEvent event) {
         String name = NameSignUp.getText();
         String email = EmailSignUp.getText();
         String phone = PhoneSignUp.getText();
         String password = PasswordSignUp.getText();
         String license = LicenseSignUp.getText();
+
+        // Validate inputs
         String validationMessage = ValiditionAgentAccount.validateAllInputs(name, email, phone, password, license);
         if (validationMessage != null) {
             showAlert("Validation Error", validationMessage); // Show validation error
             return; // Stop account creation if validation fails
         }
-        Agent agent = new Agent();
-        agent.setName(NameSignUp.getText());
-        agent.setEmail(EmailSignUp.getText());
-        agent.setPhone(PhoneSignUp.getText());
-        agent.setPassword(PasswordSignUp.getText());
-        agent.setLicenseNumber(LicenseSignUp.getText());
 
+        // Check if email exists in the database
+        if (agentDOA.emailExists(email)) {
+            showAlert("Error", "An account with this email already exists.");
+            return; // Stop account creation if email already exists
+        }
+
+        // Create a new Agent object
+        Agent agent = new Agent();
+        agent.setName(name);
+        agent.setEmail(email);
+        agent.setPhone(phone);
+        agent.setPassword(password);
+        agent.setLicenseNumber(license);
+
+        // Save the agent to the database
         agentDOA.save(agent);
         loadAgentData();
-        agentDOA.getAll();
-            /*
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePage.fxml"));
-            Parent newPageRoot = loader.load();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(newPageRoot);
-            stage.setScene(scene);
-            stage.show();
-
-             */
+        clearInputFields(); // Clear input fields after saving
+    }
+    private void clearInputFields() {
+        NameSignUp.clear();
+        EmailSignUp.clear();
+        PhoneSignUp.clear();
+        PasswordSignUp.clear();
+        LicenseSignUp.clear();
     }
     private void loadAgentData() {
         // Fetch data from the database
@@ -144,7 +192,8 @@ public class CreateAccountForAgentController {
                 {
                     updateButton.setOnAction(event -> {
                         Agent agent = getTableView().getItems().get(getIndex());
-                        updateAgent(agent); // Handle update logic
+                        updateAgent(agent);
+                        onUpdateButtonClick();
                     });
                 }
 
@@ -186,11 +235,30 @@ public class CreateAccountForAgentController {
         });
     }
 
+
     private void updateAgent(Agent agent) {
-        // Implement the logic to update the agent
-        System.out.println("Updating agent: " + agent.getName());
-        // You can open a new dialog with pre-filled values or update inline
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/AgentUpdateForm.fxml"));
+            Parent root = loader.load();
+
+            // Pass the selected agent to the update form controller
+            AgentUpdateController controller = loader.getController();
+            controller.setAgent(agent, new AgentDOAImpl());
+
+            // Show the update form in a new stage
+            Stage stage = new Stage();
+            stage.setTitle("Update Agent");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            // Refresh the TableView after updating
+            agentTabel.setItems(FXCollections.observableArrayList(new AgentDOAImpl().getAll()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+
 
     private void deleteAgent(Agent agent) {
         // Implement the logic to delete the agent
