@@ -1,18 +1,40 @@
 package com.example.realestate.models;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "agreement")
 public class Agreement {
-    private String displayID;
-    private String customerID;
-    private String propertyID;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "displayID")
+    private int displayID;
+
+
+    @Column(name = "customerID")
+    private int customerID;
+
+    @Column(name = "propertyID")
+    private int propertyID;
+
+    @Column(name = "offerType")
     private String offerType;
+
+    @Column(name = "offerStatus")
     private String offerStatus;
+
+    @Column(name = "presentationDate")
     private LocalDate presentationDate;
+
+    @Column(name = "additionalNotes")
     private String additionalNotes;
 
-    public Agreement(String displayID, String customerID, String propertyID, String offerType, String offerStatus, LocalDate presentationDate, String additionalNotes) {
-        this.displayID = displayID;
+    public Agreement() {
+    }
+
+    public Agreement( int customerID, int propertyID, String offerType, String offerStatus, LocalDate presentationDate, String additionalNotes) {
         this.customerID = customerID;
         this.propertyID = propertyID;
         this.offerType = offerType;
@@ -21,27 +43,27 @@ public class Agreement {
         this.additionalNotes = additionalNotes;
     }
 
-    public String getDisplayID() {
+    public int getDisplayID() {
         return displayID;
     }
 
-    public void setDisplayID(String displayID) {
+    public void setDisplayID(int displayID) {
         this.displayID = displayID;
     }
 
-    public String getCustomerID() {
+    public int getCustomerID() {
         return customerID;
     }
 
-    public void setCustomerID(String customerID) {
+    public void setCustomerID(int customerID) {
         this.customerID = customerID;
     }
 
-    public String getPropertyID() {
+    public int getPropertyID() {
         return propertyID;
     }
 
-    public void setPropertyID(String propertyID) {
+    public void setPropertyID(int propertyID) {
         this.propertyID = propertyID;
     }
 
