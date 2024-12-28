@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.HomePageController">
-
-    <!-- Center content with the form -->
+<BorderPane fx:id="mainBorderPane"  xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="com.example.realestate.controllers.HomePageController"
+>
     <center>
-        <HBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
-            <TextField promptText="Location" style="-fx-font-size: 14px; -fx-pref-width: 150px;" />
-            <TextField promptText="Property Type" style="-fx-font-size: 14px; -fx-pref-width: 150px;" />
-            <TextField promptText="No. of Rooms" style="-fx-font-size: 14px; -fx-pref-width: 150px;" />
-            <TextField promptText="Size" style="-fx-font-size: 14px; -fx-pref-width: 150px;" />
-            <Button style="-fx-background-color: #ADC867; -fx-text-fill: white; -fx-font-weight: bold;" text="Submit Listing" onAction="#goToListingPage"/>
+        <HBox fx:id="searchForm" spacing="20" alignment="CENTER" prefWidth="1200" style="-fx-padding: 20;">
+            <TextField fx:id="sizeTextField" prefHeight="40.0" promptText="Size" />
+            <TextField fx:id="propertyTypeTextField" prefHeight="40.0" promptText="Property Type" />
+            <TextField fx:id="roomsTextField" prefHeight="40.0" promptText="No of Rooms" />
+            <TextField fx:id="areaTextField" prefHeight="40.0" promptText="Area" />
+            <TextField fx:id="priceTextField" prefHeight="40.0" promptText="Price" />
+            <TextField fx:id="dateTextField" prefHeight="40.0" promptText="Date" />
+            <Button fx:id="searchButton" text="Search" onAction="#searchProperties" />
         </HBox>
+
     </center>
-
-
-
 </BorderPane>
+
+
