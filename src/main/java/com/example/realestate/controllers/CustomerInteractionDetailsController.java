@@ -79,7 +79,11 @@ public class CustomerInteractionDetailsController implements Initializable {
             }
 
             if (currentInteraction == null) {
-                Interaction interaction = new Interaction(Integer.parseInt(customerIDValue), interactionTypeValue, interactionDateValue, additionalNotesValue);
+                Interaction interaction = new Interaction(Integer.parseInt(customerIDValue),
+                        interactionTypeValue,
+                        interactionDateValue,
+                        additionalNotesValue
+                );
                 interactionDOA.save(interaction);
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Interaction added successfully!");
             } else {
@@ -128,13 +132,7 @@ public class CustomerInteractionDetailsController implements Initializable {
     }
 
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+
 
 
     public void setInteractionDetails(Interaction interaction) {

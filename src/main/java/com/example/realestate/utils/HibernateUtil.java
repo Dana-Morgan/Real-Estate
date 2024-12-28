@@ -2,6 +2,7 @@ package com.example.realestate.utils;
 
 import com.example.realestate.models.Admin;
 import com.example.realestate.models.Agent;
+import com.example.realestate.models.Agreement;
 import com.example.realestate.models.Interaction;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -21,6 +22,9 @@ public class HibernateUtil {
         configuration.addAnnotatedClass(Agent.class);
         configuration.addAnnotatedClass(Admin.class);
         configuration.addAnnotatedClass(Interaction.class);
+        configuration.addAnnotatedClass(Agreement.class);
+
+
         configuration.configure();
         serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties()).build();

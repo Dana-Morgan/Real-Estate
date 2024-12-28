@@ -85,6 +85,7 @@ public class CustomerInteractionTableController implements Initializable {
                 private final Button updateButton = new Button("Update");
 
                 {
+                    updateButton.setStyle("-fx-background-color: #508aa8; -fx-text-fill:white;");
                     updateButton.setOnAction(event -> {
                         Interaction interaction = getTableView().getItems().get(getIndex());
                         handleUpdateInteractionPage(interaction);
@@ -109,6 +110,7 @@ public class CustomerInteractionTableController implements Initializable {
                 private final Button deleteButton = new Button("Delete");
 
                 {
+                    deleteButton.setStyle("-fx-background-color: #BA1200; -fx-text-fill: white;");
                     deleteButton.setOnAction(event -> {
                         Interaction interaction = getTableView().getItems().get(getIndex());
                         handleDeleteInteraction(interaction);
@@ -172,8 +174,7 @@ public class CustomerInteractionTableController implements Initializable {
             interactionDOA.delete(interaction);
             showAlert(Alert.AlertType.INFORMATION, "Success", "Interaction deleted successfully!");
 
-            // تحديث الجدول بعد الحذف
-            Platform.runLater(this::refreshTable); // تحديث الجدول في الـ UI thread
+            Platform.runLater(this::refreshTable);
         } else {
             showAlert(Alert.AlertType.ERROR, "Error", "Please select an interaction to delete.");
         }
