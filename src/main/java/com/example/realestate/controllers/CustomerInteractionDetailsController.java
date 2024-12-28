@@ -74,28 +74,66 @@ public class CustomerInteractionDetailsController implements Initializable {
             String additionalNotesValue = addtionalnotesCID.getText().trim();
 
             if (customerIDValue.isEmpty() || interactionTypeValue == null || interactionDateValue == null) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "All fields except Additional Notes are required.", ButtonType.OK);
-                alert.show();
+                showAlert(Alert.AlertType.ERROR, "Validation Error", "All fields except Additional Notes are required.");
                 return;
             }
 
             if (currentInteraction == null) {
-                Interaction interaction = new Interaction(Integer.parseInt(customerIDValue), interactionTypeValue, interactionDateValue, additionalNotesValue);
+                Interaction interaction = new Interaction(Integer.parseInt(customerIDValue),
+                        interactionTypeValue,
+                        interactionDateValue,
+                        additionalNotesValue
+                );
                 interactionDOA.save(interaction);
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Interaction added successfully!");
             } else {
-                currentInteraction.setCustomerID(Integer.parseInt(customerIDValue));
-                currentInteraction.setInteractionType(interactionTypeValue);
-                currentInteraction.setInteractionDate(interactionDateValue);
-                currentInteraction.setAdditionalNotes(additionalNotesValue);
-                interactionDOA.update(currentInteraction);
+                boolean isModified = false;
+
+                if (currentInteraction.getCustomerID() != Integer.parseInt(customerIDValue)) {
+                    currentInteraction.setCustomerID(Integer.parseInt(customerIDValue));
+                    isModified = true;
+                }
+
+                if (!currentInteraction.getInteractionType().equals(interactionTypeValue)) {
+                    currentInteraction.setInteractionType(interactionTypeValue);
+                    isModified = true;
+                }
+
+                if (!currentInteraction.getInteractionDate().equals(interactionDateValue)) {
+                    currentInteraction.setInteractionDate(interactionDateValue);
+                    isModified = true;
+                }
+
+                if (!currentInteraction.getAdditionalNotes().equals(additionalNotesValue)) {
+                    currentInteraction.setAdditionalNotes(additionalNotesValue);
+                    isModified = true;
+                }
+
+                if (isModified) {
+                    interactionDOA.update(currentInteraction);
+                    showAlert(Alert.AlertType.INFORMATION, "Success", "Interaction updated successfully!");
+                } else {
+                    showAlert(Alert.AlertType.WARNING, "No Changes", "No changes detected to update.");
+                }
             }
 
             navigateTo("/com/example/realestate/views/CustomerInteractionTable.fxml", "Customer Interaction Table");
         } catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid input. Please check the data.", ButtonType.OK);
-            alert.show();
+            showAlert(Alert.AlertType.ERROR, "Error", "Invalid input. Please check the data.");
         }
     }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+
+
+
 
     public void setInteractionDetails(Interaction interaction) {
         if (interaction != null) {

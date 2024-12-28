@@ -14,22 +14,25 @@
             <Font name="System Bold Italic" size="30.0" />
         </font>
     </Label>
-    <Button fx:id="addAgreementbtn" prefHeight="39.0" prefWidth="213.0" style="-fx-background-color: #ADC867;" text="Add Agreement" textFill="WHITE" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="160">
+    <Button fx:id="addAgreementbtn" prefHeight="39.0" prefWidth="213.0" style="-fx-background-color: #ADC867;" text="Add Agreement" textFill="WHITE" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="160" onAction="#handleAddAgreementPage">
         <font>
             <Font name="System Bold" size="12.0" />
         </font>
     </Button>
-    <TableView fx:id="agreementTable" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="60" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="220">
+    <TableView fx:id="agreementTable" prefHeight="400.0" prefWidth="600.0"
+               AnchorPane.bottomAnchor="60" AnchorPane.leftAnchor="20"
+               AnchorPane.rightAnchor="20" AnchorPane.topAnchor="220">
         <columns>
-            <TableColumn fx:id="displayIDColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Display ID" />
-            <TableColumn fx:id="customerIDColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Customer ID" />
-            <TableColumn fx:id="propertyIDColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Property ID" />
-            <TableColumn fx:id="offerTypeColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Offer Type" />
-            <TableColumn fx:id="offerStatusColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Offer Status" />
-            <TableColumn fx:id="presentationDateColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Presentation Date" />
-            <TableColumn fx:id="additionalNotesColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Additional Notes" />
-            <TableColumn fx:id="updateColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Update" />
-            <TableColumn fx:id="deleteColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Delete" />
+            <TableColumn fx:id="displayIDColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Display ID"/>
+            <TableColumn fx:id="customerIDColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Customer ID"/>
+            <TableColumn fx:id="propertyIDColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Property ID"/>
+            <TableColumn fx:id="offerTypeColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Offer Type"/>
+            <TableColumn fx:id="offerStatusColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Offer Status"/>
+            <TableColumn fx:id="presentationDateColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Presentation Date"/>
+            <TableColumn fx:id="additionalNotesColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Additional Notes"/>
+            <TableColumn fx:id="updateColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Update"/>
+            <TableColumn fx:id="deleteColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Delete"/>
         </columns>
     </TableView>
+
 </AnchorPane>
