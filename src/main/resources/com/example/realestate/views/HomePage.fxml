@@ -3,12 +3,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Rectangle?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.HomePageController">
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:id="mainBorderPane" fx:controller="com.example.realestate.controllers.HomePageController">
     <top>
         <fx:include source="Navbar.fxml" />
     </top>
-
 
     <center>
         <StackPane>
@@ -19,11 +19,20 @@
                 </image>
             </ImageView>
 
-            <!-- Search Form -->
-            <VBox alignment="CENTER" prefWidth="600.0" spacing="10" style="-fx-background-color: rgba(85, 64, 125, 0.8); -fx-padding: 20;">
-                <Label style="-fx-font-size: 40px; -fx-font-weight: bold; -fx-text-fill: white;" text="Find Your Home" />
-                <fx:include source="Search.fxml" />
+            <!-- Transparent Background Color on VBox -->
+            <VBox alignment="CENTER" prefWidth="600.0" spacing="0" style="-fx-background-color: rgba(85, 64, 125, 0.74);">
+                <!-- Title inside a rounded rectangle with background color -->
+                <StackPane alignment="CENTER" style="-fx-padding: 0;">
+                    <Rectangle width="400" height="100" fill="#ADC867" arcWidth="20" arcHeight="20"/>
+                    <Label style="-fx-font-size: 40px; -fx-font-weight: bold; -fx-text-fill: white;" text="Find Your Home" />
+                </StackPane>
+
+                <!-- Search Box -->
+                <StackPane alignment="CENTER" style="-fx-padding: 0;">
+                    <fx:include source="Search.fxml" />
+                </StackPane>
             </VBox>
         </StackPane>
     </center>
 </BorderPane>
+
