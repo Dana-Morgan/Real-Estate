@@ -104,7 +104,7 @@ public class AgreementTableController implements Initializable {
                 private final Button updateButton = new Button("Update");
 
                 {
-                    updateButton.setStyle("-fx-background-color: #89B7E7; -fx-text-fill: black;");
+                    updateButton.setStyle("-fx-background-color: #89B7E7; -fx-text-fill: #ffffff;");
                     updateButton.setOnAction(event -> {
                         Agreement agreement = getTableView().getItems().get(getIndex());
                         handleUpdateAgreementPage(agreement);

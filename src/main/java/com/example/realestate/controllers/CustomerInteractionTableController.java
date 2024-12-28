@@ -85,7 +85,7 @@ public class CustomerInteractionTableController implements Initializable {
                 private final Button updateButton = new Button("Update");
 
                 {
-                    updateButton.setStyle("-fx-background-color:  #89B7E7; -fx-text-fill: black;");
+                    updateButton.setStyle("-fx-background-color: #508aa8; -fx-text-fill:white;");
                     updateButton.setOnAction(event -> {
                         Interaction interaction = getTableView().getItems().get(getIndex());
                         handleUpdateInteractionPage(interaction);
@@ -110,7 +110,7 @@ public class CustomerInteractionTableController implements Initializable {
                 private final Button deleteButton = new Button("Delete");
 
                 {
-                    deleteButton.setStyle("-fx-background-color: #DC3545; -fx-text-fill: black;");
+                    deleteButton.setStyle("-fx-background-color: #BA1200; -fx-text-fill: white;");
                     deleteButton.setOnAction(event -> {
                         Interaction interaction = getTableView().getItems().get(getIndex());
                         handleDeleteInteraction(interaction);
