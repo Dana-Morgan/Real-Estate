@@ -4,6 +4,7 @@ import com.example.realestate.models.Admin;
 import com.example.realestate.models.Agent;
 import com.example.realestate.models.Agreement;
 import com.example.realestate.models.Interaction;
+import com.example.realestate.models.Customer;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -23,6 +24,7 @@ public class HibernateUtil {
         configuration.addAnnotatedClass(Admin.class);
         configuration.addAnnotatedClass(Interaction.class);
         configuration.addAnnotatedClass(Agreement.class);
+        configuration.addAnnotatedClass(Customer.class);
 
 
         configuration.configure();
