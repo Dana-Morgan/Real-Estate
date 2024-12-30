@@ -9,84 +9,94 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="832.0"
+            prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.realestate.controllers.addCustomerDetailsController">
+   <Text layoutX="90.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Customer Details"
+         wrappingWidth="529.0062866210938">
+      <font>
+         <Font name="System Bold" size="40.0"/>
+      </font>
+   </Text>
+   <Button fx:id="Back_btn" layoutX="1041.0" layoutY="192.0" mnemonicParsing="false" onAction="#goBack"
+           prefHeight="42.0" prefWidth="122.0" style="-fx-background-color: ADC867; -fx-background-radius: 10;"
+           text="Back" textFill="WHITE">
 
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="832.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.customertable.addCustomerDetailsController">
-   <children>
-      <Text layoutX="90.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Customer Details" wrappingWidth="529.0062866210938">
-         <font>
-            <Font name="System Bold" size="50.0" />
-         </font>
-      </Text>
-      <Button fx:id="Back_btn" layoutX="1041.0" layoutY="192.0" mnemonicParsing="false" onAction="#goBack" prefHeight="42.0" prefWidth="122.0" style="-fx-background-color: ADC867; -fx-background-radius: 10;" text="Back" textFill="WHITE">
-
-
-
-
-
-
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
-      <Text layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" wrappingWidth="1280.0">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Text>
-      <Label fx:id="CustomerIDLabel" layoutX="106.0" layoutY="357.0" text="Customer ID ">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="CustomerNameLabel" layoutX="106.0" layoutY="475.0" text="Customer Name">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="CustomerEmailLabel" layoutX="107.0" layoutY="596.0" text="Customer email">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="CustomerPhoneNumberLabel" layoutX="509.0" layoutY="357.0" prefHeight="30.0" prefWidth="248.0" text="Customer Phone Number">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="ActivityStatusLabel" layoutX="509.0" layoutY="475.0" text="Activity status ">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="PreferencesLabel" layoutX="509.0" layoutY="604.0" prefHeight="30.0" prefWidth="116.0" text="Preferences">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="AddDateLabel" layoutX="940.0" layoutY="356.0" text="Add Date">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="946.0" layoutY="481.0" text="Additional  notes ">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Button fx:id="AddCustomer_btn" layoutX="457.0" layoutY="738.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="352.0" style="-fx-background-color: ADC867; -fx-background-radius: 10;" text="Add Customer" textFill="#fffefe">
-         <font>
-            <Font name="System Bold" size="28.0" />
-         </font>
-      </Button>
-      <TextField fx:id="customerID" layoutX="101.0" layoutY="390.0" prefHeight="55.0" prefWidth="290.0" style="-fx-background-radius: 10;" />
-      <TextField fx:id="customerName" layoutX="102.0" layoutY="527.0" prefHeight="55.0" prefWidth="290.0" style="-fx-background-radius: 10;" />
-      <TextField fx:id="customerEmail" layoutX="100.0" layoutY="645.0" prefHeight="55.0" prefWidth="290.0" style="-fx-background-radius: 10;" />
-      <TextField fx:id="customerPhoneNumber" layoutX="509.0" layoutY="390.0" prefHeight="55.0" prefWidth="290.0" style="-fx-background-radius: 10;" />
-      <TextField fx:id="AdditionalNotes" layoutX="940.0" layoutY="522.0" prefHeight="119.0" prefWidth="299.0" style="-fx-background-radius: 10;" />
-      <DatePicker fx:id="AddDate" layoutX="937.0" layoutY="395.0" prefHeight="55.0" prefWidth="290.0" style="-fx-background-radius: 0;" />
-      <ChoiceBox fx:id="ActivityStatus" layoutX="509.0" layoutY="527.0" prefHeight="55.0" prefWidth="290.0" style="-fx-background-radius: 10;" />
-      <ChoiceBox fx:id="Preferences" layoutX="509.0" layoutY="645.0" prefHeight="55.0" prefWidth="290.0" style="-fx-background-radius: 10;" />
-   </children>
+      <font>
+         <Font name="System Bold" size="24.0"/>
+      </font>
+   </Button>
+   <Text layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0"
+         text="---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+         wrappingWidth="1280.0">
+      <font>
+         <Font name="System Bold" size="14.0"/>
+      </font>
+   </Text>
+   <Label fx:id="CustomerIDLabel" layoutX="106.0" layoutY="357.0" text="Customer ID ">
+      <font>
+         <Font size="20.0"/>
+      </font>
+   </Label>
+   <Label fx:id="CustomerNameLabel" layoutX="106.0" layoutY="475.0" text="Customer Name">
+      <font>
+         <Font size="20.0"/>
+      </font>
+   </Label>
+   <Label fx:id="CustomerEmailLabel" layoutX="107.0" layoutY="596.0" text="Customer email">
+      <font>
+         <Font size="20.0"/>
+      </font>
+   </Label>
+   <Label fx:id="CustomerPhoneNumberLabel" layoutX="509.0" layoutY="357.0" prefHeight="30.0" prefWidth="248.0"
+          text="Customer Phone Number">
+      <font>
+         <Font size="20.0"/>
+      </font>
+   </Label>
+   <Label fx:id="ActivityStatusLabel" layoutX="509.0" layoutY="475.0" text="Activity status ">
+      <font>
+         <Font size="20.0"/>
+      </font>
+   </Label>
+   <Label fx:id="PreferencesLabel" layoutX="509.0" layoutY="604.0" prefHeight="30.0" prefWidth="116.0"
+          text="Preferences">
+      <font>
+         <Font size="20.0"/>
+      </font>
+   </Label>
+   <Label fx:id="AddDateLabel" layoutX="940.0" layoutY="356.0" text="Add Date">
+      <font>
+         <Font size="20.0"/>
+      </font>
+   </Label>
+   <Label layoutX="946.0" layoutY="481.0" text="Additional  notes ">
+      <font>
+         <Font size="20.0"/>
+      </font>
+   </Label>
+   <Button fx:id="AddCustomer_btn" layoutX="457.0" layoutY="738.0" mnemonicParsing="false" prefHeight="60.0"
+           prefWidth="352.0" style="-fx-background-color: ADC867; -fx-background-radius: 10;" text="Add Customer"
+           textFill="#fffefe">
+      <font>
+         <Font name="System Bold" size="28.0"/>
+      </font>
+   </Button>
+   <TextField fx:id="customerID" layoutX="101.0" layoutY="390.0" prefHeight="55.0" prefWidth="290.0"
+              style="-fx-background-radius: 10;"/>
+   <TextField fx:id="customerName" layoutX="102.0" layoutY="527.0" prefHeight="55.0" prefWidth="290.0"
+              style="-fx-background-radius: 10;"/>
+   <TextField fx:id="customerEmail" layoutX="100.0" layoutY="645.0" prefHeight="55.0" prefWidth="290.0"
+              style="-fx-background-radius: 10;"/>
+   <TextField fx:id="customerPhoneNumber" layoutX="509.0" layoutY="390.0" prefHeight="55.0" prefWidth="290.0"
+              style="-fx-background-radius: 10;"/>
+   <TextField fx:id="AdditionalNotes" layoutX="940.0" layoutY="522.0" prefHeight="119.0" prefWidth="299.0"
+              style="-fx-background-radius: 10;"/>
+   <DatePicker fx:id="AddDate" layoutX="937.0" layoutY="395.0" prefHeight="55.0" prefWidth="290.0"
+               style="-fx-background-radius: 0;"/>
+   <ChoiceBox fx:id="ActivityStatus" layoutX="509.0" layoutY="527.0" prefHeight="55.0" prefWidth="290.0"
+              style="-fx-background-radius: 10;"/>
+   <ChoiceBox fx:id="Preferences" layoutX="509.0" layoutY="645.0" prefHeight="55.0" prefWidth="290.0"
+              style="-fx-background-radius: 10;"/>
 </AnchorPane>

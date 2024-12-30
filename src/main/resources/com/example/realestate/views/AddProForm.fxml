@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="832" minWidth="1280" prefHeight="832" prefWidth="1280" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.AddProFormController">
+   <children>
+      <Label layoutX="44.0" layoutY="46.0" minHeight="73.0" minWidth="523.0" prefHeight="91.0" prefWidth="523.0" style="-fx-font-weight: bold;" text=" Add Property Details">
+         <font>
+            <Font size="30.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </Label>
+      <Line endX="923.31689453125" endY="-19.221710205078125" layoutX="331.0" layoutY="162.0" startX="-302.6228332519531" startY="-19.221710205078125" />
+      <Label layoutX="138.0" layoutY="185.0" prefHeight="53.0" prefWidth="177.0" text="Title">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="132.0" layoutY="285.0" prefHeight="54.0" prefWidth="193.0" text="Property Type">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="130.0" layoutY="371.0" prefHeight="58.0" prefWidth="173.0" text="Selling Type">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="129.0" layoutY="472.0" prefHeight="59.0" prefWidth="234.0" text="Number Of Rooms">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="130.0" layoutY="569.0" prefHeight="49.0" prefWidth="195.0" text="Feature">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="title" layoutX="574.0" layoutY="-256.0" minHeight="58.0" minWidth="849.0" prefHeight="58.0" prefWidth="849.0" />
+      <TextField fx:id="NumberOfRooms" layoutX="320.0" layoutY="474.0" minHeight="55.0" minWidth="300.0" prefHeight="55.0" prefWidth="300.0" promptText="Enter Number of Property room" />
+      <TextField fx:id="Feature" accessibleText="top" alignment="TOP_LEFT" layoutX="319.0" layoutY="569.0" minHeight="160.0" minWidth="300.0" prefHeight="160.0" prefWidth="303.0" promptText="Enter Features" style="-fx-alignment: top;" />
+      <Label layoutX="673.0" layoutY="285.0" prefHeight="57.0" prefWidth="603.0" text="Location">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="681.0" layoutY="373.0" prefHeight="55.0" prefWidth="176.0" text="Price">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="678.0" layoutY="475.0" prefHeight="56.0" prefWidth="178.0" text="Area ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="674.0" layoutY="565.0" prefHeight="62.0" prefWidth="184.0" text="Upload Image">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="Location" layoutX="833.0" layoutY="285.0" minHeight="55.0" minWidth="300.0" prefHeight="55.0" prefWidth="303.0" promptText="Enter Location" />
+      <TextField fx:id="Price" layoutX="838.0" layoutY="374.0" minHeight="55.0" minWidth="300.0" prefHeight="55.0" prefWidth="300.0" promptText="Enter Price">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </TextField>
+      <TextField fx:id="Area" layoutX="840.0" layoutY="476.0" minHeight="55.0" minWidth="300.0" prefHeight="55.0" prefWidth="300.0" promptText="Enter Area">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </TextField>
+      <TextField fx:id="UploadImage" layoutX="840.0" layoutY="572.0" minHeight="55.0" minWidth="300.0" prefHeight="55.0" prefWidth="300.0" promptText="Upload Images" />
+      <ChoiceBox fx:id="PropertyType" layoutX="320.0" layoutY="284.0" prefHeight="55.0" prefWidth="300.0" />
+      <ChoiceBox fx:id="SellingType" layoutX="320.0" layoutY="373.0" prefHeight="55.0" prefWidth="300.0" />
+      <TextField fx:id="Title" layoutX="317.0" layoutY="183.0" prefHeight="55.0" prefWidth="825.0" promptText="Enter title" />
+      <Button fx:id="AddPro_btn" layoutX="556.0" layoutY="759.0" onAction="#handleAddProperty" prefHeight="42.0" prefWidth="242.0" style="-fx-background-color: #A1D76E; -fx-text-fill: white; -fx-font-size: 14px;" text="Add Property" />
+      <Button fx:id="Back_btn" layoutX="1077.0" layoutY="72.0" onAction="#BackToProList" prefWidth="100" style="-fx-background-color: #7F5B97; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-color: black;" text="Back" textFill="#fffcfc" />
+   </children>
+</AnchorPane>

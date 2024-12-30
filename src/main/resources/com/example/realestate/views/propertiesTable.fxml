@@ -10,34 +10,31 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.realestate.controllers.PropertiesTableController">
     <children>
-        <fx:include source="Navbar.fxml" />
+        <fx:include source="Navbar.fxml" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" />
 
-        <TableView layoutX="56.0" layoutY="232.0" prefHeight="500.0" prefWidth="1168.0" style="-fx-table-header-border-color: white; -fx-text-fill: white;" styleClass="properties-table">
-            <columns>
-                <TableColumn prefWidth="282.0" style=" -fx-text-fill: White; -fx-font-size: 14px; -fx-pref-height: 44; -fx-border-color: white;" text="Properties" />
-                <TableColumn prefWidth="135.0" style=" -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-height: 44; -fx-border-color: white;" text="Property Type" />
-                <TableColumn prefWidth="150.0" style=" -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-height: 44; -fx-border-color: white;" text="Number Of Rooms" />
-                <TableColumn prefWidth="169.0" style=" -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-height: 44; -fx-border-color: white;" text="Property Features" />
-                <TableColumn prefWidth="96.0" style=" -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-height: 44; -fx-border-color: white;" text="Area" />
-                <TableColumn prefWidth="135.0" style=" -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-height: 44; -fx-border-color: white;" text="Property Status" />
-                <TableColumn prefWidth="98.0" style=" -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-height: 44; -fx-border-color: white;" text="Update" />
-                <TableColumn prefWidth="100.0" style=" -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-height: 44; -fx-border-color: white;" text="Delete" />
-            </columns>
-        </TableView>
-        <Label layoutX="414.0" layoutY="70.0" text="PROPERTIES TABLE">
+        <Label layoutX="40.0" layoutY="98.0" text="Properties Table" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="91.0">
             <font>
-                <Font name="System Bold Italic" size="50.0" />
+                <Font name="System Bold Italic" size="30.0" />
             </font>
         </Label>
-        <Label layoutX="541.0" layoutY="144.0" text="HERE IS A LIST OF ALL PROPERTIES" textFill="#2d2d2d">
+
+        <Button fx:id="addPropertyBtn" prefHeight="39.0" prefWidth="213.0" style="-fx-background-color: #ADC867;" text="Add Property" textFill="WHITE" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="160" onAction="#goToPF">
             <font>
-                <Font name="System Italic" size="13.0" />
-            </font>
-        </Label>
-        <Button fx:id="addPropertyBtn" layoutX="1100.0" layoutY="163.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="123.0" style="-fx-background-color: #ADC867;" text="Add Property" textFill="WHITE">
-            <font>
-                <Font name="System Bold" size="13.0" />
+                <Font name="System Bold" size="12.0" />
             </font>
         </Button>
+
+        <TableView fx:id="PropertiesTable" layoutX="40.0" layoutY="220.0" prefHeight="400.0" prefWidth="1189.0" AnchorPane.bottomAnchor="60" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="220" style=" " styleClass="properties-table">
+            <columns>
+                <TableColumn fx:id="PropertiesColumn" prefWidth="300.0" style="  -fx-alignment: CENTER; " text="Properties" />
+                <TableColumn fx:id="PTypeColumn" prefWidth="135.0" style="  -fx-alignment: CENTER; " text="Property Type" />
+                <TableColumn fx:id="NumberOfRoomsColumn" prefWidth="150.0" style="  -fx-alignment: CENTER; " text="Number Of Rooms" />
+                <TableColumn fx:id="PFeaturesColumn" prefWidth="200.0" style="  -fx-alignment: CENTER; " text="Property Features" />
+                <TableColumn fx:id="PAreaColumn" prefWidth="120.0" style=" -fx-alignment: CENTER;  " text="Area" />
+                <TableColumn fx:id="PStatusColumn" prefWidth="135.0" style="  -fx-alignment: CENTER; " text="Property Status" />
+                <TableColumn fx:id="UpdatePColumn" prefWidth="100.0" style=" -fx-alignment: CENTER;  " text="Update" />
+                <TableColumn fx:id="DeletePColumn" prefWidth="100.0" style=" -fx-alignment: CENTER; " text="Delete" />
+            </columns>
+        </TableView>
     </children>
 </AnchorPane>

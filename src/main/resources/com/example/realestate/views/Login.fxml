@@ -11,17 +11,20 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.GridPane?>
+
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="832.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.LoginController">
    <left>
-      <AnchorPane layoutX="72.0" prefHeight="832.0" prefWidth="640.0" style="-fx-background-color: #55407D;" BorderPane.alignment="CENTER">
+      <AnchorPane layoutX="72.0" prefHeight="832.0" prefWidth="640.0" style="-fx-background-color: BDB4C8;" BorderPane.alignment="CENTER">
          <children>
-            <Text fill="WHITE" layoutX="96.0" layoutY="173.0" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.0" text="Welcome Back !" wrappingWidth="353.53871154785156">
+
+            <Text layoutX="69.0" layoutY="289.0" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.0" text="Welcome Back !" wrappingWidth="353.53871154785156">
                <font>
-                  <Font size="46.0" />
+                  <Font name="System Italic" size="40.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="96.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to keep connected with us please login with your personal info" wrappingWidth="338.998779296875">
+            <Text layoutX="69.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to keep connected with us please login with your personal info" wrappingWidth="334.19879150390625">
                <font>
                   <Font size="25.0" />
                </font>
@@ -32,32 +35,32 @@
    <right>
       <AnchorPane prefHeight="832.0" prefWidth="640.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="EmailIDLogin" layoutX="99.0" layoutY="330.0" prefHeight="58.0" prefWidth="400.0" promptText="Enter Your Email/Id" style="-fx-background-color: #F0EDED;" />
-            <PasswordField fx:id="passordLogin" layoutX="99.0" layoutY="458.0" prefHeight="58.0" prefWidth="400.0" promptText="Enter Your Password" style="-fx-background-color: #F0EDED;" />
-            <Text layoutX="99.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email/ID">
+            <TextField fx:id="EmailIDLogin" layoutX="99.0" layoutY="271.0" prefHeight="58.0" prefWidth="400.0" promptText="Enter Your Email/Id" style="-fx-background-color: #F0EDED;" />
+            <PasswordField fx:id="passordLogin" layoutX="99.0" layoutY="411.0" prefHeight="58.0" prefWidth="400.0" promptText="Enter Your Password" style="-fx-background-color: #F0EDED;" />
+            <Text layoutX="99.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email/Name">
                <font>
                   <Font size="26.0" />
                </font>
             </Text>
-            <Text layoutX="103.0" layoutY="445.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+            <Text layoutX="103.0" layoutY="398.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
                <font>
                   <Font size="26.0" />
                </font>
             </Text>
-            <Button fx:id="loginbut" layoutX="103.0" layoutY="619.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="400.0" style="-fx-background-color: #ADC867;" text="Login" onAction="#loginbutton">
+            <Button fx:id="loginbut" layoutX="103.0" layoutY="618.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="400.0" style="-fx-background-color: #ADC867;" text="Login" onAction="#loginbutton">
                <font>
                   <Font size="28.0" />
                </font>
             </Button>
-            <Text fx:id="forgetbut" layoutX="378.0" layoutY="544.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-cursor: hand;" text="Forget Password" onMouseClicked="#handleResetPassword">
+            <Text fx:id="forgetbut" layoutX="378.0" layoutY="512.0" onDragDetected="#handleResetPassword" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-cursor: hand;" text="Forget Password" onMouseClicked="#handleResetPassword">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Line endX="58.9453125" endY="0.015625" layoutX="436.0" layoutY="548.0" startX="-58.0" startY="0.015625" style="-fx-background-color: #ADC867; -fx-fill: #ADC867;" />
+            <Line endX="58.9453125" endY="0.015625" layoutX="436.0" layoutY="516.0" startX="-58.0" startY="0.015625" style="-fx-background-color: #ADC867; -fx-fill: #ADC867;" />
             <Text layoutX="103.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
                <font>
-                  <Font size="44.0" />
+                  <Font size="42.0" />
                </font>
                <stroke>
                   <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">

@@ -1,91 +1,83 @@
 package com.example.realestate.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
-import javafx.scene.text.Text;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import com.example.realestate.services.AgentDOAImpl;
 
 import java.io.IOException;
 
 public class ResetPasswordController {
 
     @FXML
-    private PasswordField ResetPasswordFeild;
+    private PasswordField newPasswordField;
 
     @FXML
-    private Button ResetPasswordbut;
+    private PasswordField confirmPasswordField;
 
     @FXML
-    private Text backbutReset;
+    private Button changePasswordButton;
+
+    private final AgentDOAImpl agentService = new AgentDOAImpl();
+
+    private String userEmail;
+
+
+    public void setUserEmail(String email) {
+        this.userEmail = email;
+    }
 
     @FXML
-    private Button canclebut;
+    private void handleChangePasswordButton() {
+        String newPassword = newPasswordField.getText().trim();
+        String confirmPassword = confirmPasswordField.getText().trim();
 
-    @FXML
-    private PasswordField newPassword;
+        if (newPassword.isEmpty() || confirmPassword.isEmpty()) {
+            showAlert("Error", "Please enter both passwords!", Alert.AlertType.ERROR);
+            return;
+        }
 
-    @FXML
-    private Button backbut1;
+        if (!newPassword.equals(confirmPassword)) {
+            showAlert("Error", "Passwords do not match!", Alert.AlertType.ERROR);
+            return;
+        }
 
+        boolean isUpdated = agentService.updatePassword(userEmail, newPassword);
+        if (isUpdated) {
+            showAlert("Success", "Password changed successfully!", Alert.AlertType.INFORMATION);
+            loadLoginPage();
+        } else {
+            showAlert("Error", "Failed to change password. Please try again.", Alert.AlertType.ERROR);
+        }
+    }
 
-    @FXML
-    void handleResetPassword(ActionEvent event) {
+    private void showAlert(String title, String message, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void loadLoginPage() {
         try {
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/Login.fxml"));
-            Parent newPageRoot = loader.load();
+            Parent root = loader.load();
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) changePasswordButton.getScene().getWindow();
+            Scene scene = new Scene(root);
 
-            Scene scene = new Scene(newPageRoot);
             stage.setScene(scene);
-
             stage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-    }
-
-    @FXML
-    void cancel(ActionEvent event) {
-        try {
-            Stage currentStage = (Stage) canclebut.getScene().getWindow();
-            currentStage.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            showAlert("Error", "Failed to load login page.", Alert.AlertType.ERROR);
         }
     }
-
-
-    @FXML
-    void BackbutReset(ActionEvent event) {
-        try {
-            // Navigate back to the Login page by getting the previous stage (LoginController's stage)
-            Stage currentStage = (Stage) backbut1.getScene().getWindow();
-
-            // Go back to the Login page (previous scene)
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/Login.fxml"));
-            Parent loginRoot = loader.load();
-
-            // Set the new scene (Login page)
-            Scene loginScene = new Scene(loginRoot);
-            currentStage.setScene(loginScene);
-            currentStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
 }

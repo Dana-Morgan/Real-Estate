@@ -1,35 +1,54 @@
 package com.example.realestate.models;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "interaction")
+
 public class Interaction {
-    private String interactionID;
-    private String customerID;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "interaction_id")
+    private int interactionID;
+
+    @Column(name = "customer_id")
+    private int customerID;
+
+    @Column(name = "interaction_type")
     private String interactionType;
+
+    @Column(name = "interaction_date")
     private LocalDate interactionDate;
+
+    @Column(name = "additional_notes")
     private String additionalNotes;
 
-    public Interaction(String interactionID, String customerID, String interactionType, LocalDate interactionDate, String additionalNotes) {
-        this.interactionID = interactionID;
+    public Interaction(int customerID, String interactionType, LocalDate interactionDate, String additionalNotes) {
         this.customerID = customerID;
         this.interactionType = interactionType;
         this.interactionDate = interactionDate;
         this.additionalNotes = additionalNotes;
     }
 
-    public String getInteractionID() {
+    public Interaction() {
+
+    }
+
+    public int getInteractionID() {
         return interactionID;
     }
 
-    public void setInteractionID(String interactionID) {
+    public void setInteractionID(int interactionID) {
         this.interactionID = interactionID;
     }
 
-    public String getCustomerID() {
+    public int getCustomerID() {
         return customerID;
     }
 
-    public void setCustomerID(String customerID) {
+    public void setCustomerID(int customerID) {
         this.customerID = customerID;
     }
 
