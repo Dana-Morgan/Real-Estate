@@ -110,7 +110,7 @@ public class CustomerInteractionTableController implements Initializable {
                 private final Button deleteButton = new Button("Delete");
 
                 {
-                    deleteButton.setStyle("-fx-background-color: #BA1200; -fx-text-fill: white;");
+                    deleteButton.setStyle("-fx-background-color: #dc3545; -fx-text-fill: white;");
                     deleteButton.setOnAction(event -> {
                         Interaction interaction = getTableView().getItems().get(getIndex());
                         handleDeleteInteraction(interaction);
