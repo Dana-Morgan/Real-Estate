@@ -2,8 +2,10 @@ package com.example.realestate.controllers;
 
 import com.example.realestate.models.Admin;
 import com.example.realestate.models.Agent;
+import com.example.realestate.models.User;
 import com.example.realestate.services.AdminDOAImpl;
 import com.example.realestate.services.AgentDOAImpl;
+import com.example.realestate.services.UserDOAImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,6 +37,7 @@ public class LoginController {
     private PasswordField passordLogin;
     private AgentDOAImpl agentDAO = new AgentDOAImpl(); // Instantiate AgentDOAImpl
     private AdminDOAImpl adminDOA = new AdminDOAImpl(); // Instantiate AgentDOAImpl
+    private UserDOAImpl userDAO = new UserDOAImpl();
     private MouseEvent event;
 
     @FXML
@@ -53,6 +56,7 @@ public class LoginController {
 
 
 
+    /*
 
     @FXML
     void loginbutton(ActionEvent event) {
@@ -85,4 +89,33 @@ public class LoginController {
         }
     }
 
+     */
+    @FXML
+    private void loginbutton(ActionEvent event) throws IOException {
+        String email = EmailIDLogin.getText();
+        String password = passordLogin.getText();
+
+        User user = userDAO.login(email, password);
+        if (user != null) {
+            String role = user.getRole(); // Assuming getRole() exists in the User class
+
+            // Pass role to the other controller
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePage.fxml"));
+            Parent root = loader.load();
+
+            /*
+            // Access the dashboard controller
+            HomePageController homePageController = loader.getController();
+            homePageController.setRole(role);
+
+             */
+            // Show the dashboard
+            Stage stage = (Stage) loginbut.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } else {
+            // Handle invalid login
+            System.out.println("Invalid email or password");
+        }
+    }
 }
