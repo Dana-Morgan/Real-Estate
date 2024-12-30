@@ -3,7 +3,6 @@ module com.example.realestate {
     requires javafx.fxml;
     requires javafx.web;
     requires java.logging;
-
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires net.synedra.validatorfx;
@@ -18,8 +17,11 @@ module com.example.realestate {
     requires mysql.connector.java;
 
 
+    requires jakarta.mail;
+    requires jakarta.activation;
+
     opens com.example.realestate to javafx.fxml;
-    opens com.example.realestate.utils to javafx.fxml;
+    opens com.example.realestate.utils to javafx.fxml, jakarta.mail;
     opens com.example.realestate.models to org.hibernate.orm.core;
 
     exports com.example.realestate;
