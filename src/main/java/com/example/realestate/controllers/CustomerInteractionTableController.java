@@ -70,6 +70,12 @@ public class CustomerInteractionTableController implements Initializable {
     @FXML
     private Button deleteInteractionButton;
 
+    @FXML
+    private ChoiceBox<String> interactionTypeSearchField;
+
+    @FXML
+    private Button homeButton;  // Button to navigate to Home Page
+
     private ObservableList<Interaction> interactionList;
 
     @Override
@@ -79,6 +85,8 @@ public class CustomerInteractionTableController implements Initializable {
         interactionTypeColumn.setCellValueFactory(new PropertyValueFactory<>("interactionType"));
         interactionDateColumn.setCellValueFactory(new PropertyValueFactory<>("interactionDate"));
         additionalNotesColumn.setCellValueFactory(new PropertyValueFactory<>("additionalNotes"));
+
+        interactionTypeSearchField.getItems().addAll("calls", "follow-up", "inquiry");
 
         updateColumn.setCellFactory(column -> {
             TableCell<Interaction, String> cell = new TableCell<Interaction, String>() {
@@ -180,6 +188,11 @@ public class CustomerInteractionTableController implements Initializable {
         }
     }
 
+    @FXML
+    private void handleHomeButtonAction() {
+        navigateTo("/com/example/realestate/views/HomePage.fxml", "Home Page");
+    }
+
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -204,10 +217,10 @@ public class CustomerInteractionTableController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
-            Stage stage = (Stage) addInteractionbtn.getScene().getWindow();
-            stage.setScene(new Scene(root, 1280, 832));
-            stage.setTitle(title);
-            stage.show();
+            Stage stage = (Stage) homeButton.getScene().getWindow();  // Using homeButton to get the current stage
+            stage.setScene(new Scene(root, 620, 620));  // Set the new scene
+            stage.setTitle(title);  // Set the title
+            stage.show();  // Show the stage
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Error: Unable to load " + fxmlPath, e);
         }

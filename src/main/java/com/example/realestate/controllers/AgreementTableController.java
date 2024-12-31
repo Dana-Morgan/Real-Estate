@@ -87,6 +87,12 @@ public class AgreementTableController implements Initializable {
     @FXML
     private Button deleteAgreementButton;
 
+    @FXML
+    private ChoiceBox<String> offerTypeChoiceBox;
+
+    @FXML
+    private ChoiceBox<String> offerStatusChoiceBox;
+
     private ObservableList<Agreement> agreementList;
 
     @Override
@@ -99,12 +105,16 @@ public class AgreementTableController implements Initializable {
         presentationDateColumn.setCellValueFactory(new PropertyValueFactory<>("presentationDate"));
         additionalNotesColumn.setCellValueFactory(new PropertyValueFactory<>("additionalNotes"));
 
+        offerTypeChoiceBox.getItems().addAll("Sale", "Rent", "Lease");
+
+        offerStatusChoiceBox.getItems().addAll("Pending", "Accepted", "Rejected");
+
         updateColumn.setCellFactory(column -> {
             TableCell<Agreement, String> cell = new TableCell<Agreement, String>() {
                 private final Button updateButton = new Button("Update");
 
                 {
-                    updateButton.setStyle("-fx-background-color: #89B7E7; -fx-text-fill: #ffffff;");
+                    updateButton.setStyle("-fx-background-color: #508aa8; -fx-text-fill: #ffffff;");
                     updateButton.setOnAction(event -> {
                         Agreement agreement = getTableView().getItems().get(getIndex());
                         handleUpdateAgreementPage(agreement);
@@ -203,6 +213,10 @@ public class AgreementTableController implements Initializable {
         } else {
             showAlert(Alert.AlertType.ERROR, "Error", "Please select an agreement to delete.");
         }
+    }
+    @FXML
+    private void handleHomeButtonAction() {
+        navigateTo("/com/example/realestate/views/HomePage.fxml", "Home Page");
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
