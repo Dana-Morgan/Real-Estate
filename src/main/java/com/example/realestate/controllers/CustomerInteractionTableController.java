@@ -67,16 +67,10 @@ public class CustomerInteractionTableController implements Initializable {
     @FXML
     private Button addInteractionbtn;
 
-    @FXML
-    private Button deleteInteractionButton;
 
     @FXML
     private ChoiceBox<String> interactionTypeSearchField;
 
-    @FXML
-    private Button homeButton;  // Button to navigate to Home Page
-
-    private ObservableList<Interaction> interactionList;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -217,14 +211,23 @@ public class CustomerInteractionTableController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
-            Stage stage = (Stage) homeButton.getScene().getWindow();  // Using homeButton to get the current stage
-            stage.setScene(new Scene(root, 620, 620));  // Set the new scene
-            stage.setTitle(title);  // Set the title
-            stage.show();  // Show the stage
+
+            Stage stage = (Stage) addInteractionbtn.getScene().getWindow();
+
+            Scene scene = new Scene(root);
+
+            stage.setScene(scene);
+            stage.sizeToScene();
+            stage.setMinWidth(root.minWidth(-1));
+            stage.setMinHeight(root.minHeight(-1));
+
+            stage.setTitle(title);
+            stage.show();
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Error: Unable to load " + fxmlPath, e);
         }
     }
+
 
     @FXML
     private void handleAddInteractionPage() {
@@ -236,10 +239,18 @@ public class CustomerInteractionTableController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/CustomerInteractionDetails.fxml"));
             Parent root = loader.load();
+
             CustomerInteractionDetailsController controller = loader.getController();
             controller.setInteractionDetails(interaction);
+
             Stage stage = (Stage) interactionTable.getScene().getWindow();
-            stage.setScene(new Scene(root, 1280, 832));
+
+            Scene scene = new Scene(root);
+
+            stage.setScene(scene);
+            stage.sizeToScene();
+            stage.setMinWidth(root.minWidth(-1));
+            stage.setMinHeight(root.minHeight(-1));
             stage.setTitle("Update Interaction");
             stage.show();
         } catch (IOException e) {
