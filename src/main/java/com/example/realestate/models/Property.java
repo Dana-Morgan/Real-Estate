@@ -1,29 +1,106 @@
 package com.example.realestate.models;
 
-public class Property {
-    private String propertyName;
-    private String propertyType;
-    private int numberOfRooms;
-    private String propertyFeatures;
-    private String area;
-    private String status;
+import javax.persistence.*;
+import java.util.Arrays;
+import java.util.List;
 
-    public Property(String propertyName, String propertyType, int numberOfRooms, String propertyFeatures, String area, String status) {
-        this.propertyName = propertyName;
+@Entity
+@Table(name = "property")
+public class Property {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    private static final List<String> PROPERTY_TYPES = Arrays.asList("Residential", "Commercial", "Industrial");
+    private static final List<String> STATUSES = Arrays.asList("Available", "Sold", "Rented");
+
+    private String image;
+
+
+    private String name;
+
+
+    private String location;
+
+
+    private String price;
+
+
+    private String propertyType;
+
+
+    private int numberOfRooms;
+
+
+    private String propertyFeatures;
+
+    private String area;
+
+    private String status;
+    private String date;
+
+    public Property() {
+        // Default constructor for JPA
+    }
+
+    public Property(String image, String name, String location, String price, String propertyType, String status, int numberOfRooms, String propertyFeatures, String area, String date) {
+        if (!PROPERTY_TYPES.contains(propertyType)) {
+            throw new IllegalArgumentException("Invalid property type. Must be one of: " + PROPERTY_TYPES);
+        }
+        if (!STATUSES.contains(status)) {
+            throw new IllegalArgumentException("Invalid status. Must be one of: " + STATUSES);
+        }
+
+        this.image = image;
+        this.name = name;
+        this.location = location;
+        this.price = price;
         this.propertyType = propertyType;
+        this.status = status;
         this.numberOfRooms = numberOfRooms;
         this.propertyFeatures = propertyFeatures;
         this.area = area;
-        this.status = status;
+        this.date = date;
+    }
+    // Getters and setters
+    public int getId() {
+        return id;
     }
 
-    // Getters and Setters
-    public String getPropertyName() {
-        return propertyName;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setPropertyName(String propertyName) {
-        this.propertyName = propertyName;
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public String getPropertyType() {
@@ -65,4 +142,14 @@ public class Property {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 }
+
+

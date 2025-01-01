@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="propertyCard" maxWidth="350.0" minWidth="300.0" prefWidth="320.0"
+            style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 2);"
+            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox spacing="10" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0"
+          AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+
+        <!-- Property Image -->
+        <ImageView fx:id="imageView" fitHeight="180" fitWidth="300" preserveRatio="true">
+            <image>
+                <Image url="@../images/aqar.jpg"/>
+            </image>
+        </ImageView>
+
+        <!-- Property Details -->
+        <VBox spacing="8" style="-fx-padding: 5 10 5 10;">
+            <Label fx:id="nameLabel" style="-fx-font-weight: bold;">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
+
+            <Label fx:id="priceLabel" style="-fx-text-fill: #2196F3;">
+                <font>
+                    <Font size="16.0"/>
+                </font>
+            </Label>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label fx:id="statusLabel" style="-fx-text-fill: #4CAF50; -fx-background-color: #E8F5E9; -fx-padding: 2 8 2 8; -fx-background-radius: 4;">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Label>
+
+                <Label fx:id="areaLabel">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </Label>
+            </HBox>
+
+            <Label fx:id="descriptionLabel" wrapText="true" style="-fx-text-fill: #757575;">
+                <font>
+                    <Font size="12.0"/>
+                </font>
+            </Label>
+
+            <Button text="More Details" style="-fx-background-color: #BDB4C8; -fx-text-fill: white; -fx-background-radius: 5;">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Button>
+        </VBox>
+    </VBox>
+</AnchorPane>

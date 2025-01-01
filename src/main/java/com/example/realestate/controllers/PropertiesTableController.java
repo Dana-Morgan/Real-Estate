@@ -54,7 +54,6 @@ public class PropertiesTableController {
         UpdatePColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(100.0 / 1240));
         DeletePColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(100.0 / 1240));
 
-        loadSampleData();
 
         addDeleteButton();
         addEditButton();
@@ -107,22 +106,7 @@ public class PropertiesTableController {
     }
 
 
-    private void loadSampleData() {
-        ObservableList<Property> sampleData = FXCollections.observableArrayList(
-                new Property("Villa A", "Villa", 4, "Pool, Garden", "350 sqm", "Available"),
-                new Property("Apartment B", "Apartment", 3, "Balcony, Parking", "120 sqm", "Sold"),
-                new Property("Office C", "Office", 0, "Conference Room", "200 sqm", "Rented")
-        );
 
-        PropertiesColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        PTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        NumberOfRoomsColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfRooms"));
-        PFeaturesColumn.setCellValueFactory(new PropertyValueFactory<>("features"));
-        PAreaColumn.setCellValueFactory(new PropertyValueFactory<>("area"));
-        PStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-
-        PropertiesTable.setItems(sampleData);
-    }
 
     public void goToPF(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/realestate/views/AddProForm.fxml")));
