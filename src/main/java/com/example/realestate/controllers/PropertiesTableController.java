@@ -1,6 +1,8 @@
 package com.example.realestate.controllers;
 
 import com.example.realestate.models.Property;
+import com.example.realestate.services.PropertyDAO;
+import com.example.realestate.services.PropertyDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,17 +16,20 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 public class PropertiesTableController {
     @FXML
-    private Label welcomeText;
-    @FXML
-    private Button addPropertyBtn;
-    @FXML
     private TableView<Property> PropertiesTable;
     @FXML
-    private TableColumn<Property, String> PropertiesColumn;
+    private TableColumn<Property, String> PNameColumn;
+    @FXML
+    private TableColumn<Property, String> PImageColumn;
+    @FXML
+    private TableColumn<Property, String> PPriceColumn;
+    @FXML
+    private TableColumn<Property, String> PLocationColumn;
     @FXML
     private TableColumn<Property, String> PTypeColumn;
     @FXML
@@ -36,28 +41,63 @@ public class PropertiesTableController {
     @FXML
     private TableColumn<Property, String> PStatusColumn;
     @FXML
+    private TableColumn<Property, String> PDateColumn;
+    @FXML
     private TableColumn<Property, Void> UpdatePColumn;
     @FXML
     private TableColumn<Property, Void> DeletePColumn;
+
+    private final PropertyDAO propertyDAO = new PropertyDAOImpl();
 
     private Stage stage;
     private Scene scene;
 
     @FXML
     public void initialize() {
-        PropertiesColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(300.0 / 1240));
-        PTypeColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(135.0 / 1240));
-        NumberOfRoomsColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(150.0 / 1240));
-        PFeaturesColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(200.0 / 1240));
-        PAreaColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(120.0 / 1240));
-        PStatusColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(135.0 / 1240));
-        UpdatePColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(100.0 / 1240));
-        DeletePColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(100.0 / 1240));
 
-        loadSampleData();
+        PNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        PImageColumn.setCellValueFactory(new PropertyValueFactory<>("image"));
+        PPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        PLocationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+        PTypeColumn.setCellValueFactory(new PropertyValueFactory<>("propertyType"));
+        NumberOfRoomsColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfRooms"));
+        PFeaturesColumn.setCellValueFactory(new PropertyValueFactory<>("propertyFeatures"));
+        PAreaColumn.setCellValueFactory(new PropertyValueFactory<>("area"));
+        PStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        PDateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 
+
+        PNameColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(200.0 / 2200));
+        PImageColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(250.0 / 2200));
+        PLocationColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(200.0 / 2200));
+        PPriceColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(200.0 / 2200));
+        PTypeColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(200.0 / 2200));
+        NumberOfRoomsColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(200.0 / 2200));
+        PFeaturesColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(300.0 / 2200));
+        PAreaColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(200.0 / 2200));
+        PStatusColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(200.0 / 2200));
+        PDateColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(200.0 / 2200));
+        UpdatePColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(200.0 / 2200));
+        DeletePColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(200.0 / 2200));
+
+
+        loadData();
         addDeleteButton();
-        addEditButton();
+        addUpdateButton();
+
+
+    }
+
+
+    private void loadData() {
+        try {
+            List<Property> properties = propertyDAO.getAllProperties();
+            ObservableList<Property> observableList = FXCollections.observableList(properties);
+            PropertiesTable.setItems(observableList);
+        } catch (RuntimeException e) {
+            System.err.println("Failed to load properties: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void addDeleteButton() {
@@ -65,10 +105,29 @@ public class PropertiesTableController {
             private final Button deleteButton = new Button("Delete");
 
             {
+                deleteButton.setStyle("-fx-background-color:#dc3545; -fx-text-fill: white;");
                 deleteButton.setOnAction(event -> {
-                    // Placeholder for delete logic
-                    System.out.println("Delete button clicked!");
+                    Property property = getTableView().getItems().get(getIndex());
+                    if (property != null) {
+                        try {
+                            propertyDAO.deleteProperty(property);
+                            getTableView().getItems().remove(property);
+
+
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Success");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Property '" + property.getName() + "' has been successfully deleted!");
+                            alert.showAndWait();
+
+                            System.out.println("Deleted property: " + property.getName());
+                        } catch (RuntimeException e) {
+                            System.err.println("Failed to delete property: " + e.getMessage());
+                            e.printStackTrace();
+                        }
+                    }
                 });
+
             }
 
             @Override
@@ -83,15 +142,14 @@ public class PropertiesTableController {
         });
     }
 
-    private void addEditButton() {
+    private void addUpdateButton() {
         UpdatePColumn.setCellFactory(param -> new TableCell<>() {
-            private final Button editButton = new Button("Update");
+            private final Button updateButton;
 
             {
-                editButton.setOnAction(event -> {
-                    // Placeholder for edit logic
-                    System.out.println("Edit button clicked!");
-                });
+                updateButton = new Button("Update");
+                updateButton.setStyle("-fx-background-color: #508aa8; -fx-text-fill: white;");
+                // No functionality for now "Hanan's part"
             }
 
             @Override
@@ -100,29 +158,12 @@ public class PropertiesTableController {
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    setGraphic(editButton);
+                    setGraphic(updateButton);
                 }
             }
         });
     }
 
-
-    private void loadSampleData() {
-        ObservableList<Property> sampleData = FXCollections.observableArrayList(
-                new Property("Villa A", "Villa", 4, "Pool, Garden", "350 sqm", "Available"),
-                new Property("Apartment B", "Apartment", 3, "Balcony, Parking", "120 sqm", "Sold"),
-                new Property("Office C", "Office", 0, "Conference Room", "200 sqm", "Rented")
-        );
-
-        PropertiesColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        PTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        NumberOfRoomsColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfRooms"));
-        PFeaturesColumn.setCellValueFactory(new PropertyValueFactory<>("features"));
-        PAreaColumn.setCellValueFactory(new PropertyValueFactory<>("area"));
-        PStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-
-        PropertiesTable.setItems(sampleData);
-    }
 
     public void goToPF(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/realestate/views/AddProForm.fxml")));
@@ -131,6 +172,4 @@ public class PropertiesTableController {
         stage.setScene(scene);
         stage.show();
     }
-
-
 }
