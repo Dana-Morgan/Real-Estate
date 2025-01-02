@@ -7,12 +7,14 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
+import com.example.realestate.models.Property; // THIS
+
 
 public class HibernateUtil {
 
     private static HibernateUtil instance = null;
 
-    private static SessionFactory sessionFactory;
+    public static SessionFactory sessionFactory;
     private static StandardServiceRegistry serviceRegistry;
 
     private HibernateUtil(){
@@ -23,7 +25,7 @@ public class HibernateUtil {
         configuration.addAnnotatedClass(Interaction.class);
         configuration.addAnnotatedClass(Agreement.class);
         configuration.addAnnotatedClass(Customer.class);
-
+        configuration.addAnnotatedClass(Property.class); // THIS
 
         configuration.configure();
         serviceRegistry = new StandardServiceRegistryBuilder()
