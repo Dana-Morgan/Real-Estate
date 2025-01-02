@@ -87,7 +87,6 @@ public class CustomerInteractionDetailsController implements Initializable {
                 return;
             }
 
-            // تحقق من وجود الـ customerID في قاعدة البيانات
             int customerIDInt = Integer.parseInt(customerIDValue);
             if (!interactionDOA.isCustomerExist(customerIDInt)) {
                 showAlert(Alert.AlertType.ERROR, "Customer Not Found", "The customer ID does not exist. Please use an existing customer ID.");
