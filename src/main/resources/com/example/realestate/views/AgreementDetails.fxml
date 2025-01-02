@@ -10,15 +10,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="832.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.AgreementDetailsController">
     <children>
-        <!-- زر الرجوع -->
         <Button fx:id="backAD" text="Back" prefWidth="100" style="-fx-background-color: #7F5B97; -fx-text-fill: white; -fx-font-size: 14px;" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="50.0"/>
 
-        <!-- إضافة الشعار -->
         <VBox alignment="CENTER" prefHeight="295.0" prefWidth="600.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
             <ImageView fitHeight="200.0" fitWidth="241.0" preserveRatio="true">
                 <image>
@@ -28,15 +25,12 @@
             <Label style="-fx-font-family: 'Arial'; -fx-font-weight: bold; -fx-font-size: 24px; -fx-text-fill: #333;" text="Add Agreement Details" />
         </VBox>
 
-        <!-- الفورم -->
         <GridPane vgap="10" hgap="20" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="200.0" AnchorPane.bottomAnchor="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3" style="-fx-padding: 20;">
-            <!-- عمود 1 (محتويات اليسار) -->
             <columnConstraints>
                 <ColumnConstraints percentWidth="24.0" />
                 <ColumnConstraints percentWidth="76.0" />
             </columnConstraints>
 
-            <!-- إضافة Labels و عناصر الإدخال -->
             <children>
                 <Label text="Property ID" style="-fx-font-size: 14px;" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
                 <TextField fx:id="propertyID" promptText="Enter Property ID" style="-fx-pref-width: 300px; -fx-pref-height: 55px; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
@@ -57,7 +51,6 @@
                 <TextArea fx:id="additionalNotesAD" prefHeight="80" promptText="Enter additional notes" style="-fx-pref-width: 300px; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.rowSpan="2"/>
             </children>
 
-            <!-- زر حفظ -->
             <GridPane vgap="50" GridPane.columnIndex="0" GridPane.rowIndex="7" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="50.0" hgap="20">
                 <Button fx:id="saveAD" prefWidth="200" style="-fx-background-color: #A1D76E; -fx-text-fill: white; -fx-font-size: 14px;" text="Save" GridPane.columnIndex="1" onAction="#handleSaveAgreement"/>
             </GridPane>
