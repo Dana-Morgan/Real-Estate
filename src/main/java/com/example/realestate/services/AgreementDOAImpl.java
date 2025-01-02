@@ -57,4 +57,24 @@ public class AgreementDOAImpl implements AgreementDOA {
             return session.get(Agreement.class, displayID);
         }
     }
+
+    @Override
+    public boolean isCustomerExists(int customerId) {
+        try (Session session = sessionFactory.openSession()) {
+            Long count = session.createQuery("SELECT COUNT(c) FROM Customer c WHERE c.customerId = :customerId", Long.class)
+                    .setParameter("customerId", customerId)
+                    .uniqueResult();
+            return count > 0;
+        }
+    }
+
+    @Override
+    public boolean isPropertyExists(int propertyId) {
+        try (Session session = sessionFactory.openSession()) {
+            Long count = session.createQuery("SELECT COUNT(p) FROM Property p WHERE p.id = :propertyId", Long.class)
+                    .setParameter("propertyId", propertyId)
+                    .uniqueResult();
+            return count > 0;
+        }
+    }
 }

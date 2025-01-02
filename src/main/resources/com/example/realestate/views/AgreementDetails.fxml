@@ -57,7 +57,7 @@
                 <DatePicker fx:id="presentationDate" promptText="Select Date" style="-fx-pref-width: 300px; -fx-pref-height: 55px;" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
                 <Label text="Additional Notes" style="-fx-font-size: 14px;" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-                <TextArea fx:id="additionalNotes" prefHeight="80" promptText="Enter additional notes" style="-fx-pref-width: 300px; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.rowSpan="2"/>
+                <TextArea fx:id="additionalNotesAD" prefHeight="80" promptText="Enter additional notes" style="-fx-pref-width: 300px; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.rowSpan="2"/>
             </children>
 
             <GridPane vgap="50" GridPane.columnIndex="0" GridPane.rowIndex="7" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="50.0" hgap="20">

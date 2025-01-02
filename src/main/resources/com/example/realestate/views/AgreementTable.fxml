@@ -16,14 +16,12 @@
 
 <AnchorPane prefHeight="832.0" prefWidth="1280.0" style="-fx-background-color: BDB4C8;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.AgreementTableController">
 
-    <!-- شعار التطبيق -->
     <ImageView fitHeight="150.0" fitWidth="150.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
         <image>
             <Image url="@../images/logo-icon.jpg" />
         </image>
     </ImageView>
 
-    <!-- عنوان الصفحة -->
     <Label text="Customer Agreements" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="30.0" prefHeight="46.0">
         <font>
             <Font name="System Bold Italic" size="30.0" />
