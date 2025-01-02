@@ -28,6 +28,9 @@ import java.util.List;
 public class CreateAccountForAgentController {
 
     @FXML
+    public ChoiceBox<String> roleChoiceBox;
+
+    @FXML
     private TableView<User> agentTabel;
 
     @FXML
@@ -38,8 +41,7 @@ public class CreateAccountForAgentController {
     private TableColumn<User, String> EmailColumn;
     @FXML
     private TableColumn<User, String> PhoneColumn;
-    @FXML
-    private TableColumn<User, String> LNColumn;
+
     @FXML
     private TableColumn<User, String> passwordColumn;
     @FXML
@@ -93,6 +95,10 @@ public class CreateAccountForAgentController {
         EmailColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getEmail()));
         PhoneColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getPhone()));
         passwordColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getPassword()));
+        roleColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getRole()));
+        ObservableList<String> roles = FXCollections.observableArrayList("Admin", "Agent");
+        roleChoiceBox.setItems(roles);
+        //roleChoiceBox.setValue("Agent");
         addUpdateButtonToTable();
         addDeleteButtonToTable();
         // Load data into the table
@@ -145,11 +151,11 @@ public class CreateAccountForAgentController {
         String email = EmailSignUp.getText();
         String phone = PhoneSignUp.getText();
         String password = PasswordSignUp.getText();
-        String license = LicenseSignUp.getText();
-        String role = "Agent";
+        String role = roleChoiceBox.getValue();
+        //String role = "Agent";
 
         // Validate inputs
-        String validationMessage = ValiditionAgentAccount.validateAllInputs(name, email, phone, password, license);
+        String validationMessage = ValiditionAgentAccount.validateAllInputs(name, email, phone, password, role);
         if (validationMessage != null) {
             showAlert("Validation Error", validationMessage); // Show validation error
             return; // Stop account creation if validation fails
@@ -188,7 +194,6 @@ public class CreateAccountForAgentController {
         EmailSignUp.clear();
         PhoneSignUp.clear();
         PasswordSignUp.clear();
-        LicenseSignUp.clear();
     }
 
     private void loadAgentData() {

@@ -55,10 +55,9 @@ public class UserDOAImpl implements  UserDOA {
         Session session = sessionFactory.openSession();
 
         try {
-            String hql = "FROM User u WHERE u.role = :role";
-            return session.createQuery(hql, User.class)
-                    .setParameter("role", "Agent")
-                    .getResultList();
+            // إزالة الشرط "WHERE"
+            String hql = "FROM User"; // استعلام يجلب كل السجلات
+            return session.createQuery(hql, User.class).getResultList();
         } finally {
             session.close();
         }
