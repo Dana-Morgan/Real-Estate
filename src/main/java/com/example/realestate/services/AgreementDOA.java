@@ -10,4 +10,7 @@ public interface AgreementDOA {
     void delete(Agreement agreement);
     List<Agreement> getAll();
     Agreement getById(int displayID);
+
+    boolean isCustomerExists(int customerId);
+    boolean isPropertyExists(int propertyId);
 }
