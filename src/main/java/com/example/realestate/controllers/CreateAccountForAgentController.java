@@ -1,7 +1,9 @@
 package com.example.realestate.controllers;
 
 import com.example.realestate.models.Agent;
+import com.example.realestate.models.User;
 import com.example.realestate.services.AgentDOAImpl;
+import com.example.realestate.services.UserDOAImpl;
 import com.example.realestate.validation.ValiditionAgentAccount;
 import com.mysql.cj.Session;
 import com.mysql.cj.x.protobuf.MysqlxSession;
@@ -26,20 +28,22 @@ import java.util.List;
 public class CreateAccountForAgentController {
 
     @FXML
-    private TableView<Agent> agentTabel;
+    private TableView<User> agentTabel;
 
     @FXML
-    private TableColumn<Agent, Integer> idTabel;
+    private TableColumn<User, Integer> idTabel;
     @FXML
-    private TableColumn<Agent, String> NameColumn;
+    private TableColumn<User, String> NameColumn;
     @FXML
-    private TableColumn<Agent, String> EmailColumn;
+    private TableColumn<User, String> EmailColumn;
     @FXML
-    private TableColumn<Agent, String> PhoneColumn;
+    private TableColumn<User, String> PhoneColumn;
     @FXML
-    private TableColumn<Agent, String> LNColumn;
+    private TableColumn<User, String> LNColumn;
     @FXML
-    private TableColumn<Agent, String> passwordColumn;
+    private TableColumn<User, String> passwordColumn;
+    @FXML
+    private TableColumn<User, String> roleColumn;
 
     @FXML
     private Button CreateBut;
@@ -69,43 +73,43 @@ public class CreateAccountForAgentController {
     private Button canclebut;
 
     @FXML
-    private TableColumn<Agent, Void> UpdateAgent;
+    private TableColumn<User, Void> UpdateAgent;
 
     @FXML
-    private TableColumn<Agent, Void> DeleteAgent;
+    private TableColumn<User, Void> DeleteAgent;
 
     @FXML
     private Button backbut1;
     private AgentDOAImpl agentDOA = new AgentDOAImpl();
-    private ObservableList<Agent> agentList = FXCollections.observableArrayList();
+    private UserDOAImpl userDOA = new UserDOAImpl();
+    //private ObservableList<Agent> agentList = FXCollections.observableArrayList();
+    private ObservableList<User> userList = FXCollections.observableArrayList();
 
     @FXML
     void initialize() {
         // Initialize table columns
-        idTabel.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getAgentId()));
+        idTabel.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue().getId()));
         NameColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getName()));
         EmailColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getEmail()));
         PhoneColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getPhone()));
-        LNColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getLicenseNumber()));
         passwordColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getPassword()));
         addUpdateButtonToTable();
         addDeleteButtonToTable();
-
         // Load data into the table
         loadAgentData();
     }
+
+    /*
     @FXML
     private void onUpdateButtonClick() {
         // Get the selected agent from TableView
-        Agent selectedAgent = agentTabel.getSelectionModel().getSelectedItem();
-        /*
-        if (selectedAgent == null) {
+        User selectedUser = agentTabel.getSelectionModel().getSelectedItem();
+
+        if (selectedUser == null) {
             // Show alert if no agent is selected
             showAlert("No agent selected", "Please select an agent to update.");
             return;
         }
-
-         */
 
         try {
             // Load the update form
@@ -114,7 +118,7 @@ public class CreateAccountForAgentController {
 
             // Get controller and pass the selected agent
             AgentUpdateController controller = loader.getController();
-            controller.setAgent(selectedAgent, new AgentDOAImpl());
+            controller.setAgent(selectedUser, new UserDOAImpl());
 
             // Show update form in a new stage
             Stage stage = new Stage();
@@ -123,12 +127,17 @@ public class CreateAccountForAgentController {
             stage.showAndWait();
 
             // Refresh the TableView after updating
-            agentTabel.setItems(FXCollections.observableArrayList(new AgentDOAImpl().getAll()));
+            agentTabel.setItems(FXCollections.observableArrayList(new UserDOAImpl().getAll()));
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+     */
+
+
+
 
     @FXML
     void createAccount(ActionEvent event) {
@@ -137,6 +146,7 @@ public class CreateAccountForAgentController {
         String phone = PhoneSignUp.getText();
         String password = PasswordSignUp.getText();
         String license = LicenseSignUp.getText();
+        String role = "Agent";
 
         // Validate inputs
         String validationMessage = ValiditionAgentAccount.validateAllInputs(name, email, phone, password, license);
@@ -146,21 +156,30 @@ public class CreateAccountForAgentController {
         }
 
         // Check if email exists in the database
-        if (agentDOA.emailExists(email)) {
+        if (userDOA.emailExists(email)) {
             showAlert("Error", "An account with this email already exists.");
             return; // Stop account creation if email already exists
         }
-
         // Create a new Agent object
-        Agent agent = new Agent();
+        //Agent agent = new Agent();
+        User user = new User();
+        user.setName(name);
+        user.setEmail(email);
+        user.setPhone(phone);
+        user.setPassword(password);
+        user.setRole(role);
+/*
         agent.setName(name);
         agent.setEmail(email);
         agent.setPhone(phone);
         agent.setPassword(password);
         agent.setLicenseNumber(license);
 
+
+ */
         // Save the agent to the database
-        agentDOA.save(agent);
+        //agentDOA.save(agent);
+        userDOA.save(user);
         loadAgentData();
         clearInputFields(); // Clear input fields after saving
     }
@@ -171,12 +190,16 @@ public class CreateAccountForAgentController {
         PasswordSignUp.clear();
         LicenseSignUp.clear();
     }
+
     private void loadAgentData() {
         // Fetch data from the database
-        List<Agent> agents = agentDOA.getAll();
-        agentList.setAll(agents);
-        agentTabel.setItems(agentList);
+        List<User> users = userDOA.getAll(); // Fetch users from database
+        // Update the ObservableList
+        userList.setAll(users);
+        // Set the ObservableList to the ListView
+        agentTabel.setItems(userList);
     }
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -184,16 +207,18 @@ public class CreateAccountForAgentController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
     private void addUpdateButtonToTable() {
         UpdateAgent.setCellFactory(column -> {
-            return new TableCell<Agent, Void>() {
+            return new TableCell<User, Void>() {
                 private final Button updateButton = new Button("Update");
 
                 {
                     updateButton.setOnAction(event -> {
-                        Agent agent = getTableView().getItems().get(getIndex());
-                        updateAgent(agent);
-                        onUpdateButtonClick();
+                        User user = getTableView().getItems().get(getIndex());
+                        updateAgent(user);
+                        loadAgentData();
+                        //onUpdateButtonClick();
                     });
                 }
 
@@ -212,13 +237,13 @@ public class CreateAccountForAgentController {
 
     private void addDeleteButtonToTable() {
         DeleteAgent.setCellFactory(column -> {
-            return new TableCell<Agent, Void>() {
+            return new TableCell<User, Void>() {
                 private final Button deleteButton = new Button("Delete");
 
                 {
                     deleteButton.setOnAction(event -> {
-                        Agent agent = getTableView().getItems().get(getIndex());
-                        deleteAgent(agent); // Handle delete logic
+                        User user = getTableView().getItems().get(getIndex());
+                        deleteAgent(user); // Handle delete logic
                     });
                 }
 
@@ -236,14 +261,14 @@ public class CreateAccountForAgentController {
     }
 
 
-    private void updateAgent(Agent agent) {
+    private void updateAgent(User user) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/AgentUpdateForm.fxml"));
             Parent root = loader.load();
 
             // Pass the selected agent to the update form controller
             AgentUpdateController controller = loader.getController();
-            controller.setAgent(agent, new AgentDOAImpl());
+            controller.setAgent(user, new UserDOAImpl());
 
             // Show the update form in a new stage
             Stage stage = new Stage();
@@ -252,7 +277,7 @@ public class CreateAccountForAgentController {
             stage.showAndWait();
 
             // Refresh the TableView after updating
-            agentTabel.setItems(FXCollections.observableArrayList(new AgentDOAImpl().getAll()));
+           // agentTabel.setItems(FXCollections.observableArrayList(new AgentDOAImpl().getAll()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -260,11 +285,11 @@ public class CreateAccountForAgentController {
 
 
 
-    private void deleteAgent(Agent agent) {
+    private void deleteAgent(User user) {
         // Implement the logic to delete the agent
-        agentDOA.delete(agent);  // Assuming you have a delete method in the DAO
+        userDOA.delete(user);  // Assuming you have a delete method in the DAO
         loadAgentData(); // Refresh table
-        System.out.println("Deleted agent: " + agent.getName());
+        System.out.println("Deleted agent: " + user.getName());
     }
 
     @FXML

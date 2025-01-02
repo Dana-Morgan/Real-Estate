@@ -3,12 +3,11 @@ package com.example.realestate.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "admin")
-public class Admin {
-
+@Table(name = "user")
+public class User {
     @Id
     @GeneratedValue
-    private int AdminId;
+    private int id;
 
     @Column(name="name")
     private String name;
@@ -19,14 +18,18 @@ public class Admin {
     @Column(name="email")
     private String email;
 
-    private String Role;
+    @Column(name="phone")
+    private String phone;
+
+    @Column(name="role")
+    private String role="Agent";
 
     public int getId() {
-        return AdminId;
+        return id;
     }
 
-    public void setId(int AdminId) {
-        this.AdminId = AdminId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -51,5 +54,21 @@ public class Admin {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        role = role;
     }
 }

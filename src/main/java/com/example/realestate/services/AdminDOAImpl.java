@@ -14,12 +14,7 @@ public class AdminDOAImpl implements AdminDOA{
     HibernateUtil hibernateUtil;
     SessionFactory sessionFactory;
 
-    /*
-    public EmployeeDOAImp(){
-        hibernateUtil =  HibernateUtil.getInstance();
-        sessionFactory = (SessionFactory) hibernateUtil.getSessionFactory();
-    }
-     */
+
     public AdminDOAImpl() {
         hibernateUtil = HibernateUtil.getInstance();
         sessionFactory = hibernateUtil.getSessionFactory();

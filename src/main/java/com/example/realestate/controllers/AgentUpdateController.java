@@ -1,7 +1,9 @@
 package com.example.realestate.controllers;
 
 import com.example.realestate.models.Agent;
+import com.example.realestate.models.User;
 import com.example.realestate.services.AgentDOA;
+import com.example.realestate.services.UserDOA;
 import com.example.realestate.validation.ValiditionAgentAccount;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -25,36 +27,36 @@ public class AgentUpdateController {
     @FXML
     private TextField LCField;
 
-    private AgentDOA agentDOA;
-    private Agent agent;
+    private UserDOA userDOA;
+    private User user;
 
-    public void setAgent(Agent agent, AgentDOA agentDOA) {
-        this.agent = agent;
-        this.agentDOA = agentDOA;
+    public void setAgent(User user, UserDOA userDOA) {
+        this.user = user;
+        this.userDOA = userDOA;
 
         // Pre-fill fields with agent data
-        nameField.setText(agent.getName());
-        emailField.setText(agent.getEmail());
-        phoneField.setText(agent.getPhone());
-        passwordField.setText(agent.getPassword());
-        LCField.setText(agent.getName());
+        nameField.setText(user.getName());
+        emailField.setText(user.getEmail());
+        phoneField.setText(user.getPhone());
+        passwordField.setText(user.getPassword());
+        LCField.setText(user.getName());
     }
 
 
     @FXML
     private void onUpdateButtonClick() {
         // Validate agent object
-        if (agent == null) {
+        if (user == null) {
             showAlert("Error", "No agent selected for updating.");
             return;
         }
 
         // Update agent object with new values from input fields
-        agent.setName(nameField.getText());
-        agent.setEmail(emailField.getText());
-        agent.setPhone(phoneField.getText());
-        agent.setPassword(passwordField.getText());
-        agent.setLicenseNumber(LCField.getText());
+        user.setName(nameField.getText());
+        user.setEmail(emailField.getText());
+        user.setPhone(phoneField.getText());
+        user.setPassword(passwordField.getText());
+        //user.setLicenseNumber(LCField.getText());
 
         // Validate all inputs
         String validationMessage = ValiditionAgentAccount.validateAllInputs(
@@ -72,7 +74,7 @@ public class AgentUpdateController {
 
         // Update agent in database
         try {
-            agentDOA.update(agent); // Assuming update logic is correctly implemented in DAO
+            userDOA.update(user); // Assuming update logic is correctly implemented in DAO
             showAlert("Success", "Agent updated successfully.");
         } catch (Exception e) {
             showAlert("Error", "Failed to update agent: " + e.getMessage());
