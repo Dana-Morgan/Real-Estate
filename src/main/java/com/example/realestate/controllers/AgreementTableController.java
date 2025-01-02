@@ -87,6 +87,12 @@ public class AgreementTableController implements Initializable {
     @FXML
     private Button deleteAgreementButton;
 
+    @FXML
+    private ChoiceBox<String> offerTypeChoiceBox;
+
+    @FXML
+    private ChoiceBox<String> offerStatusChoiceBox;
+
     private ObservableList<Agreement> agreementList;
 
     @Override
@@ -99,12 +105,16 @@ public class AgreementTableController implements Initializable {
         presentationDateColumn.setCellValueFactory(new PropertyValueFactory<>("presentationDate"));
         additionalNotesColumn.setCellValueFactory(new PropertyValueFactory<>("additionalNotes"));
 
+        offerTypeChoiceBox.getItems().addAll("Sale", "Rent", "Lease");
+
+        offerStatusChoiceBox.getItems().addAll("Pending", "Accepted", "Rejected");
+
         updateColumn.setCellFactory(column -> {
             TableCell<Agreement, String> cell = new TableCell<Agreement, String>() {
                 private final Button updateButton = new Button("Update");
 
                 {
-                    updateButton.setStyle("-fx-background-color: #89B7E7; -fx-text-fill: #ffffff;");
+                    updateButton.setStyle("-fx-background-color: #508aa8; -fx-text-fill: #ffffff;");
                     updateButton.setOnAction(event -> {
                         Agreement agreement = getTableView().getItems().get(getIndex());
                         handleUpdateAgreementPage(agreement);
@@ -204,6 +214,10 @@ public class AgreementTableController implements Initializable {
             showAlert(Alert.AlertType.ERROR, "Error", "Please select an agreement to delete.");
         }
     }
+    @FXML
+    private void handleHomeButtonAction() {
+        navigateTo("/com/example/realestate/views/HomePage.fxml", "Home Page");
+    }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
@@ -232,14 +246,23 @@ public class AgreementTableController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
+
             Stage stage = (Stage) addAgreementbtn.getScene().getWindow();
-            stage.setScene(new Scene(root, 1280, 832));
+
+            Scene scene = new Scene(root);
+
+            stage.setScene(scene);
+            stage.sizeToScene();
+            stage.setMinWidth(root.minWidth(-1));
+            stage.setMinHeight(root.minHeight(-1));
+
             stage.setTitle(title);
             stage.show();
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Error: Unable to load " + fxmlPath, e);
         }
     }
+
 
     @FXML
     private void handleAddAgreementPage() {

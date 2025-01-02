@@ -66,8 +66,16 @@ public class AgreementDetailsController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
+
             Stage stage = (Stage) backAD.getScene().getWindow();
-            stage.setScene(new Scene(root, 1280, 832));
+
+            Scene scene = new Scene(root);
+
+            stage.setScene(scene);
+            stage.sizeToScene();
+            stage.setMinWidth(root.minWidth(-1));
+            stage.setMinHeight(root.minHeight(-1));
+
             stage.setTitle(title);
             stage.show();
         } catch (IOException e) {

@@ -11,5 +11,5 @@ public interface AgentDOA {
     public List<Agent> getAll();
     public Agent getByEmail(String Email);
     Agent login(String email, String password);
-
+    public boolean updatePassword(String email, String newPassword);
 }

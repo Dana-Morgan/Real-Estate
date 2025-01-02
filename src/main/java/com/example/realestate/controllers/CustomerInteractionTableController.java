@@ -67,10 +67,10 @@ public class CustomerInteractionTableController implements Initializable {
     @FXML
     private Button addInteractionbtn;
 
-    @FXML
-    private Button deleteInteractionButton;
 
-    private ObservableList<Interaction> interactionList;
+    @FXML
+    private ChoiceBox<String> interactionTypeSearchField;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -79,6 +79,8 @@ public class CustomerInteractionTableController implements Initializable {
         interactionTypeColumn.setCellValueFactory(new PropertyValueFactory<>("interactionType"));
         interactionDateColumn.setCellValueFactory(new PropertyValueFactory<>("interactionDate"));
         additionalNotesColumn.setCellValueFactory(new PropertyValueFactory<>("additionalNotes"));
+
+        interactionTypeSearchField.getItems().addAll("calls", "follow-up", "inquiry");
 
         updateColumn.setCellFactory(column -> {
             TableCell<Interaction, String> cell = new TableCell<Interaction, String>() {
@@ -110,7 +112,7 @@ public class CustomerInteractionTableController implements Initializable {
                 private final Button deleteButton = new Button("Delete");
 
                 {
-                    deleteButton.setStyle("-fx-background-color: #BA1200; -fx-text-fill: white;");
+                    deleteButton.setStyle("-fx-background-color: #dc3545; -fx-text-fill: white;");
                     deleteButton.setOnAction(event -> {
                         Interaction interaction = getTableView().getItems().get(getIndex());
                         handleDeleteInteraction(interaction);
@@ -180,6 +182,11 @@ public class CustomerInteractionTableController implements Initializable {
         }
     }
 
+    @FXML
+    private void handleHomeButtonAction() {
+        navigateTo("/com/example/realestate/views/HomePage.fxml", "Home Page");
+    }
+
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -204,14 +211,23 @@ public class CustomerInteractionTableController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
+
             Stage stage = (Stage) addInteractionbtn.getScene().getWindow();
-            stage.setScene(new Scene(root, 1280, 832));
+
+            Scene scene = new Scene(root);
+
+            stage.setScene(scene);
+            stage.sizeToScene();
+            stage.setMinWidth(root.minWidth(-1));
+            stage.setMinHeight(root.minHeight(-1));
+
             stage.setTitle(title);
             stage.show();
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Error: Unable to load " + fxmlPath, e);
         }
     }
+
 
     @FXML
     private void handleAddInteractionPage() {
@@ -223,10 +239,18 @@ public class CustomerInteractionTableController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/CustomerInteractionDetails.fxml"));
             Parent root = loader.load();
+
             CustomerInteractionDetailsController controller = loader.getController();
             controller.setInteractionDetails(interaction);
+
             Stage stage = (Stage) interactionTable.getScene().getWindow();
-            stage.setScene(new Scene(root, 1280, 832));
+
+            Scene scene = new Scene(root);
+
+            stage.setScene(scene);
+            stage.sizeToScene();
+            stage.setMinWidth(root.minWidth(-1));
+            stage.setMinHeight(root.minHeight(-1));
             stage.setTitle("Update Interaction");
             stage.show();
         } catch (IOException e) {

@@ -10,4 +10,5 @@ public interface InteractionDOA {
     void delete(Interaction interaction);
     List<Interaction> getAll();
     Interaction getById(int interactionId);
+    boolean isCustomerExist(int customerID); // دالة جديدة للتحقق من وجود العميل
 }

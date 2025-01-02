@@ -62,10 +62,45 @@ public class AgentDOAImpl implements AgentDOA{
     }
 
     @Override
-    public Agent getByEmail(String Email) {
-        SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
-        Session session = sessionFactory.openSession();
-        return session.get(Agent.class, Email);
+    public Agent getByEmail(String email) {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "FROM Agent WHERE Email = :email";
+            Query query = session.createQuery(hql);
+            query.setParameter("email", email);
+            List<Agent> results = query.getResultList();
+            if (results.isEmpty()) {
+                return null;
+            }
+            return results.get(0);
+        }
+    }
+
+    @Override
+    public boolean updatePassword(String email, String newPassword) {
+        try (Session session = sessionFactory.openSession()) {
+
+            String emailCheckQuery = "SELECT COUNT(*) FROM Agent WHERE Email = :email";
+            Query query = session.createQuery(emailCheckQuery);
+            query.setParameter("email", email);
+            long count = (long) query.getSingleResult();
+
+            if (count == 0) {
+                System.out.println("No agent found with the provided email: " + email);
+                return false;
+            }
+            session.beginTransaction();
+            String hql = "UPDATE Agent SET Password = :password WHERE Email = :email";
+            Query updateQuery = session.createQuery(hql);
+            updateQuery.setParameter("password", newPassword);
+            updateQuery.setParameter("email", email);
+            int result = updateQuery.executeUpdate();
+            session.getTransaction().commit();
+            System.out.println("Password update result: " + result); // Debugging
+            return result > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public boolean emailExists(String email) {
@@ -89,7 +124,7 @@ public class AgentDOAImpl implements AgentDOA{
 
 
 
-        @Override
+    @Override
         public Agent login(String email, String password) {
             SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
             Session session = sessionFactory.openSession();
@@ -102,7 +137,7 @@ public class AgentDOAImpl implements AgentDOA{
                 query.setParameter("password", password);
                 agent = (Agent) ((org.hibernate.query.Query<?>) query).uniqueResult();
             } catch (Exception e) {
-                e.printStackTrace(); // Corrected here
+                e.printStackTrace();
             } finally {
                 session.close();
             }

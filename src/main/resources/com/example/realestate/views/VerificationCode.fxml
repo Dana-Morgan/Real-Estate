@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import com.example.realestate.controllers.VerificationCodeController?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.VerificationCodeController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="235.0" prefWidth="361.0" style="-fx-background-color: #ffffff;">
+   <children>
+      <!-- Title Label -->
+      <Label layoutX="100.0" layoutY="35.0" text="Verify Code">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+
+
+      <Label layoutX="70.0" layoutY="78.0" text="Check your mail to get the verification code" />
+
+
+      <PasswordField fx:id="verificationCodeField" layoutX="64.0" layoutY="105.0" prefHeight="30.0" prefWidth="230.0">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </PasswordField>
+
+
+      <Button fx:id="nextButton" layoutX="229.0" layoutY="158.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #adc865;" text="Next" textFill="WHITE" onAction="#handleNextButton"/>
+
+
+      <Button fx:id="cancelButton" layoutX="87.0" layoutY="158.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #2c2c2c;" text="Cancel" textFill="WHITE" onAction="#handleCancelButton"/>
+   </children>
+</Pane>
