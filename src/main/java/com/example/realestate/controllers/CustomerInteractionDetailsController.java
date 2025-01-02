@@ -1,6 +1,7 @@
 package com.example.realestate.controllers;
 
 import com.example.realestate.models.Interaction;
+import com.example.realestate.models.Customer;
 import com.example.realestate.services.InteractionDOA;
 import com.example.realestate.services.InteractionDOAImpl;
 import javafx.fxml.FXML;
@@ -86,8 +87,15 @@ public class CustomerInteractionDetailsController implements Initializable {
                 return;
             }
 
+            // تحقق من وجود الـ customerID في قاعدة البيانات
+            int customerIDInt = Integer.parseInt(customerIDValue);
+            if (!interactionDOA.isCustomerExist(customerIDInt)) {
+                showAlert(Alert.AlertType.ERROR, "Customer Not Found", "The customer ID does not exist. Please use an existing customer ID.");
+                return;
+            }
+
             if (currentInteraction == null) {
-                Interaction interaction = new Interaction(Integer.parseInt(customerIDValue),
+                Interaction interaction = new Interaction(customerIDInt,
                         interactionTypeValue,
                         interactionDateValue,
                         additionalNotesValue
@@ -97,8 +105,8 @@ public class CustomerInteractionDetailsController implements Initializable {
             } else {
                 boolean isModified = false;
 
-                if (currentInteraction.getCustomerID() != Integer.parseInt(customerIDValue)) {
-                    currentInteraction.setCustomerID(Integer.parseInt(customerIDValue));
+                if (currentInteraction.getCustomerID() != customerIDInt) {
+                    currentInteraction.setCustomerID(customerIDInt);
                     isModified = true;
                 }
 
@@ -138,10 +146,6 @@ public class CustomerInteractionDetailsController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-
-
-
 
     public void setInteractionDetails(Interaction interaction) {
         if (interaction != null) {

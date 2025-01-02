@@ -1,5 +1,6 @@
 package com.example.realestate.services;
 
+import com.example.realestate.models.Customer;
 import com.example.realestate.models.Interaction;
 import com.example.realestate.utils.HibernateUtil;
 import org.hibernate.Session;
@@ -56,6 +57,17 @@ public class InteractionDOAImpl implements InteractionDOA {
     public Interaction getById(int interactionId) {
         try (Session session = sessionFactory.openSession()) {
             return session.get(Interaction.class, interactionId);
+        }
+    }
+
+    @Override
+    public boolean isCustomerExist(int customerID) {
+        try (Session session = sessionFactory.openSession()) {
+            // تنفيذ استعلام للتحقق من وجود العميل
+            Query<Customer> query = session.createQuery("FROM Customer WHERE customerId = :customerID", Customer.class);
+            query.setParameter("customerID", customerID);
+            Customer customer = query.uniqueResult();
+            return customer != null; // إذا كان العميل موجودًا، نعيد true، وإذا لم يكن موجودًا نعيد false
         }
     }
 }
