@@ -24,7 +24,6 @@ public class AgreementDetailsController implements Initializable {
     private AgreementDOA agreementDOA = new AgreementDOAImpl();
     private Agreement currentAgreement;
 
-
     @FXML
     private TextField customerID;
 
@@ -47,7 +46,7 @@ public class AgreementDetailsController implements Initializable {
     private Button saveAD;
 
     @FXML
-    private Button backAD;
+    private Button backAD;  // تم تغيير الاسم ليطابق الـ FXML
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -112,7 +111,6 @@ public class AgreementDetailsController implements Initializable {
             } else {
                 boolean isModified = false;
 
-
                 if (currentAgreement.getCustomerID() != Integer.parseInt(customerIDValue)) {
                     currentAgreement.setCustomerID(Integer.parseInt(customerIDValue));
                     isModified = true;
@@ -137,7 +135,6 @@ public class AgreementDetailsController implements Initializable {
                     currentAgreement.setAdditionalNotes(additionalNotesValue);
                     isModified = true;
                 }
-
 
                 if (isModified) {
                     agreementDOA.update(currentAgreement);

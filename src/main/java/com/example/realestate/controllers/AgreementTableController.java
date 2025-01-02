@@ -277,7 +277,12 @@ public class AgreementTableController implements Initializable {
             AgreementDetailsController controller = loader.getController();
             controller.setAgreementDetails(agreement);
             Stage stage = (Stage) agreementTable.getScene().getWindow();
-            stage.setScene(new Scene(root, 1280, 832));
+            Scene scene = new Scene(root);
+
+            stage.setScene(scene);
+            stage.sizeToScene();
+            stage.setMinWidth(root.minWidth(-1));
+            stage.setMinHeight(root.minHeight(-1));
             stage.setTitle("Update Agreement");
             stage.show();
         } catch (IOException e) {
