@@ -48,7 +48,7 @@ public class InteractionDetailsController implements Initializable {
         interactionType.getItems().addAll("calls", "follow-up", "inquiry");
         interactionType.setValue("calls");
 
-        backCID.setOnAction(event -> navigateTo("/com/example/realestate/views/InteractionTable.fxml", "Customer Interaction Table"));
+        backCID.setOnAction(event -> navigateTo("/com/example/realestate/views/CustomerInteractionTable.fxml", "Customer Interaction Table"));
 
         saveCID.setOnAction(event -> handleSaveInteraction());
     }
@@ -131,7 +131,7 @@ public class InteractionDetailsController implements Initializable {
                 }
             }
 
-            navigateTo("/com/example/realestate/views/InteractionTable.fxml", "Customer Interaction Table");
+            navigateTo("/com/example/realestate/views/CustomerInteractionTable.fxml", "Customer Interaction Table");
         } catch (NumberFormatException e) {
             showAlert(Alert.AlertType.ERROR, "Error", "Invalid input. Please check the data.");
         }

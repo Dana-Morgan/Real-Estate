@@ -41,7 +41,7 @@ public class HomePageController {
             List<Property> properties = session.createQuery(
                             "FROM Property ORDER BY RAND()",
                             Property.class)
-                    .setMaxResults(2)
+                    .setMaxResults(3)
                     .getResultList();
             for (Property property : properties) {
                 try {
