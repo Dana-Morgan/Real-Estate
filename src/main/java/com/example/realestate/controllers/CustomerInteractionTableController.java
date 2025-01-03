@@ -212,10 +212,14 @@ public class CustomerInteractionTableController implements Initializable {
             Parent root = loader.load();
 
             Stage stage = (Stage) addInteractionbtn.getScene().getWindow();
+            if (title.equals("Add Interaction")) {
+                Scene scene = new Scene(root, 600, 800);
+            stage.setScene(scene);}
 
+         else {
             Scene scene = new Scene(root, 1280, 800);
+           stage.setScene(scene);}
 
-            stage.setScene(scene);
             stage.sizeToScene();
             stage.setMinWidth(root.minWidth(-1));
             stage.setMinHeight(root.minHeight(-1));
