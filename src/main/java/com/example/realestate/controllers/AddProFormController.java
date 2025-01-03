@@ -117,8 +117,10 @@ public class AddProFormController implements Initializable {
     public void handleUpdateProperty(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/addproperetyinfo/UpdateProForm.fxml"));
+            Parent root = loader.load();
             Stage stage = new Stage();
-            stage.setScene(new Scene(loader.load()));
+            Scene scene = new Scene(root, 1280, 800);
+            stage.setScene(scene);
             stage.setTitle("Update Property");
             stage.show();
         } catch (IOException e) {

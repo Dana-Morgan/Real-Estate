@@ -227,7 +227,7 @@ public class AgreementTableController implements Initializable {
 
             Stage stage = (Stage) addAgreementbtn.getScene().getWindow();
 
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root, 1280, 800);
 
             stage.setScene(scene);
             stage.sizeToScene();

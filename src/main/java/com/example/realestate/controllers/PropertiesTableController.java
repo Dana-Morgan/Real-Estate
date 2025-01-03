@@ -184,7 +184,7 @@ public class PropertiesTableController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
             // Set the new scene with the loaded FXML
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root, 1280, 800);
             stage.setScene(scene);
             stage.show();
 

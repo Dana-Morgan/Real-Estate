@@ -21,10 +21,10 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="200.0" minHeight="150.0" prefHeight="180.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="156.79998779296875" minHeight="21.600006103515625" prefHeight="97.19999999999999" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="138.39999389648438" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="593.5999999999999" minHeight="200.0" prefHeight="593.5999999999999" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="219.99999084472657" minHeight="150.0" prefHeight="219.99999084472657" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="156.79998779296875" minHeight="21.600006103515625" prefHeight="58.00000915527343" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="138.39999389648438" minHeight="0.0" prefHeight="18.600006103515625" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="620.0" minHeight="200.0" prefHeight="602.3999938964844" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="100.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
             </rowConstraints>
 
@@ -40,7 +40,7 @@
                         <Font name="System Bold" size="36.0" />
                     </font>
                 </Label>
-                <VBox alignment="CENTER" spacing="30.0" GridPane.rowIndex="3">
+                <VBox alignment="CENTER" prefHeight="567.0" prefWidth="302.0" spacing="25.0" GridPane.rowIndex="3">
                     <Button mnemonicParsing="false" onAction="#goToAgentTable" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #BDB4C8;">
                         <graphic>
                             <HBox alignment="CENTER_LEFT" style="-fx-background-color: #BDB4C8;">
