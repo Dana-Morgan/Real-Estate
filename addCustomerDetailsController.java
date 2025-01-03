@@ -85,7 +85,7 @@ public class addCustomerDetailsController implements Initializable {
     @FXML
     private void goBack() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/customerTable.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/CustomerTable.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) Back_btn.getScene().getWindow();
             stage.setScene(new Scene(root));

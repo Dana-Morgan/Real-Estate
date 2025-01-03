@@ -67,7 +67,7 @@ public class customerTableController implements Initializable {
 
     public void navigateToAddCustomerDetails(ActionEvent event) throws IOException {
         Stage stage = (Stage) AddNewCustomer_btn.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/addCustomerDetails.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/AddCustomerDetails.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);

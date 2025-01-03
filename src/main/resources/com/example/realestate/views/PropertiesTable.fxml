@@ -40,7 +40,6 @@
 
 
 
-    <!--    <fx:include source="Navbar.fxml" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"/>-->
 
     <TableView fx:id="PropertiesTable" layoutX="40.0" layoutY="220.0" prefHeight="400.0" prefWidth="1189.0" style=" " styleClass="properties-table" AnchorPane.bottomAnchor="60" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="220">
 

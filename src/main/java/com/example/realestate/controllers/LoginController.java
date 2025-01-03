@@ -1,7 +1,5 @@
 package com.example.realestate.controllers;
 
-import com.example.realestate.models.Admin;
-import com.example.realestate.models.Agent;
 import com.example.realestate.models.User;
 import com.example.realestate.services.AdminDOAImpl;
 import com.example.realestate.services.AgentDOAImpl;
@@ -9,10 +7,8 @@ import com.example.realestate.services.UserDOAImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -43,7 +39,7 @@ public class LoginController {
     @FXML
     void handleResetPassword(MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/forgetpassword.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/ForgetPassword.fxml"));
             Scene newScene = new Scene(loader.load());
 
             Stage stage = (Stage) ((Text) event.getSource()).getScene().getWindow();
