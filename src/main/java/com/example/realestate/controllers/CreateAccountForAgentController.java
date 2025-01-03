@@ -17,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
@@ -29,6 +30,9 @@ public class CreateAccountForAgentController {
 
     @FXML
     public ChoiceBox<String> roleChoiceBox;
+
+    @FXML
+    public Button homeButton;
 
     @FXML
     private TableView<User> agentTabel;
@@ -324,6 +328,25 @@ public class CreateAccountForAgentController {
             currentStage.setScene(loginScene);
             currentStage.show();
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleHomeButtonAction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePage.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) homeButton.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.sizeToScene();
+            stage.setMinWidth(root.minWidth(-1));
+            stage.setMinHeight(root.minHeight(-1));
+            stage.setTitle("Home Page");
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

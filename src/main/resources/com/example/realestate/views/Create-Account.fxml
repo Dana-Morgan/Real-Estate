@@ -1,27 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.collections.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="832.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.CreateAccountForAgentController">
-   <!-- الشريط العلوي -->
-   <top>
-      <fx:include source="Navbar.fxml" />
-   </top>
+<BorderPane prefHeight="832.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.CreateAccountForAgentController">
 
-   <!-- القسم الأيمن: الجدول -->
    <center>
-      <VBox spacing="10.0" style="-fx-background-color: #F0EDED; -fx-padding: 20;">
+      <VBox alignment="TOP_RIGHT" prefHeight="832.0" prefWidth="721.0" spacing="10.0" style="-fx-background-color: #F0EDED; -fx-padding: 20;">
          <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+               <image>
+                  <Image url="@../images/logo-icon.jpg" />
+               </image>
+               <!-- تم إزالة VBox.margin -->
+            </ImageView>
             <Text text="The Agents">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <TableView fx:id="agentTabel" VBox.vgrow="ALWAYS">
+            <TableView fx:id="agentTabel" prefHeight="632.0" prefWidth="632.0" VBox.vgrow="ALWAYS">
                <columns>
                   <TableColumn fx:id="idTabel" text="ID" />
                   <TableColumn fx:id="NameColumn" text="Name" />
@@ -44,20 +57,20 @@
    <left>
       <AnchorPane prefHeight="832.0" prefWidth="608.0" style="-fx-background-color: BDB4C8;" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="65.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create account for agent">
+            <Text layoutX="68.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create account for agent">
                <font>
                   <Font name="System Bold Italic" size="28.0" />
                </font>
             </Text>
-            <TextField fx:id="NameSignUp" layoutX="65.0" layoutY="156.0" prefHeight="48.0" prefWidth="400.0" />
-            <TextField fx:id="EmailSignUp" layoutX="65.0" layoutY="251.0" prefHeight="48.0" prefWidth="400.0" />
-            <TextField fx:id="PhoneSignUp" layoutX="65.0" layoutY="450.0" prefHeight="48.0" prefWidth="400.0" />
-            <PasswordField fx:id="PasswordSignUp" layoutX="65.0" layoutY="346.0" prefHeight="48.0" prefWidth="400.0" />
-            <Label layoutX="65.0" layoutY="525.0" text="Select Role:">
+            <TextField fx:id="NameSignUp" layoutX="68.0" layoutY="232.0" prefHeight="48.0" prefWidth="400.0" />
+            <TextField fx:id="EmailSignUp" layoutX="68.0" layoutY="327.0" prefHeight="48.0" prefWidth="400.0" />
+            <TextField fx:id="PhoneSignUp" layoutX="68.0" layoutY="526.0" prefHeight="48.0" prefWidth="400.0" />
+            <PasswordField fx:id="PasswordSignUp" layoutX="68.0" layoutY="422.0" prefHeight="48.0" prefWidth="400.0" />
+            <Label layoutX="68.0" layoutY="601.0" text="Select Role:">
                <font>
                   <Font size="22.0" />
                </font></Label>
-            <ChoiceBox fx:id="roleChoiceBox" layoutX="62.0" layoutY="559.0" prefHeight="48.0" prefWidth="400.0">
+            <ChoiceBox fx:id="roleChoiceBox" layoutX="65.0" layoutY="635.0" prefHeight="48.0" prefWidth="400.0">
                <items>
                   <FXCollections fx:factory="observableArrayList">
                      <String fx:value="Agent" />
@@ -65,31 +78,35 @@
                   </FXCollections>
                </items>
             </ChoiceBox>
-            <Button fx:id="CreateBut" layoutX="65.0" layoutY="641.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="48.0" prefWidth="400.0" style="-fx-background-color: ADC867;" text="Create Account">
+            <Button fx:id="CreateBut" layoutX="68.0" layoutY="717.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="48.0" prefWidth="400.0" style="-fx-background-color: ADC867;" text="Create Account">
                <font>
                   <Font size="22.0" />
                </font>
             </Button>
-            <Text fill="#151515" layoutX="65.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Name">
+            <Text fill="#151515" layoutX="68.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Name">
                <font>
                   <Font size="20.0" />
                </font>
             </Text>
-            <Text layoutX="65.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Email">
+            <Text layoutX="68.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Email">
                <font>
                   <Font size="20.0" />
                </font>
             </Text>
-            <Text layoutX="65.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Password">
+            <Text layoutX="68.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Password">
                <font>
                   <Font size="20.0" />
                </font>
             </Text>
-            <Text layoutX="65.0" layoutY="439.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Phone">
+            <Text layoutX="68.0" layoutY="515.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Phone">
                <font>
                   <Font size="20.0" />
                </font>
             </Text>
+            <Button fx:id="homeButton" onAction="#handleHomeButtonAction" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+            <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="62.0" layoutY="31.0" onMouseClicked="#handleHomeButtonAction">
+               <Image url="@../images/img.png" />
+            </ImageView>
          </children>
       </AnchorPane>
    </left>
