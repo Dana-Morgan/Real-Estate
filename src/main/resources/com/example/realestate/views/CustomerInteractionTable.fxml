@@ -24,14 +24,14 @@
     </ImageView>
 
     <!-- Title Label -->
-    <Label prefHeight="46.0" prefWidth="500.0" text="Customer Interactions" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="20.0">
+    <Label prefHeight="46.0" prefWidth="350.0" text="Customer Interactions" AnchorPane.leftAnchor="77.0" AnchorPane.rightAnchor="877.0" AnchorPane.topAnchor="44.0">
         <font>
             <Font name="System Bold Italic" size="30.0" />
         </font>
         <alignment>CENTER</alignment>
     </Label>
 
-    <Button fx:id="homeButton" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" onAction="#handleHomeButtonAction">
+    <Button fx:id="homeButton" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="38.0" onAction="#handleHomeButtonAction">
         <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0">
                 <Image url="@../images/img.png" />

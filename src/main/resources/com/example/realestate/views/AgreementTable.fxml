@@ -22,14 +22,14 @@
         </image>
     </ImageView>
 
-    <Label text="Customer Agreements" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="30.0" prefHeight="46.0">
+    <Label prefHeight="46.0" prefWidth="326.0" text="Customer Agreements" AnchorPane.leftAnchor="77.0" AnchorPane.rightAnchor="877.0" AnchorPane.topAnchor="44.0">
         <font>
             <Font name="System Bold Italic" size="30.0" />
         </font>
         <alignment>CENTER</alignment>
     </Label>
 
-    <Button fx:id="homeButton" onAction="#handleHomeButtonAction" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+    <Button fx:id="homeButton" onAction="#handleHomeButtonAction" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="38.0">
         <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0">
                 <Image url="@../images/img.png" />
@@ -38,7 +38,7 @@
     </Button>
 
 
-    <VBox spacing="10.0" AnchorPane.topAnchor="150.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+    <VBox spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="150.0">
         <Button fx:id="addAgreementbtn" onAction="#handleAddAgreementPage" prefHeight="39.0" prefWidth="213.0" style="-fx-background-color: #ADC867;" text="Add Agreement" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="12.0" />
@@ -60,7 +60,7 @@
         </HBox>
     </VBox>
 
-    <TableView fx:id="agreementTable" AnchorPane.topAnchor="248.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+    <TableView fx:id="agreementTable" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="248.0">
         <columns>
             <TableColumn fx:id="displayIDColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Display ID" />
             <TableColumn fx:id="customerIDColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Customer ID" />
