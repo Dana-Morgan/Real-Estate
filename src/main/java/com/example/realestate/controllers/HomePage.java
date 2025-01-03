@@ -22,7 +22,7 @@ import org.hibernate.SessionFactory;
 import java.io.IOException;
 import java.util.List;
 
-public class DashBoard {
+public class HomePage {
     private Stage stage;
     private Scene scene;
 
@@ -41,7 +41,7 @@ public class DashBoard {
             List<Property> properties = session.createQuery(
                             "FROM Property ORDER BY RAND()",
                             Property.class)
-                    .setMaxResults(3)
+                    .setMaxResults(2)
                     .getResultList();
             for (Property property : properties) {
                 try {
