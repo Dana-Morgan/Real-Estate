@@ -340,7 +340,7 @@ public class CreateAccountForAgentController {
             Parent root = loader.load();
 
             Stage stage = (Stage) homeButton.getScene().getWindow();
-            Scene scene = new Scene(root, 1280, 800);
+            Scene scene = new Scene(root, 1400, 780);
             stage.setScene(scene);
             stage.sizeToScene();
             stage.setMinWidth(root.minWidth(-1));

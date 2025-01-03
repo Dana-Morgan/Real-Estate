@@ -17,7 +17,7 @@ public class RealEstate extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(RealEstate.class.getResource("/com/example/realestate/views/HomePage.fxml"));
         Parent root = fxmlLoader.load();
 
-        Scene scene = new Scene(root, 1280, 800);
+        Scene scene = new Scene(root, 1400, 780);
 
         stage.setScene(scene);
         stage.sizeToScene();

@@ -227,11 +227,11 @@ public class AgreementTableController implements Initializable {
 
             Stage stage = (Stage) addAgreementbtn.getScene().getWindow();
             if (title.equals("Add Agreement")) {
-                Scene scene = new Scene(root, 600, 800);
+                Scene scene = new Scene(root, 600, 780);
                 stage.setScene(scene);}
 
             else {
-                Scene scene = new Scene(root, 1280, 800);
+                Scene scene = new Scene(root, 1400, 780);
                 stage.setScene(scene);}
 
             stage.sizeToScene();
