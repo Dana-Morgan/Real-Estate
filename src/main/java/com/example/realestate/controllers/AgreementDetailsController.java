@@ -1,8 +1,8 @@
 package com.example.realestate.controllers;
 
 import com.example.realestate.models.Agreement;
-import com.example.realestate.services.AgreementDOA;
-import com.example.realestate.services.AgreementDOAImpl;
+import com.example.realestate.services.AgreementDAO;
+import com.example.realestate.services.AgreementDAOImpl;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,7 +22,7 @@ public class AgreementDetailsController implements Initializable {
 
     private static final Logger LOGGER = Logger.getLogger(AgreementDetailsController.class.getName());
 
-    private AgreementDOA agreementDOA = new AgreementDOAImpl();
+    private AgreementDAO agreementDAO = new AgreementDAOImpl();
     private Agreement currentAgreement;
 
     @FXML
@@ -98,8 +98,8 @@ public class AgreementDetailsController implements Initializable {
                 return;
             }
 
-            boolean isCustomerExists = agreementDOA.isCustomerExists(Integer.parseInt(customerIDValue));
-            boolean isPropertyExists = agreementDOA.isPropertyExists(Integer.parseInt(propertyIDValue));
+            boolean isCustomerExists = agreementDAO.isCustomerExists(Integer.parseInt(customerIDValue));
+            boolean isPropertyExists = agreementDAO.isPropertyExists(Integer.parseInt(propertyIDValue));
 
             if (!isCustomerExists) {
                 showAlert(Alert.AlertType.ERROR, "Validation Error", "Customer ID does not exist.");
@@ -120,7 +120,7 @@ public class AgreementDetailsController implements Initializable {
                         presentationDateValue,
                         additionalNotesValue
                 );
-                agreementDOA.save(agreement);
+                agreementDAO.save(agreement);
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Agreement added successfully!");
             } else {
                 boolean isModified = false;
@@ -156,7 +156,7 @@ public class AgreementDetailsController implements Initializable {
                 }
 
                 if (isModified) {
-                    agreementDOA.update(currentAgreement);
+                    agreementDAO.update(currentAgreement);
                     showAlert(Alert.AlertType.INFORMATION, "Success", "Agreement updated successfully!");
                 } else {
                     showAlert(Alert.AlertType.WARNING, "No Changes", "No changes detected to update.");

@@ -1,8 +1,6 @@
 package com.example.realestate.controllers;
 
-import com.example.realestate.models.Agent;
 import com.example.realestate.models.User;
-import com.example.realestate.services.AgentDOA;
 import com.example.realestate.services.UserDOA;
 import com.example.realestate.validation.ValiditionAgentAccount;
 import javafx.fxml.FXML;

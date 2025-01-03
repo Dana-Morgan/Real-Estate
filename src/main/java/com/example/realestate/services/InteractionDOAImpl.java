@@ -9,7 +9,7 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class InteractionDOAImpl implements InteractionDOA {
+public class InteractionDOAImpl implements InteractionDAO {
 
     private HibernateUtil hibernateUtil;
     private SessionFactory sessionFactory;

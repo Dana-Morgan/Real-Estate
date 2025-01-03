@@ -1,7 +1,7 @@
 package com.example.realestate.controllers;
 
 import com.example.realestate.models.Interaction;
-import com.example.realestate.services.InteractionDOA;
+import com.example.realestate.services.InteractionDAO;
 import com.example.realestate.services.InteractionDOAImpl;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 public class InteractionTableController implements Initializable {
 
     private static final Logger LOGGER = Logger.getLogger(InteractionTableController.class.getName());
-    private InteractionDOA interactionDOA = new InteractionDOAImpl();
+    private InteractionDAO interactionDAO = new InteractionDOAImpl();
 
     @FXML private TableView<Interaction> interactionTable;
     @FXML private TableColumn<Interaction, Integer> interactionIDColumn, customerIDColumn;
@@ -125,7 +125,7 @@ public class InteractionTableController implements Initializable {
 
     private void handleDeleteInteraction(Interaction interaction) {
         if (interaction != null) {
-            interactionDOA.delete(interaction);
+            interactionDAO.delete(interaction);
             showAlert(Alert.AlertType.INFORMATION, "Success", "Interaction deleted successfully!");
             Platform.runLater(this::refreshTable);
         } else {
@@ -161,7 +161,7 @@ public class InteractionTableController implements Initializable {
         LocalDate dateInput = interactionDateSearchField.getValue();
         String interactionTypeInput = interactionTypeSearchField.getValue();
 
-        List<Interaction> filteredInteractions = interactionDOA.getAll().stream()
+        List<Interaction> filteredInteractions = interactionDAO.getAll().stream()
                 .filter(interaction -> matchesSearchCriteria(interaction, interactionIDInput, customerIDInput, dateInput, interactionTypeInput))
                 .collect(Collectors.toList());
 
@@ -184,7 +184,7 @@ public class InteractionTableController implements Initializable {
     }
 
     private void refreshTable() {
-        interactionList = FXCollections.observableArrayList(interactionDOA.getAll());
+        interactionList = FXCollections.observableArrayList(interactionDAO.getAll());
         interactionTable.setItems(interactionList);
     }
 
