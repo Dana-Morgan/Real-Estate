@@ -1,21 +1,19 @@
 package com.example.realestate.services;
 
 import com.example.realestate.models.Admin;
-import com.example.realestate.models.Agent;
 import com.example.realestate.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.Query;
-import java.util.List;
 
-public class AdminDOAImpl implements AdminDOA{
+public class AdminDAOImpl implements AdminDAO {
 
     HibernateUtil hibernateUtil;
     SessionFactory sessionFactory;
 
 
-    public AdminDOAImpl() {
+    public AdminDAOImpl() {
         hibernateUtil = HibernateUtil.getInstance();
         sessionFactory = hibernateUtil.getSessionFactory();
     }

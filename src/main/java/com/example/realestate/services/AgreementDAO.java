@@ -4,7 +4,7 @@ import com.example.realestate.models.Agreement;
 
 import java.util.List;
 
-public interface AgreementDOA {
+public interface AgreementDAO {
     void save(Agreement agreement);
     void update(Agreement agreement);
     void delete(Agreement agreement);
