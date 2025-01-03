@@ -22,7 +22,7 @@ public class User {
     private String phone;
 
     @Column(name="role")
-    private String role="Agent";
+    private String role;
 
     public int getId() {
         return id;
@@ -69,6 +69,6 @@ public class User {
     }
 
     public void setRole(String role) {
-        role = role;
+        this.role = role;
     }
 }

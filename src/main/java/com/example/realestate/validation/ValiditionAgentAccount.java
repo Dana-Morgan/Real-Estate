@@ -33,33 +33,32 @@ public class ValiditionAgentAccount {
         return phone != null && phone.matches("\\d{10}");
     }
 
-    // Validate license number (example: not empty)
-    public static boolean isLicenseValid(String license) {
-        return license != null && !license.trim().isEmpty() && license.matches("^[A-Za-z0-9-]+$");
-    }
-
     // Validate password length
     public static boolean isPasswordValid(String password) {
         return password != null && !password.trim().isEmpty() &&
                 password.matches("^(?=.*[A-Z])(?=.*\\d).{8,}$");
     }
 
+    public static boolean isRoleValid(String role) {
+        return role != null && !role.trim().isEmpty();
+    }
+
     // Method to validate all input fields
-    public static String validateAllInputs(String name, String email, String phone, String password, String license) {
+    public static String validateAllInputs(String name, String email, String phone, String password, String role) {
         if (!isNameValid(name)) {
             return "Name must start with a letter!";
         }
         if (!isEmailValid(email)) {
-            return "Email must end with '@' and '.com'! and numbers!.";
+            return "Email must end with '@' and '.com'! and numbers! jana123@gmail.com).";
         }
         if (!isPhoneValid(phone)) {
             return "Phone number must be 10 digits.";
         }
-        if (!isLicenseValid(license)) {
-            return "License number must be valid (can contain letters, numbers, and hyphens).";
-        }
         if (!isPasswordValid(password)) {
             return "Password must contain at least one uppercase letter, one number, and be at least 8 characters long!";
+        }
+        if (!isRoleValid(role)){
+            return "Please select a one role!";
         }
         return null;
     }

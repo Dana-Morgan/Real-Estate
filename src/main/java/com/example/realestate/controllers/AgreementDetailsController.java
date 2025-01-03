@@ -98,7 +98,6 @@ public class AgreementDetailsController implements Initializable {
                 return;
             }
 
-            // التحقق من وجود الكستمر والبروبرتي
             boolean isCustomerExists = agreementDOA.isCustomerExists(Integer.parseInt(customerIDValue));
             boolean isPropertyExists = agreementDOA.isPropertyExists(Integer.parseInt(propertyIDValue));
 
@@ -124,8 +123,44 @@ public class AgreementDetailsController implements Initializable {
                 agreementDOA.save(agreement);
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Agreement added successfully!");
             } else {
-                // تحديث الاتفاقية الحالية
-                // ... (كود التحديث يبقى كما هو)
+                boolean isModified = false;
+
+                if (currentAgreement.getCustomerID() != Integer.parseInt(customerIDValue)) {
+                    currentAgreement.setCustomerID(Integer.parseInt(customerIDValue));
+                    isModified = true;
+                }
+
+                if (currentAgreement.getPropertyID() != Integer.parseInt(propertyIDValue)) {
+                    currentAgreement.setPropertyID(Integer.parseInt(propertyIDValue));
+                    isModified = true;
+                }
+
+                if (!currentAgreement.getOfferType().equals(offerTypeValue)) {
+                    currentAgreement.setOfferType(offerTypeValue);
+                    isModified = true;
+                }
+
+                if (!currentAgreement.getOfferStatus().equals(offerStatusValue)) {
+                    currentAgreement.setOfferStatus(offerStatusValue);
+                    isModified = true;
+                }
+
+                if (!currentAgreement.getPresentationDate().equals(presentationDateValue)) {
+                    currentAgreement.setPresentationDate(presentationDateValue);
+                    isModified = true;
+                }
+
+                if (!currentAgreement.getAdditionalNotes().equals(additionalNotesValue)) {
+                    currentAgreement.setAdditionalNotes(additionalNotesValue);
+                    isModified = true;
+                }
+
+                if (isModified) {
+                    agreementDOA.update(currentAgreement);
+                    showAlert(Alert.AlertType.INFORMATION, "Success", "Agreement updated successfully!");
+                } else {
+                    showAlert(Alert.AlertType.WARNING, "No Changes", "No changes detected to update.");
+                }
             }
 
             navigateTo("/com/example/realestate/views/AgreementTable.fxml", "Agreement Table");

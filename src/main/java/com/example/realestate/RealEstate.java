@@ -7,11 +7,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MainApplication extends Application {
+public class RealEstate extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("/com/example/realestate/views/HomePage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(RealEstate.class.getResource("/com/example/realestate/views/HomePage.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load(), 1280, 832);
         stage.setTitle("Real Estate Application");

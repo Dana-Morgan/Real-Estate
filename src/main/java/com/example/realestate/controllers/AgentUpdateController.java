@@ -6,13 +6,13 @@ import com.example.realestate.services.AgentDOA;
 import com.example.realestate.services.UserDOA;
 import com.example.realestate.validation.ValiditionAgentAccount;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class AgentUpdateController {
 
+    @FXML
+    public ChoiceBox<String> roleChoiceBox;
     @FXML
     private TextField nameField;
 
@@ -24,8 +24,7 @@ public class AgentUpdateController {
 
     @FXML
     private PasswordField passwordField;
-    @FXML
-    private TextField LCField;
+
 
     private UserDOA userDOA;
     private User user;
@@ -39,7 +38,7 @@ public class AgentUpdateController {
         emailField.setText(user.getEmail());
         phoneField.setText(user.getPhone());
         passwordField.setText(user.getPassword());
-        LCField.setText(user.getName());
+        roleChoiceBox.setValue(user.getRole());
     }
 
 
@@ -56,7 +55,9 @@ public class AgentUpdateController {
         user.setEmail(emailField.getText());
         user.setPhone(phoneField.getText());
         user.setPassword(passwordField.getText());
-        //user.setLicenseNumber(LCField.getText());
+        String selectedRole = roleChoiceBox.getValue();
+        user.setRole(selectedRole);
+
 
         // Validate all inputs
         String validationMessage = ValiditionAgentAccount.validateAllInputs(
@@ -64,7 +65,7 @@ public class AgentUpdateController {
                 emailField.getText(),
                 phoneField.getText(),
                 passwordField.getText(),
-                LCField.getText() // Assuming license is also a required input
+                selectedRole  // Assuming license is also a required input
         );
 
         if (validationMessage != null) {
