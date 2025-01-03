@@ -5,7 +5,6 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "interaction")
-
 public class Interaction {
 
     @Id
@@ -33,9 +32,9 @@ public class Interaction {
     }
 
     public Interaction() {
-
     }
 
+    // Getters and setters
     public int getInteractionID() {
         return interactionID;
     }

@@ -42,6 +42,16 @@ public class Agreement {
         this.presentationDate = presentationDate;
         this.additionalNotes = additionalNotes;
     }
+    public Agreement(int displayID, int customerID, int propertyID, String offerType, String offerStatus, LocalDate presentationDate, String additionalNotes) {
+        this.displayID = displayID;
+        this.customerID = customerID;
+        this.propertyID = propertyID;
+        this.offerType = offerType;
+        this.offerStatus = offerStatus;
+        this.presentationDate = presentationDate;
+        this.additionalNotes = additionalNotes;
+    }
+
 
     public int getDisplayID() {
         return displayID;
