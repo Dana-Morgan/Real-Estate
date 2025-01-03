@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: #BDB4C8;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.CustomerInteractionDetailsController">
+<AnchorPane prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: #BDB4C8;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.InteractionDetailsController">
     <children>
-        <Button fx:id="backCID" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: black; -fx-text-fill: white; -fx-background-radius: 40;" text="Back" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
+        <Button fx:id="backCID" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: #7F5B97; -fx-text-fill: white; -fx-font-size: 14;" text="Back" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="50.0" />
 
         <VBox alignment="CENTER" prefHeight="295.0" prefWidth="600.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
             <ImageView fitHeight="200.0" fitWidth="241.0" preserveRatio="true">
@@ -24,7 +24,7 @@
                     <Image url="@../images/logo-icon.jpg" />
                 </image>
             </ImageView>
-            <Label style="-fx-font-family: 'Arial'; -fx-font-weight: bold; -fx-font-size: 24px; -fx-text-fill: #333;" text="Add Customer Interaction" />
+            <Label style="-fx-font-family: 'Arial'; -fx-font-weight: bold; -fx-font-size: 24px; -fx-text-fill: #333;" text=" Interaction Details" />
         </VBox>
 
         <GridPane layoutX="-28.0" prefHeight="327.0" prefWidth="550.0" style="-fx-padding: 20.0;" vgap="5" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="78.0">
@@ -55,5 +55,6 @@
                 <RowConstraints minHeight="25.0" vgrow="ALWAYS" />
             </rowConstraints>
         </GridPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
     </children>
 </AnchorPane>

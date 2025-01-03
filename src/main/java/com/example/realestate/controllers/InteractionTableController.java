@@ -24,9 +24,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-public class CustomerInteractionTableController implements Initializable {
+public class InteractionTableController implements Initializable {
 
-    private static final Logger LOGGER = Logger.getLogger(CustomerInteractionTableController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(InteractionTableController.class.getName());
     private InteractionDOA interactionDOA = new InteractionDOAImpl();
 
     @FXML private TableView<Interaction> interactionTable;
@@ -135,9 +135,9 @@ public class CustomerInteractionTableController implements Initializable {
 
     private void handleUpdateInteractionPage(Interaction interaction) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/CustomerInteractionDetails.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/InteractionDetails.fxml"));
             Parent root = loader.load();
-            CustomerInteractionDetailsController controller = loader.getController();
+            InteractionDetailsController controller = loader.getController();
             controller.setInteractionDetails(interaction);
 
             Stage stage = (Stage) interactionTable.getScene().getWindow();
@@ -203,7 +203,7 @@ public class CustomerInteractionTableController implements Initializable {
 
     @FXML
     private void handleAddInteractionPage() {
-        navigateTo("/com/example/realestate/views/CustomerInteractionDetails.fxml", "Add Interaction");
+        navigateTo("/com/example/realestate/views/InteractionDetails.fxml", "Add Interaction");
     }
 
     private void navigateTo(String fxmlPath, String title) {

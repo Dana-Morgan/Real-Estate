@@ -151,7 +151,7 @@ public class HomePageController {
 
     @FXML
     public void goToCustomerInteractionTable(ActionEvent event) {
-        loadPage(event, "/com/example/realestate/views/CustomerInteractionTable.fxml");
+        loadPage(event, "/com/example/realestate/views/InteractionTable.fxml");
     }
 
     @FXML

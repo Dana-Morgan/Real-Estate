@@ -1,7 +1,6 @@
 package com.example.realestate.controllers;
 
 import com.example.realestate.models.Interaction;
-import com.example.realestate.models.Customer;
 import com.example.realestate.services.InteractionDOA;
 import com.example.realestate.services.InteractionDOAImpl;
 import javafx.fxml.FXML;
@@ -19,9 +18,9 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CustomerInteractionDetailsController implements Initializable {
+public class InteractionDetailsController implements Initializable {
 
-    private static final Logger LOGGER = Logger.getLogger(CustomerInteractionDetailsController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(InteractionDetailsController.class.getName());
 
     private InteractionDOA interactionDOA = new InteractionDOAImpl();
     private Interaction currentInteraction;
@@ -49,7 +48,7 @@ public class CustomerInteractionDetailsController implements Initializable {
         interactionType.getItems().addAll("calls", "follow-up", "inquiry");
         interactionType.setValue("calls");
 
-        backCID.setOnAction(event -> navigateTo("/com/example/realestate/views/CustomerInteractionTable.fxml", "Customer Interaction Table"));
+        backCID.setOnAction(event -> navigateTo("/com/example/realestate/views/InteractionTable.fxml", "Customer Interaction Table"));
 
         saveCID.setOnAction(event -> handleSaveInteraction());
     }
@@ -132,7 +131,7 @@ public class CustomerInteractionDetailsController implements Initializable {
                 }
             }
 
-            navigateTo("/com/example/realestate/views/CustomerInteractionTable.fxml", "Customer Interaction Table");
+            navigateTo("/com/example/realestate/views/InteractionTable.fxml", "Customer Interaction Table");
         } catch (NumberFormatException e) {
             showAlert(Alert.AlertType.ERROR, "Error", "Invalid input. Please check the data.");
         }
