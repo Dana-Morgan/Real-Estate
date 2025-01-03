@@ -4,7 +4,7 @@ import com.example.realestate.models.Agent;
 
 import java.util.List;
 
-public interface AgentDOA {
+public interface AgentDAO {
     public void save(Agent agent);
     public void update(Agent agent);
     public void delete(Agent agent);

@@ -1,8 +1,8 @@
 package com.example.realestate.controllers;
 
 import com.example.realestate.models.Agreement;
-import com.example.realestate.services.AgreementDOA;
-import com.example.realestate.services.AgreementDOAImpl;
+import com.example.realestate.services.AgreementDAO;
+import com.example.realestate.services.AgreementDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 public class AgreementTableController implements Initializable {
 
     private static final Logger LOGGER = Logger.getLogger(AgreementTableController.class.getName());
-    private AgreementDOA agreementDOA = new AgreementDOAImpl();
+    private AgreementDAO agreementDAO = new AgreementDAOImpl();
 
     @FXML private TableView<Agreement> agreementTable;
     @FXML private TableColumn<Agreement, Integer> displayIDColumn, customerIDColumn, propertyIDColumn;
@@ -133,7 +133,7 @@ public class AgreementTableController implements Initializable {
 
     private void handleDeleteAgreement(Agreement agreement) {
         if (agreement != null) {
-            agreementDOA.delete(agreement);
+            agreementDAO.delete(agreement);
             showAlert(Alert.AlertType.INFORMATION, "Success", "Agreement deleted successfully!");
             Platform.runLater(this::refreshTable);
         } else {
@@ -171,7 +171,7 @@ public class AgreementTableController implements Initializable {
         String offerTypeInput = offerTypeChoiceBox.getValue();
         String offerStatusInput = offerStatusChoiceBox.getValue();
 
-        List<Agreement> filteredAgreements = agreementDOA.getAll().stream()
+        List<Agreement> filteredAgreements = agreementDAO.getAll().stream()
                 .filter(agreement -> matchesSearchCriteria(agreement, displayIDInput, customerIDInput, propertyIDInput, dateInput, offerTypeInput, offerStatusInput))
                 .collect(Collectors.toList());
 
@@ -196,7 +196,7 @@ public class AgreementTableController implements Initializable {
     }
 
     private void refreshTable() {
-        agreementList = FXCollections.observableArrayList(agreementDOA.getAll());
+        agreementList = FXCollections.observableArrayList(agreementDAO.getAll());
         agreementTable.setItems(agreementList);
     }
 

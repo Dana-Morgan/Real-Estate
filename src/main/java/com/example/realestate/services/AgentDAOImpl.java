@@ -8,7 +8,7 @@ import org.hibernate.SessionFactory;
 import javax.persistence.Query;
 import java.util.List;
 
-public class AgentDOAImpl implements AgentDOA{
+public class AgentDAOImpl implements AgentDAO {
 
     HibernateUtil hibernateUtil;
     SessionFactory sessionFactory;
@@ -19,7 +19,7 @@ public class AgentDOAImpl implements AgentDOA{
         sessionFactory = (SessionFactory) hibernateUtil.getSessionFactory();
     }
      */
-    public AgentDOAImpl() {
+    public AgentDAOImpl() {
         hibernateUtil = HibernateUtil.getInstance();
         sessionFactory = hibernateUtil.getSessionFactory();
     }

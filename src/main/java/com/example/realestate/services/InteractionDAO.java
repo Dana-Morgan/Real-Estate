@@ -4,7 +4,7 @@ import com.example.realestate.models.Interaction;
 
 import java.util.List;
 
-public interface InteractionDOA {
+public interface InteractionDAO {
     void save(Interaction interaction);
     void update(Interaction interaction);
     void delete(Interaction interaction);
