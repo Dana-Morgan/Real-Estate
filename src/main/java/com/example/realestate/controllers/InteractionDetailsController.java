@@ -1,7 +1,6 @@
 package com.example.realestate.controllers;
 
 import com.example.realestate.models.Interaction;
-import com.example.realestate.models.Customer;
 import com.example.realestate.services.InteractionDOA;
 import com.example.realestate.services.InteractionDOAImpl;
 import javafx.fxml.FXML;
@@ -19,9 +18,9 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CustomerInteractionDetailsController implements Initializable {
+public class InteractionDetailsController implements Initializable {
 
-    private static final Logger LOGGER = Logger.getLogger(CustomerInteractionDetailsController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(InteractionDetailsController.class.getName());
 
     private InteractionDOA interactionDOA = new InteractionDOAImpl();
     private Interaction currentInteraction;

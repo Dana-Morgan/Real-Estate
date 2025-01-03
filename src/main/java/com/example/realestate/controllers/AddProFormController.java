@@ -71,7 +71,7 @@ public class AddProFormController implements Initializable {
     }
 
     public void BackToProList(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/realestate/views/propertiesTable.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/realestate/views/PropertiesTable.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root, 1280, 832);
         stage.setScene(scene);
@@ -117,8 +117,10 @@ public class AddProFormController implements Initializable {
     public void handleUpdateProperty(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/addproperetyinfo/UpdateProForm.fxml"));
+            Parent root = loader.load();
             Stage stage = new Stage();
-            stage.setScene(new Scene(loader.load()));
+            Scene scene = new Scene(root, 1280, 800);
+            stage.setScene(scene);
             stage.setTitle("Update Property");
             stage.show();
         } catch (IOException e) {

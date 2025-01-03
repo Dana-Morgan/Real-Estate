@@ -226,10 +226,14 @@ public class AgreementTableController implements Initializable {
             Parent root = loader.load();
 
             Stage stage = (Stage) addAgreementbtn.getScene().getWindow();
+            if (title.equals("Add Agreement")) {
+                Scene scene = new Scene(root, 600, 780);
+                stage.setScene(scene);}
 
-            Scene scene = new Scene(root);
+            else {
+                Scene scene = new Scene(root, 1400, 780);
+                stage.setScene(scene);}
 
-            stage.setScene(scene);
             stage.sizeToScene();
             stage.setMinWidth(root.minWidth(-1));
             stage.setMinHeight(root.minHeight(-1));

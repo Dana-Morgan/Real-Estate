@@ -30,7 +30,7 @@ public class Property {
     private String propertyType;
 
     @Column(name = "number_of_rooms")
-    private int numberOfRooms;
+    private Integer numberOfRooms;
 
     @Column(name = "property_features")
     private String propertyFeatures;
@@ -45,10 +45,9 @@ public class Property {
     private String date;
 
     public Property() {
-        // Default constructor for JPA
     }
 
-    public Property(String image, String name, String location, String price, String propertyType, String status, int numberOfRooms, String propertyFeatures, String area, String date) {
+    public Property(String image, String name, String location, String price, String propertyType, String status, Integer numberOfRooms, String propertyFeatures, String area, String date) {
         if (!PROPERTY_TYPES.contains(propertyType)) {
             throw new IllegalArgumentException("Invalid property type. Must be one of: " + PROPERTY_TYPES);
         }
@@ -68,7 +67,6 @@ public class Property {
         this.date = date;
     }
 
-    // Getters and Setters
 
     public int getId() {
         return id;
@@ -118,11 +116,11 @@ public class Property {
         this.propertyType = propertyType;
     }
 
-    public int getNumberOfRooms() {
+    public Integer getNumberOfRooms() {
         return numberOfRooms;
     }
 
-    public void setNumberOfRooms(int numberOfRooms) {
+    public void setNumberOfRooms(Integer numberOfRooms) {
         this.numberOfRooms = numberOfRooms;
     }
 

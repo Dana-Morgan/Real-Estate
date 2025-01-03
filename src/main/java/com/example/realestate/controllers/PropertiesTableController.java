@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PropertiesTableController {
     @FXML
@@ -47,7 +49,12 @@ public class PropertiesTableController {
     @FXML
     private TableColumn<Property, Void> DeletePColumn;
 
+    @FXML
+    private Button homeButton;
+
     private final PropertyDAO propertyDAO = new PropertyDAOImpl();
+
+    private static final Logger LOGGER = Logger.getLogger(PropertiesTableController.class.getName());
 
     private Stage stage;
     private Scene scene;
@@ -163,6 +170,31 @@ public class PropertiesTableController {
             }
         });
     }
+
+
+
+    @FXML
+    private void handleNavigateToHomeButton(ActionEvent event) {
+        try {
+            // Load the FXML file for the home page
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePage.fxml"));
+            Parent root = loader.load();
+
+            // Get the current stage from the button's event source
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene with the loaded FXML
+            Scene scene = new Scene(root, 1400, 780);
+            stage.setScene(scene);
+            stage.show();
+
+            System.out.println("Navigated to HomePage successfully!");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error loading HomePage.fxml: " + e.getMessage());
+        }
+    }
+
 
 
     public void goToPF(ActionEvent event) throws IOException {
