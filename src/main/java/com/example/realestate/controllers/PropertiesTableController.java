@@ -95,7 +95,7 @@ public class PropertiesTableController {
     }
 
 
-    private void loadData() {
+    public void loadData() {
         try {
             List<Property> properties = propertyDAO.getAllProperties();
             ObservableList<Property> observableList = FXCollections.observableList(properties);
@@ -150,12 +150,33 @@ public class PropertiesTableController {
 
     private void addUpdateButton() {
         UpdatePColumn.setCellFactory(param -> new TableCell<>() {
-            private final Button updateButton;
+            private final Button updateButton = new Button("Update");
 
             {
-                updateButton = new Button("Update");
                 updateButton.setStyle("-fx-background-color: #508aa8; -fx-text-fill: white;");
-                // No functionality for now "Hanan's part"
+                updateButton.setOnAction(event -> {
+                    Property property = getTableView().getItems().get(getIndex());
+                    if (property != null) {
+                        try {
+                            // Passing selected property to the AddProFormController
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/AddProForm.fxml"));
+                            Parent root = loader.load();
+
+                            AddProFormController controller = loader.getController();
+                            controller.setPropertyToUpdate(property); // Passing the selected property to the form controller
+
+                            // Switch to AddProForm scene
+                            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            Scene scene = new Scene(root, 1280, 832);
+                            stage.setScene(scene);
+                            stage.show();
+
+                            System.out.println("Navigated to Add Property Form with property data for update!");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
 
             @Override

@@ -7,4 +7,6 @@ import java.util.List;
 public interface PropertyDAO {
    List<Property> getAllProperties();
    void deleteProperty(Property property);
+   void updateProperty(Property property);
+   void addProperty(Property property);
 }

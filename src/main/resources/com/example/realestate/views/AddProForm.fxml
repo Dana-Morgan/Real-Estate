@@ -4,13 +4,14 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="832" minWidth="1280" prefHeight="832" prefWidth="1280" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.AddProFormController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.AddProFormController">
    <children>
       <Label layoutX="44.0" layoutY="46.0" minHeight="73.0" minWidth="523.0" prefHeight="91.0" prefWidth="523.0" style="-fx-font-weight: bold;" text=" Add Property Details">
          <font>
@@ -84,7 +85,13 @@
       <ChoiceBox fx:id="PropertyType" layoutX="320.0" layoutY="284.0" prefHeight="55.0" prefWidth="300.0" />
       <ChoiceBox fx:id="SellingType" layoutX="320.0" layoutY="373.0" prefHeight="55.0" prefWidth="300.0" />
       <TextField fx:id="Title" layoutX="317.0" layoutY="183.0" prefHeight="55.0" prefWidth="825.0" promptText="Enter title" />
-      <Button fx:id="AddPro_btn" layoutX="556.0" layoutY="759.0" onAction="#handleAddProperty" prefHeight="42.0" prefWidth="242.0" style="-fx-background-color: #A1D76E; -fx-text-fill: white; -fx-font-size: 14px;" text="Add Property" />
+      <Button fx:id="AddPro_btn" layoutX="453.0" layoutY="66.0" onAction="#handleAddProperty" prefHeight="42.0" prefWidth="242.0" style="-fx-background-color: #A1D76E; -fx-text-fill: white; -fx-font-size: 14px;" text="Add Property" />
       <Button fx:id="Back_btn" layoutX="1077.0" layoutY="72.0" onAction="#BackToProList" prefWidth="100" style="-fx-background-color: #7F5B97; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-color: black;" text="Back" textFill="#fffcfc" />
+      <DatePicker fx:id="Date" layoutX="840.0" layoutY="673.0" minHeight="55.0" minWidth="300.0" promptText="select date" />
+      <Label layoutX="677.0" layoutY="656.0" prefHeight="58.0" prefWidth="184.0" text="Date">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
