@@ -227,7 +227,6 @@ public class AgreementTableController implements Initializable {
 
     @FXML
     private void handleHomeButtonAction() {
-        // تأكد من أن الدور يتم التحقق منه بشكل صحيح
 
         if (Objects.equals(SessionManager.getUserRole(), "Admin")) {
             System.out.println(userRole);
