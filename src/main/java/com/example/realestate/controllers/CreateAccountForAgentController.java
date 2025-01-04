@@ -315,7 +315,7 @@ public class CreateAccountForAgentController {
             Stage currentStage = (Stage) backbut1.getScene().getWindow();
 
             // Go back to the Login page (previous scene)
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePageForAdmin.fxml"));
             Parent loginRoot = loader.load();
 
             // Set the new scene (Login page)
@@ -331,7 +331,7 @@ public class CreateAccountForAgentController {
     @FXML
     private void handleHomeButtonAction() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePageForAdmin.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) homeButton.getScene().getWindow();
