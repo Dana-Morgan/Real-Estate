@@ -125,8 +125,11 @@ public class LoginController {
             stage.setScene(new Scene(root));
             stage.show();
         } else {
-            // في حالة فشل تسجيل الدخول
-            System.out.println("Invalid email or password");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Login Failed");
+            alert.setHeaderText(null);
+            alert.setContentText("Invalid email or password. Please try again.");
+            alert.showAndWait();
         }
     }
 
