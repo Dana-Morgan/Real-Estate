@@ -1,8 +1,9 @@
 package com.example.realestate.controllers;
 
 import com.example.realestate.models.Interaction;
-import com.example.realestate.services.InteractionDOA;
+import com.example.realestate.services.InteractionDAO;
 import com.example.realestate.services.InteractionDOAImpl;
+import com.example.realestate.utils.SessionManager;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,15 +20,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-public class CustomerInteractionTableController implements Initializable {
+public class InteractionTableController implements Initializable {
 
-    private static final Logger LOGGER = Logger.getLogger(CustomerInteractionTableController.class.getName());
-    private InteractionDOA interactionDOA = new InteractionDOAImpl();
+    private static final Logger LOGGER = Logger.getLogger(InteractionTableController.class.getName());
+    private InteractionDAO interactionDAO = new InteractionDOAImpl();
 
     @FXML private TableView<Interaction> interactionTable;
     @FXML private TableColumn<Interaction, Integer> interactionIDColumn, customerIDColumn;
@@ -42,9 +44,19 @@ public class CustomerInteractionTableController implements Initializable {
     @FXML private TextField interactionIDSearchField, customerIDSearchField;
 
     private ObservableList<Interaction> interactionList;
+    private String userRole;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        userRole = SessionManager.getUserRole();
+
+        System.out.println("User role from session: " + userRole);
+
+        if (userRole == null) {
+            System.out.println("User role is null! Make sure to set it before initialization.");
+        } else {
+            System.out.println("User role: " + userRole);
+        }
         initializeColumns();
         initializeChoiceBoxes();
         initializeButtons();
@@ -125,7 +137,7 @@ public class CustomerInteractionTableController implements Initializable {
 
     private void handleDeleteInteraction(Interaction interaction) {
         if (interaction != null) {
-            interactionDOA.delete(interaction);
+            interactionDAO.delete(interaction);
             showAlert(Alert.AlertType.INFORMATION, "Success", "Interaction deleted successfully!");
             Platform.runLater(this::refreshTable);
         } else {
@@ -135,9 +147,9 @@ public class CustomerInteractionTableController implements Initializable {
 
     private void handleUpdateInteractionPage(Interaction interaction) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/CustomerInteractionDetails.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/InteractionDetails.fxml"));
             Parent root = loader.load();
-            CustomerInteractionDetailsController controller = loader.getController();
+            InteractionDetailsController controller = loader.getController();
             controller.setInteractionDetails(interaction);
 
             Stage stage = (Stage) interactionTable.getScene().getWindow();
@@ -161,7 +173,7 @@ public class CustomerInteractionTableController implements Initializable {
         LocalDate dateInput = interactionDateSearchField.getValue();
         String interactionTypeInput = interactionTypeSearchField.getValue();
 
-        List<Interaction> filteredInteractions = interactionDOA.getAll().stream()
+        List<Interaction> filteredInteractions = interactionDAO.getAll().stream()
                 .filter(interaction -> matchesSearchCriteria(interaction, interactionIDInput, customerIDInput, dateInput, interactionTypeInput))
                 .collect(Collectors.toList());
 
@@ -184,7 +196,7 @@ public class CustomerInteractionTableController implements Initializable {
     }
 
     private void refreshTable() {
-        interactionList = FXCollections.observableArrayList(interactionDOA.getAll());
+        interactionList = FXCollections.observableArrayList(interactionDAO.getAll());
         interactionTable.setItems(interactionList);
     }
 
@@ -198,12 +210,18 @@ public class CustomerInteractionTableController implements Initializable {
 
     @FXML
     private void handleHomeButtonAction() {
-        navigateTo("/com/example/realestate/views/HomePage.fxml", "Home Page");
+        if (Objects.equals(SessionManager.getUserRole(), "Admin")) {
+            System.out.println(userRole);
+            navigateTo("/com/example/realestate/views/HomePageForAdmin.fxml", "Admin Home Page");
+        } else if (Objects.equals(SessionManager.getUserRole(), "Agent")) {  // تم تعديل هنا للتحقق من Agent
+            System.out.println(userRole);
+            navigateTo("/com/example/realestate/views/HomePageForAgent.fxml", "Agent Home Page");
+        }
     }
 
     @FXML
     private void handleAddInteractionPage() {
-        navigateTo("/com/example/realestate/views/CustomerInteractionDetails.fxml", "Add Interaction");
+        navigateTo("/com/example/realestate/views/InteractionDetails.fxml", "Add Interaction");
     }
 
     private void navigateTo(String fxmlPath, String title) {
@@ -212,10 +230,14 @@ public class CustomerInteractionTableController implements Initializable {
             Parent root = loader.load();
 
             Stage stage = (Stage) addInteractionbtn.getScene().getWindow();
+            if (title.equals("Add Interaction")) {
+                Scene scene = new Scene(root, 600, 780);
+            stage.setScene(scene);}
 
-            Scene scene = new Scene(root);
+         else {
+            Scene scene = new Scene(root, 1400, 780);
+           stage.setScene(scene);}
 
-            stage.setScene(scene);
             stage.sizeToScene();
             stage.setMinWidth(root.minWidth(-1));
             stage.setMinHeight(root.minHeight(-1));
@@ -225,5 +247,8 @@ public class CustomerInteractionTableController implements Initializable {
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Error: Unable to load " + fxmlPath, e);
         }
+    }
+    public void setUserRole(String role) {
+        this.userRole = role;
     }
 }

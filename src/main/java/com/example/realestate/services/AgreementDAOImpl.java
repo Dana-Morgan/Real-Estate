@@ -7,12 +7,12 @@ import org.hibernate.SessionFactory;
 
 import java.util.List;
 
-public class AgreementDOAImpl implements AgreementDOA {
+public class AgreementDAOImpl implements AgreementDAO {
 
     private HibernateUtil hibernateUtil;
     private SessionFactory sessionFactory;
 
-    public AgreementDOAImpl() {
+    public AgreementDAOImpl() {
         hibernateUtil = HibernateUtil.getInstance();
         sessionFactory = hibernateUtil.getSessionFactory();
     }

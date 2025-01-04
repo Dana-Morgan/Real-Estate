@@ -1,11 +1,10 @@
 package com.example.realestate.controllers;
 
-import com.example.realestate.models.Admin;
-import com.example.realestate.models.Agent;
 import com.example.realestate.models.User;
-import com.example.realestate.services.AdminDOAImpl;
-import com.example.realestate.services.AgentDOAImpl;
+import com.example.realestate.services.AdminDAOImpl;
+import com.example.realestate.services.AgentDAOImpl;
 import com.example.realestate.services.UserDOAImpl;
+import com.example.realestate.utils.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,15 +34,15 @@ public class LoginController {
 
     @FXML
     private PasswordField passordLogin;
-    private AgentDOAImpl agentDAO = new AgentDOAImpl(); // Instantiate AgentDOAImpl
-    private AdminDOAImpl adminDOA = new AdminDOAImpl(); // Instantiate AgentDOAImpl
+    private AgentDAOImpl agentDAO = new AgentDAOImpl(); // Instantiate AgentDOAImpl
+    private AdminDAOImpl adminDOA = new AdminDAOImpl(); // Instantiate AgentDOAImpl
     private UserDOAImpl userDAO = new UserDOAImpl();
     private MouseEvent event;
 
     @FXML
     void handleResetPassword(MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/forgetpassword.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/ForgetPassword.fxml"));
             Scene newScene = new Scene(loader.load());
 
             Stage stage = (Stage) ((Text) event.getSource()).getScene().getWindow();
@@ -53,7 +52,6 @@ public class LoginController {
             e.printStackTrace();
         }
     }
-
 
 
     /*
@@ -70,7 +68,7 @@ public class LoginController {
         if (agent != null || admin != null ) {
             // If login is successful, navigate to the HomePage
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePage.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePageForAdmin.fxml"));
                 Parent newPageRoot = loader.load();
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(newPageRoot);
@@ -90,32 +88,50 @@ public class LoginController {
     }
 
      */
+
     @FXML
     private void loginbutton(ActionEvent event) throws IOException {
         String email = EmailIDLogin.getText();
         String password = passordLogin.getText();
 
+        // تحقق من صحة بيانات المستخدم
         User user = userDAO.login(email, password);
-        if (user != null) {
-            String role = user.getRole(); // Assuming getRole() exists in the User class
 
-            // Pass role to the other controller
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePage.fxml"));
+        if (user != null) {
+            // تخزين المستخدم في الجلسة
+            SessionManager.setLoggedInUser(user);
+            System.out.println("User role after login: " + user.getRole());
+
+            String role = user.getRole(); // الحصول على دور المستخدم
+
+            // تحديد الصفحة بناءً على الدور
+            String fxmlFile;
+            if ("Agent".equalsIgnoreCase(role)) {
+                fxmlFile = "/com/example/realestate/views/HomePageForAgent.fxml";
+            } else if ("Admin".equalsIgnoreCase(role)) {
+                fxmlFile = "/com/example/realestate/views/HomePageForAdmin.fxml";
+            } else {
+                // إذا كان الدور غير معرّف
+                System.out.println("Unknown role: " + role);
+                return;
+            }
+
+            // تحميل الصفحة المناسبة
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent root = loader.load();
 
-            /*
-            // Access the dashboard controller
-            HomePageController homePageController = loader.getController();
-            homePageController.setRole(role);
-
-             */
-            // Show the dashboard
+            // عرض الصفحة
             Stage stage = (Stage) loginbut.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         } else {
-            // Handle invalid login
+            // في حالة فشل تسجيل الدخول
             System.out.println("Invalid email or password");
         }
     }
+
+
+
+
+
 }

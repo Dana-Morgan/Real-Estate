@@ -1,23 +1,18 @@
 package com.example.realestate.controllers;
 
-import com.example.realestate.models.Agent;
 import com.example.realestate.models.User;
-import com.example.realestate.services.AgentDOAImpl;
+import com.example.realestate.services.AgentDAOImpl;
 import com.example.realestate.services.UserDOAImpl;
 import com.example.realestate.validation.ValiditionAgentAccount;
-import com.mysql.cj.Session;
-import com.mysql.cj.x.protobuf.MysqlxSession;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
@@ -86,7 +81,7 @@ public class CreateAccountForAgentController {
 
     @FXML
     private Button backbut1;
-    private AgentDOAImpl agentDOA = new AgentDOAImpl();
+    private AgentDAOImpl agentDOA = new AgentDAOImpl();
     private UserDOAImpl userDOA = new UserDOAImpl();
     //private ObservableList<Agent> agentList = FXCollections.observableArrayList();
     private ObservableList<User> userList = FXCollections.observableArrayList();
@@ -320,7 +315,7 @@ public class CreateAccountForAgentController {
             Stage currentStage = (Stage) backbut1.getScene().getWindow();
 
             // Go back to the Login page (previous scene)
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePageForAdmin.fxml"));
             Parent loginRoot = loader.load();
 
             // Set the new scene (Login page)
@@ -336,11 +331,11 @@ public class CreateAccountForAgentController {
     @FXML
     private void handleHomeButtonAction() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePageForAdmin.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) homeButton.getScene().getWindow();
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root, 1400, 780);
             stage.setScene(scene);
             stage.sizeToScene();
             stage.setMinWidth(root.minWidth(-1));

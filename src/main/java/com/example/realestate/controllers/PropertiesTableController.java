@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class PropertiesTableController {
@@ -177,21 +176,21 @@ public class PropertiesTableController {
     private void handleNavigateToHomeButton(ActionEvent event) {
         try {
             // Load the FXML file for the home page
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePageForAdmin.fxml"));
             Parent root = loader.load();
 
             // Get the current stage from the button's event source
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
             // Set the new scene with the loaded FXML
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root, 1400, 780);
             stage.setScene(scene);
             stage.show();
 
             System.out.println("Navigated to HomePage successfully!");
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("Error loading HomePage.fxml: " + e.getMessage());
+            System.err.println("Error loading HomePageForAdmin.fxml: " + e.getMessage());
         }
     }
 

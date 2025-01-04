@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -13,56 +14,63 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: #BDB4C8" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.AgreementDetailsController">
+<AnchorPane prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: #BDB4C8;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.AgreementDetailsController">
     <children>
-        <Button fx:id="backAD" text="Back" prefWidth="100" style="-fx-background-color: #7F5B97; -fx-text-fill: white; -fx-font-size: 14px;" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="50.0"/>
+        <Button fx:id="backAD" prefWidth="100" style="-fx-background-color: #7F5B97; -fx-text-fill: white; -fx-font-size: 14px;" text="Back" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="50.0" />
 
-        <VBox alignment="CENTER" prefHeight="295.0" prefWidth="600.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" style="-fx-padding: 20;">
+        <VBox alignment="CENTER" prefHeight="295.0" prefWidth="600.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
             <ImageView fitHeight="200.0" fitWidth="241.0" preserveRatio="true">
                 <image>
                     <Image url="@../images/logo-icon.jpg" />
                 </image>
             </ImageView>
-            <Label style="-fx-font-family: 'Arial'; -fx-font-weight: bold; -fx-font-size: 24px; -fx-text-fill: #333; -fx-padding: 10;" text="Add Details" />
+            <Label style="-fx-font-family: 'Arial'; -fx-font-weight: bold; -fx-font-size: 24px; -fx-text-fill: #333;" text="Agreement Details" />
         </VBox>
 
-        <GridPane vgap="10" hgap="20" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="400.0" AnchorPane.bottomAnchor="100.0" style="-fx-padding: 20;">
+        <GridPane layoutX="-28.0" prefHeight="327.0" prefWidth="550.0" style="-fx-padding: 20.0;" vgap="10" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="78.0">
             <columnConstraints>
                 <ColumnConstraints percentWidth="24.0" />
                 <ColumnConstraints percentWidth="76.0" />
             </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="25.0" vgrow="ALWAYS"/>
-                <RowConstraints minHeight="25.0" vgrow="ALWAYS"/>
-                <RowConstraints minHeight="25.0" vgrow="ALWAYS"/>
-                <RowConstraints minHeight="25.0" vgrow="ALWAYS"/>
-                <RowConstraints minHeight="25.0" vgrow="ALWAYS"/>
-            </rowConstraints>
-
             <children>
-                <!-- الحقول -->
-                <Label text="Property ID" style="-fx-font-size: 14px;" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                <TextField fx:id="propertyID" promptText="Enter Property ID" style="-fx-pref-width: 300px; -fx-pref-height: 55px; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Label alignment="CENTER_RIGHT" maxWidth="Infinity" style="-fx-font-weight: bold;" text="Property ID              " textAlignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="propertyID" maxWidth="Infinity" promptText="Enter Property ID" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                <Label text="Offer Type" style="-fx-font-size: 14px;" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                <ChoiceBox fx:id="offerType" style="-fx-pref-width: 300px; -fx-pref-height: 55px; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Label alignment="CENTER_RIGHT" maxWidth="Infinity" style="-fx-font-weight: bold;" text="Offer Type                " textAlignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <ChoiceBox fx:id="offerType" maxWidth="Infinity" prefHeight="26.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                <Label text="Offer Status" style="-fx-font-size: 14px;" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-                <ChoiceBox fx:id="offerStatus" style="-fx-pref-width: 300px; -fx-pref-height: 55px; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                <Label alignment="CENTER_RIGHT" maxWidth="Infinity" style="-fx-font-weight: bold;" text="Offer Status             " textAlignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <ChoiceBox fx:id="offerStatus" maxWidth="Infinity" prefHeight="26.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-                <Label text="Customer ID" style="-fx-font-size: 14px;" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-                <TextField fx:id="customerID" promptText="Enter Customer ID" style="-fx-pref-width: 300px; -fx-pref-height: 55px; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <Label alignment="CENTER_RIGHT" maxWidth="Infinity" style="-fx-font-weight: bold;" text="Customer ID             " textAlignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextField fx:id="customerID" maxWidth="Infinity" promptText="Enter Customer ID" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-                <Label text="Date" style="-fx-font-size: 14px;" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-                <DatePicker fx:id="presentationDate" promptText="Select Date" style="-fx-pref-width: 300px; -fx-pref-height: 55px;" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                <Label alignment="CENTER_RIGHT" maxWidth="Infinity" prefHeight="18.0" prefWidth="94.0" style="-fx-font-weight: bold;" text="Date                          " textAlignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <DatePicker fx:id="presentationDate" maxWidth="Infinity" prefHeight="26.0" promptText="Choose Date" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
-                <Label text="Additional Notes" style="-fx-font-size: 14px;" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-                <TextArea fx:id="additionalNotesAD" prefHeight="80" promptText="Enter additional notes" style="-fx-pref-width: 300px; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.rowSpan="2"/>
+                <Label alignment="CENTER_RIGHT" maxWidth="Infinity" style="-fx-font-weight: bold;" text="Additional Notes    " textAlignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <TextArea fx:id="additionalNotesAD" maxWidth="Infinity" prefHeight="80.0" promptText="Enter Additional Notes" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.rowSpan="2" />
             </children>
+            <rowConstraints>
+                <RowConstraints minHeight="25.0" vgrow="ALWAYS" />
+                <RowConstraints minHeight="25.0" vgrow="ALWAYS" />
+                <RowConstraints minHeight="25.0" vgrow="ALWAYS" />
+                <RowConstraints minHeight="25.0" vgrow="ALWAYS" />
+                <RowConstraints minHeight="25.0" vgrow="ALWAYS" />
+            <RowConstraints />
+            <RowConstraints />
+            </rowConstraints>
+        </GridPane>
 
-            <GridPane vgap="50" GridPane.columnIndex="0" GridPane.rowIndex="7" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="50.0" hgap="20">
-                <Button fx:id="saveAD" prefWidth="200" style="-fx-background-color: #A1D76E; -fx-text-fill: white; -fx-font-size: 14px;" text="Save" GridPane.columnIndex="1" onAction="#handleSaveAgreement"/>
-            </GridPane>
+        <GridPane hgap="20" vgap="50" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="50.0" GridPane.columnIndex="0" GridPane.rowIndex="7">
+            <Button fx:id="saveAD" onAction="#handleSaveAgreement" prefWidth="200" style="-fx-background-color: #A1D76E; -fx-text-fill: white; -fx-font-size: 14px;" text="Save" GridPane.columnIndex="1" />
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
         </GridPane>
     </children>
 </AnchorPane>
