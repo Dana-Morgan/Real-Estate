@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: BDB4C8;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.UpdateCustomerDetailsController">
+    <Label layoutX="159.0" layoutY="241.0" text="Update Customer Details">
+        <font>
+            <Font name="System Bold" size="24.0" />
+        </font></Label>
+
+    <Label layoutX="46.0" layoutY="352.0" text="Name">
+        <font>
+            <Font name="System Bold" size="15.0" />
+        </font></Label>
+    <TextField fx:id="customerName" layoutX="105.0" layoutY="350.0" />
+
+    <Label layoutX="47.0" layoutY="418.0" text="Email">
+        <font>
+            <Font name="System Bold" size="15.0" />
+        </font></Label>
+    <TextField fx:id="customerEmail" layoutX="105.0" layoutY="416.0" />
+
+    <Label layoutX="45.0" layoutY="477.0" text="Phone">
+        <font>
+            <Font name="System Bold" size="15.0" />
+        </font></Label>
+    <TextField fx:id="customerPhoneNumber" layoutX="105.0" layoutY="475.0" />
+
+    <Label layoutX="305.0" layoutY="353.0" text="Activity Status">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font></Label>
+    <ChoiceBox fx:id="ActivityStatus" layoutX="410.0" layoutY="349.0" prefHeight="26.0" prefWidth="149.0" />
+
+    <Label layoutX="321.0" layoutY="418.0" text="Preferences">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font></Label>
+    <ChoiceBox fx:id="Preferences" layoutX="410.0" layoutY="415.0" prefHeight="26.0" prefWidth="149.0" />
+
+    <Label layoutX="315.0" layoutY="491.0" text="Additional Notes">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font></Label>
+    <TextField fx:id="AdditionalNotes" layoutX="305.0" layoutY="524.0" prefHeight="74.0" prefWidth="252.0" />
+
+    <Button layoutX="448.0" layoutY="684.0" onAction="#updateCustomer" prefHeight="35.0" prefWidth="92.0" style="-fx-background-color: #A1D76E; -fx-background-radius: 10;" text="Save" textFill="#fffdfd">
+        <font>
+            <Font name="System Bold" size="18.0" />
+        </font></Button>
+    <Button fx:id="cancelButton" layoutX="46.0" layoutY="60.0" onAction="#goBack" prefHeight="35.0" prefWidth="77.0" style="-fx-background-color: #000000; -fx-background-radius: 20;" text="Back" textFill="WHITE" />
+    <ImageView fitHeight="150.0" fitWidth="203.0" layoutX="244.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../images/logo-icon.jpg" />
+        </image>
+    </ImageView>
+</AnchorPane>
