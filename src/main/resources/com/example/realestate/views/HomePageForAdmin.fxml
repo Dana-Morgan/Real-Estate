@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.HomePageController">
+<AnchorPane prefHeight="900" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.HomePageControllerForAdmin">
     <children>
         <GridPane maxWidth="301.0" minWidth="250.0" prefHeight="900.0" prefWidth="301.0" style="-fx-background-color:#BDB4C8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
@@ -41,9 +41,9 @@
                     </font>
                 </Label>
                 <VBox alignment="CENTER" prefHeight="567.0" prefWidth="302.0" spacing="25.0" GridPane.rowIndex="3">
-                    <Button mnemonicParsing="false" onAction="#goToAgentTable" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #BDB4C8;">
+                    <Button fx:id="agentbutton" mnemonicParsing="false" onAction="#goToAgentTable" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #BDB4C8;">
                         <graphic>
-                            <HBox alignment="CENTER_LEFT" style="-fx-background-color: #BDB4C8;">
+                            <HBox  alignment="CENTER_LEFT" style="-fx-background-color: #BDB4C8;">
                                 <ImageView fitHeight="37.0" fitWidth="37.0">
                                     <image>
                                         <Image url="@../images/profile.png" />
@@ -57,9 +57,9 @@
                             </HBox>
                         </graphic>
                     </Button>
-                    <Button mnemonicParsing="false" onAction="#goToAgreementTable" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #BDB4C8;">
+                    <Button fx:id="agreemntbutton" mnemonicParsing="false" onAction="#goToAgreementTable" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #BDB4C8;">
                         <graphic>
-                            <HBox alignment="CENTER_LEFT" style="-fx-background-color: #BDB4C8;">
+                            <HBox  alignment="CENTER_LEFT" style="-fx-background-color: #BDB4C8;">
                                 <ImageView fitHeight="37.0" fitWidth="37.0">
                                     <image>
                                         <Image url="@../images/rental-service.png" />
@@ -73,9 +73,9 @@
                             </HBox>
                         </graphic>
                     </Button>
-                    <Button mnemonicParsing="false" onAction="#goToPropertiesTable" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #BDB4C8;">
+                    <Button fx:id="Propertybutton" mnemonicParsing="false" onAction="#goToPropertiesTable" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #BDB4C8;">
                         <graphic>
-                            <HBox alignment="CENTER_LEFT">
+                            <HBox  alignment="CENTER_LEFT">
                                 <ImageView fitHeight="37.0" fitWidth="37.0">
                                     <image>
                                         <Image url="@../images/property.png" />
@@ -89,9 +89,9 @@
                             </HBox>
                         </graphic>
                     </Button>
-                    <Button mnemonicParsing="false" onAction="#goToCustomerInteractionTable" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #BDB4C8;">
+                    <Button fx:id="customerInteractionbutton" mnemonicParsing="false" onAction="#goToCustomerInteractionTable" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #BDB4C8;">
                         <graphic>
-                            <HBox alignment="CENTER_LEFT" style="-fx-background-color: #BDB4C8;">
+                            <HBox  alignment="CENTER_LEFT" style="-fx-background-color: #BDB4C8;">
                                 <ImageView fitHeight="37.0" fitWidth="37.0">
                                     <image>
                                         <Image url="@../images/interaction.png" />
@@ -105,9 +105,9 @@
                             </HBox>
                         </graphic>
                     </Button>
-                    <Button mnemonicParsing="false" onAction="#goToCustomerTable" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #BDB4C8;">
+                    <Button fx:id="customerbutton" mnemonicParsing="false" onAction="#goToCustomerTable" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #BDB4C8;">
                         <graphic>
-                            <HBox alignment="CENTER_LEFT" style="-fx-background-color: #BDB4C8;">
+                            <HBox  alignment="CENTER_LEFT" style="-fx-background-color: #BDB4C8;">
                                 <ImageView fitHeight="37.0" fitWidth="37.0">
                                     <image>
                                         <Image url="@../images/support.png" />

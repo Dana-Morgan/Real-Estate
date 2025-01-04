@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class PropertiesTableController {
@@ -177,7 +176,7 @@ public class PropertiesTableController {
     private void handleNavigateToHomeButton(ActionEvent event) {
         try {
             // Load the FXML file for the home page
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePageForAdmin.fxml"));
             Parent root = loader.load();
 
             // Get the current stage from the button's event source
@@ -191,7 +190,7 @@ public class PropertiesTableController {
             System.out.println("Navigated to HomePage successfully!");
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("Error loading HomePage.fxml: " + e.getMessage());
+            System.err.println("Error loading HomePageForAdmin.fxml: " + e.getMessage());
         }
     }
 
