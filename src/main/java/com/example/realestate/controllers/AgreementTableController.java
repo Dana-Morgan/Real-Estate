@@ -3,6 +3,8 @@ package com.example.realestate.controllers;
 import com.example.realestate.models.Agreement;
 import com.example.realestate.services.AgreementDAO;
 import com.example.realestate.services.AgreementDAOImpl;
+
+import com.example.realestate.utils.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,6 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,8 +45,20 @@ public class AgreementTableController implements Initializable {
 
     private ObservableList<Agreement> agreementList;
 
+    private String userRole;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        userRole = SessionManager.getUserRole();
+
+        System.out.println("User role from session: " + userRole);
+
+        if (userRole == null) {
+            System.out.println("User role is null! Make sure to set it before initialization.");
+        } else {
+            System.out.println("User role: " + userRole);
+        }
         initializeColumns();
         initializeChoiceBoxes();
         initializeButtons();
@@ -212,7 +227,15 @@ public class AgreementTableController implements Initializable {
 
     @FXML
     private void handleHomeButtonAction() {
-        navigateTo("/com/example/realestate/views/HomePage.fxml", "Home Page");
+        // تأكد من أن الدور يتم التحقق منه بشكل صحيح
+
+        if (Objects.equals(SessionManager.getUserRole(), "Admin")) {
+            System.out.println(userRole);
+            navigateTo("/com/example/realestate/views/HomePageForAdmin.fxml", "Admin Home Page");
+        } else if (Objects.equals(SessionManager.getUserRole(), "Agent")) {  // تم تعديل هنا للتحقق من Agent
+            System.out.println(userRole);
+            navigateTo("/com/example/realestate/views/HomePageForAgent.fxml", "Agent Home Page");
+        }
     }
 
     @FXML
@@ -243,5 +266,8 @@ public class AgreementTableController implements Initializable {
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Error: Unable to load " + fxmlPath, e);
         }
+    }
+    public void setUserRole(String role) {
+        this.userRole = role;
     }
 }

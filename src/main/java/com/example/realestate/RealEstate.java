@@ -14,7 +14,7 @@ public class RealEstate extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(RealEstate.class.getResource("/com/example/realestate/views/HomePage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(RealEstate.class.getResource("/com/example/realestate/views/Login.fxml"));
         Parent root = fxmlLoader.load();
 
         Scene scene = new Scene(root, 1400, 780);

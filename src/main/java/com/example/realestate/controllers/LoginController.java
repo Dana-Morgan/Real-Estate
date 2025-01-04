@@ -4,11 +4,14 @@ import com.example.realestate.models.User;
 import com.example.realestate.services.AdminDAOImpl;
 import com.example.realestate.services.AgentDAOImpl;
 import com.example.realestate.services.UserDOAImpl;
+import com.example.realestate.utils.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -51,7 +54,6 @@ public class LoginController {
     }
 
 
-
     /*
 
     @FXML
@@ -66,7 +68,7 @@ public class LoginController {
         if (agent != null || admin != null ) {
             // If login is successful, navigate to the HomePage
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePage.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePageForAdmin.fxml"));
                 Parent newPageRoot = loader.load();
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(newPageRoot);
@@ -86,32 +88,50 @@ public class LoginController {
     }
 
      */
+
     @FXML
     private void loginbutton(ActionEvent event) throws IOException {
         String email = EmailIDLogin.getText();
         String password = passordLogin.getText();
 
+        // تحقق من صحة بيانات المستخدم
         User user = userDAO.login(email, password);
-        if (user != null) {
-            String role = user.getRole(); // Assuming getRole() exists in the User class
 
-            // Pass role to the other controller
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePage.fxml"));
+        if (user != null) {
+            // تخزين المستخدم في الجلسة
+            SessionManager.setLoggedInUser(user);
+            System.out.println("User role after login: " + user.getRole());
+
+            String role = user.getRole(); // الحصول على دور المستخدم
+
+            // تحديد الصفحة بناءً على الدور
+            String fxmlFile;
+            if ("Agent".equalsIgnoreCase(role)) {
+                fxmlFile = "/com/example/realestate/views/HomePageForAgent.fxml";
+            } else if ("Admin".equalsIgnoreCase(role)) {
+                fxmlFile = "/com/example/realestate/views/HomePageForAdmin.fxml";
+            } else {
+                // إذا كان الدور غير معرّف
+                System.out.println("Unknown role: " + role);
+                return;
+            }
+
+            // تحميل الصفحة المناسبة
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent root = loader.load();
 
-            /*
-            // Access the dashboard controller
-            HomePageController homePageController = loader.getController();
-            homePageController.setRole(role);
-
-             */
-            // Show the dashboard
+            // عرض الصفحة
             Stage stage = (Stage) loginbut.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         } else {
-            // Handle invalid login
+            // في حالة فشل تسجيل الدخول
             System.out.println("Invalid email or password");
         }
     }
+
+
+
+
+
 }

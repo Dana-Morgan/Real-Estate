@@ -2,6 +2,7 @@ package com.example.realestate.controllers;
 
 import com.example.realestate.models.Property;
 import com.example.realestate.utils.HibernateUtil;
+import com.example.realestate.utils.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,17 +23,24 @@ import org.hibernate.SessionFactory;
 import java.io.IOException;
 import java.util.List;
 
-public class HomePageController {
+public class HomePageControllerForAgent {
     private Stage stage;
     private Scene scene;
 
     @FXML
     private TilePane tilePane;
+    private String userRole;
+
 
     @FXML
     public void initialize() {
         loadPropertiesFromDatabase();
     }
+
+    public void setUserRole(String role) {
+        this.userRole = role;
+    }
+
 
     private void loadPropertiesFromDatabase() {
         SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
@@ -151,22 +159,43 @@ public class HomePageController {
 
     @FXML
     public void goToCustomerInteractionTable(ActionEvent event) {
-        loadPage(event, "/com/example/realestate/views/InteractionTable.fxml");
+        //loadPage(event, "/com/example/realestate/views/InteractionTable.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/InteractionTable.fxml"));
+            Parent root = loader.load();
+
+            // الحصول على الـController وضبط الدور
+            InteractionTableController controller = loader.getController();
+            controller.setUserRole(SessionManager.getUserRole()); // تمرير الدور من الجلسة
+
+            // إعداد المشهد الجديد
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root, 1280, 832));
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Failed to load AgreementTable.fxml: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void goToAgreementTable(ActionEvent event) {
-        loadPage(event, "/com/example/realestate/views/AgreementTable.fxml");
-    }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/AgreementTable.fxml"));
+            Parent root = loader.load();
 
-    @FXML
-    public void goToPropertiesTable(ActionEvent event) {
-        loadPage(event, "/com/example/realestate/views/PropertiesTable.fxml");
-    }
+            // الحصول على الـController وضبط الدور
+            AgreementTableController controller = loader.getController();
+            controller.setUserRole(SessionManager.getUserRole()); // تمرير الدور من الجلسة
 
-    @FXML
-    public void goToAgentTable(ActionEvent event) {
-        loadPage(event, "/com/example/realestate/views/CreateAccount.fxml");
+            // إعداد المشهد الجديد
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root, 1280, 832));
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Failed to load AgreementTable.fxml: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @FXML
