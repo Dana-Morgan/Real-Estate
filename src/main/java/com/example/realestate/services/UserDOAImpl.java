@@ -64,10 +64,69 @@ public class UserDOAImpl implements  UserDOA {
     }
 
     @Override
-    public User getByEmail(String Email) {
-        return null;
+    public User getByEmail(String email) {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "FROM User WHERE email = :email";
+            Query query = session.createQuery(hql);
+            query.setParameter("email", email);
+            List<User> results = query.getResultList();
+            if (results.isEmpty()) {
+                return null;
+            }
+            return results.get(0);
+        }
     }
-/*
+
+    @Override
+    public boolean updatePassword(String email, String newPassword) {
+        try (Session session = sessionFactory.openSession()) {
+
+            String emailCheckQuery = "SELECT COUNT(*) FROM User WHERE email = :email";
+            Query query = session.createQuery(emailCheckQuery);
+            query.setParameter("email", email);
+            long count = (long) query.getSingleResult();
+
+            if (count == 0) {
+                System.out.println("No agent found with the provided email: " + email);
+                return false;
+            }
+            session.beginTransaction();
+            String hql = "UPDATE User SET password = :password WHERE email = :email";
+            Query updateQuery = session.createQuery(hql);
+            updateQuery.setParameter("password", newPassword);
+            updateQuery.setParameter("email", email);
+            int result = updateQuery.executeUpdate();
+            session.getTransaction().commit();
+            System.out.println("Password update result: " + result); // Debugging
+            return result > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /*
+        @Override
+        public User login(String email, String password) {
+            SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
+            Session session = sessionFactory.openSession();
+            User user = null;
+
+            try {
+                String hql = "FROM User WHERE email = :email AND password = :password";
+                Query query = session.createQuery(hql);
+                query.setParameter("email", email);
+                query.setParameter("password", password);
+                user = (User) ((org.hibernate.query.Query<?>) query).uniqueResult();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                session.close();
+            }
+
+            return user; // Returns null if no agent is found with given email and password
+        }
+    */
     @Override
     public User login(String email, String password) {
         SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
@@ -86,29 +145,8 @@ public class UserDOAImpl implements  UserDOA {
             session.close();
         }
 
-        return user; // Returns null if no agent is found with given email and password
+        return user; // Returns null if no user is found with the given credentials
     }
-*/
-@Override
-public User login(String email, String password) {
-    SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
-    Session session = sessionFactory.openSession();
-    User user = null;
-
-    try {
-        String hql = "FROM User WHERE email = :email AND password = :password";
-        Query query = session.createQuery(hql);
-        query.setParameter("email", email);
-        query.setParameter("password", password);
-        user = (User) ((org.hibernate.query.Query<?>) query).uniqueResult();
-    } catch (Exception e) {
-        e.printStackTrace();
-    } finally {
-        session.close();
-    }
-
-    return user; // Returns null if no user is found with the given credentials
-}
 
     public boolean emailExists(String email) {
         Session session = sessionFactory.openSession();
@@ -128,9 +166,4 @@ public User login(String email, String password) {
 
         return exists;
     }
-    @Override
-    public boolean updatePassword(String email, String newPassword) {
-        return false;
-    }
-
 }
