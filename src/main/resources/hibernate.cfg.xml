@@ -11,7 +11,7 @@
         <property name="hibernate.connection.url">jdbc:mysql://localhost:40000/realestate</property>
 
         <property name="hibernate.connection.username">root</property>
-
+        <property name="hibernate.connection.password">Ruaa@276</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.show_sql">true</property>
 

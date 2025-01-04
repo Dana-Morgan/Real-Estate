@@ -6,6 +6,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -19,8 +23,7 @@ public class CustomerDAOimp implements CustomerDAO {
     }
 
     @Override
-    public void save (Customer customer)
-    {
+    public void save(Customer customer) {
         Session session = sessionFactory.openSession();
         Transaction transaction = null;
 
@@ -28,15 +31,16 @@ public class CustomerDAOimp implements CustomerDAO {
             transaction = session.beginTransaction();
             session.save(customer);
             transaction.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("error in saving Customer",e);
-        }finally {
+            throw new RuntimeException("Error saving/updating Customer", e);
+        } finally {
             session.close();
         }
     }
+
 
     @Override
     public List<Customer> getAllCustomers() {
@@ -50,6 +54,7 @@ public class CustomerDAOimp implements CustomerDAO {
             session.close();
         }
     }
+
     @Override
     public void delete(Customer customer) {
         Session session = sessionFactory.openSession();
@@ -68,4 +73,24 @@ public class CustomerDAOimp implements CustomerDAO {
             session.close();
         }
     }
+
+    @Override
+    public void update(Customer customer) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+            session.update(customer);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new RuntimeException("Error updating customer", e);
+        } finally {
+            session.close();
+        }
+    }
+
 }

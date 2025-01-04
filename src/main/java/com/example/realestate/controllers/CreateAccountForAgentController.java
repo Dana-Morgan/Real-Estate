@@ -1,19 +1,15 @@
 package com.example.realestate.controllers;
 
-import com.example.realestate.models.Agent;
 import com.example.realestate.models.User;
-import com.example.realestate.services.AgentDOAImpl;
+import com.example.realestate.services.AgentDAOImpl;
 import com.example.realestate.services.UserDOAImpl;
 import com.example.realestate.validation.ValiditionAgentAccount;
-import com.mysql.cj.Session;
-import com.mysql.cj.x.protobuf.MysqlxSession;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -28,6 +24,12 @@ import java.util.List;
 public class CreateAccountForAgentController {
 
     @FXML
+    public ChoiceBox<String> roleChoiceBox;
+
+    @FXML
+    public Button homeButton;
+
+    @FXML
     private TableView<User> agentTabel;
 
     @FXML
@@ -38,8 +40,7 @@ public class CreateAccountForAgentController {
     private TableColumn<User, String> EmailColumn;
     @FXML
     private TableColumn<User, String> PhoneColumn;
-    @FXML
-    private TableColumn<User, String> LNColumn;
+
     @FXML
     private TableColumn<User, String> passwordColumn;
     @FXML
@@ -80,7 +81,7 @@ public class CreateAccountForAgentController {
 
     @FXML
     private Button backbut1;
-    private AgentDOAImpl agentDOA = new AgentDOAImpl();
+    private AgentDAOImpl agentDOA = new AgentDAOImpl();
     private UserDOAImpl userDOA = new UserDOAImpl();
     //private ObservableList<Agent> agentList = FXCollections.observableArrayList();
     private ObservableList<User> userList = FXCollections.observableArrayList();
@@ -93,6 +94,10 @@ public class CreateAccountForAgentController {
         EmailColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getEmail()));
         PhoneColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getPhone()));
         passwordColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getPassword()));
+        roleColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getRole()));
+        ObservableList<String> roles = FXCollections.observableArrayList("Admin", "Agent");
+        roleChoiceBox.setItems(roles);
+        //roleChoiceBox.setValue("Agent");
         addUpdateButtonToTable();
         addDeleteButtonToTable();
         // Load data into the table
@@ -145,11 +150,11 @@ public class CreateAccountForAgentController {
         String email = EmailSignUp.getText();
         String phone = PhoneSignUp.getText();
         String password = PasswordSignUp.getText();
-        String license = LicenseSignUp.getText();
-        String role = "Agent";
+        String role = roleChoiceBox.getValue();
+        //String role = "Agent";
 
         // Validate inputs
-        String validationMessage = ValiditionAgentAccount.validateAllInputs(name, email, phone, password, license);
+        String validationMessage = ValiditionAgentAccount.validateAllInputs(name, email, phone, password, role);
         if (validationMessage != null) {
             showAlert("Validation Error", validationMessage); // Show validation error
             return; // Stop account creation if validation fails
@@ -188,7 +193,6 @@ public class CreateAccountForAgentController {
         EmailSignUp.clear();
         PhoneSignUp.clear();
         PasswordSignUp.clear();
-        LicenseSignUp.clear();
     }
 
     private void loadAgentData() {
@@ -311,7 +315,7 @@ public class CreateAccountForAgentController {
             Stage currentStage = (Stage) backbut1.getScene().getWindow();
 
             // Go back to the Login page (previous scene)
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePageForAdmin.fxml"));
             Parent loginRoot = loader.load();
 
             // Set the new scene (Login page)
@@ -319,6 +323,25 @@ public class CreateAccountForAgentController {
             currentStage.setScene(loginScene);
             currentStage.show();
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleHomeButtonAction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePageForAdmin.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) homeButton.getScene().getWindow();
+            Scene scene = new Scene(root, 1400, 780);
+            stage.setScene(scene);
+            stage.sizeToScene();
+            stage.setMinWidth(root.minWidth(-1));
+            stage.setMinHeight(root.minHeight(-1));
+            stage.setTitle("Home Page");
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

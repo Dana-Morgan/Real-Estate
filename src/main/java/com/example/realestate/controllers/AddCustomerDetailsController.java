@@ -15,7 +15,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
 
-public class addCustomerDetailsController implements Initializable {
+public class AddCustomerDetailsController implements Initializable {
     @FXML
     private TextField customerName;
     @FXML
@@ -85,7 +85,7 @@ public class addCustomerDetailsController implements Initializable {
     @FXML
     private void goBack() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/customerTable.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/CustomerTable.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) Back_btn.getScene().getWindow();
             stage.setScene(new Scene(root));

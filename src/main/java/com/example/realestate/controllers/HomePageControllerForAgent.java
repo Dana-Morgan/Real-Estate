@@ -1,7 +1,8 @@
 package com.example.realestate.controllers;
 
+import com.example.realestate.services.*;
 import com.example.realestate.models.Property;
-import com.example.realestate.utils.HibernateUtil;
+import com.example.realestate.utils.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,34 +16,80 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
 
 import java.io.IOException;
 import java.util.List;
 
-public class DashBoard {
+public class HomePageControllerForAgent {
+
     private Stage stage;
     private Scene scene;
+
+    private final PropertyDAO propertyDAO;
+    private final AgentDAO agentDAO;
+    private final UserDOA userDAO;
 
     @FXML
     private TilePane tilePane;
 
     @FXML
+    private Label propertyCountLabel;
+
+    @FXML
+    private Label agentCountLabel;
+
+    @FXML
+    private Label userCountLabel;
+
+    private String userRole;
+
+    public HomePageControllerForAgent() {
+        this.propertyDAO = new PropertyDAOImpl();
+        this.agentDAO = new AgentDAOImpl();
+        this.userDAO = new UserDOAImpl();
+    }
+
+    @FXML
     public void initialize() {
         loadPropertiesFromDatabase();
+        loadPropertyCount();
+        loadAgentCount();
+        loadUserCount();
+    }
+ @FXML
+    private void loadUserCount() {
+        try {
+            long userCount = userDAO.getUserCount();
+            userCountLabel.setText(String.valueOf(userCount));
+        } catch (Exception e) {
+            userCountLabel.setText("Error");
+            e.printStackTrace();
+        }
+    }
+@FXML
+    private void loadAgentCount() {
+        try {
+            long count = agentDAO.getAgentCount();
+            agentCountLabel.setText(String.valueOf(count));
+        } catch (Exception e) {
+            agentCountLabel.setText("Error");
+            e.printStackTrace();
+        }
+    }
+@FXML
+    private void loadPropertyCount() {
+        try {
+            long count = propertyDAO.getPropertyCount();
+            propertyCountLabel.setText(String.valueOf(count));
+        } catch (Exception e) {
+            propertyCountLabel.setText("Error");
+            e.printStackTrace();
+        }
     }
 
     private void loadPropertiesFromDatabase() {
-        SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
-
-        try (Session session = sessionFactory.openSession()) {
-            List<Property> properties = session.createQuery(
-                            "FROM Property ORDER BY RAND()",
-                            Property.class)
-                    .setMaxResults(3)
-                    .getResultList();
+        try {
+            List<Property> properties = propertyDAO.getRandomProperties(3);
             for (Property property : properties) {
                 try {
                     FXMLLoader loader = new FXMLLoader(
@@ -123,8 +170,6 @@ public class DashBoard {
         alert.showAndWait();
     }
 
-
-
     private void loadPage(ActionEvent event, String fxmlFile) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
@@ -146,33 +191,47 @@ public class DashBoard {
 
     @FXML
     public void goToCustomerTable(ActionEvent event) {
-        loadPage(event, "/com/example/realestate/views/customerTable.fxml");
+        loadPage(event, "/com/example/realestate/views/CustomerTable.fxml");
     }
 
     @FXML
     public void goToCustomerInteractionTable(ActionEvent event) {
-        loadPage(event, "/com/example/realestate/views/CustomerInteractionTable.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/InteractionTable.fxml"));
+            Parent root = loader.load();
+            InteractionTableController controller = loader.getController();
+            controller.setUserRole(SessionManager.getUserRole());
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root, 1280, 832));
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Failed to load InteractionTable.fxml: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void goToAgreementTable(ActionEvent event) {
-        loadPage(event, "/com/example/realestate/views/AgreementTable.fxml");
-    }
-
-    @FXML
-    public void goToPropertiesTable(ActionEvent event) {
-        loadPage(event, "/com/example/realestate/views/propertiesTable.fxml");
-    }
-
-    @FXML
-    public void goToAgentTable(ActionEvent event) {
-        loadPage(event, "/com/example/realestate/views/Create-Account.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/AgreementTable.fxml"));
+            Parent root = loader.load();
+            AgreementTableController controller = loader.getController();
+            controller.setUserRole(SessionManager.getUserRole());
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root, 1280, 832));
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Failed to load AgreementTable.fxml: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void goToLoginPage(ActionEvent event) {
         loadPage(event, "/com/example/realestate/views/Login.fxml");
     }
+
+    public void setUserRole(String role) {
+        this.userRole = role;
+    }
 }
-
-

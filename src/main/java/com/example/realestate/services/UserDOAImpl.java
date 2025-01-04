@@ -55,10 +55,9 @@ public class UserDOAImpl implements  UserDOA {
         Session session = sessionFactory.openSession();
 
         try {
-            String hql = "FROM User u WHERE u.role = :role";
-            return session.createQuery(hql, User.class)
-                    .setParameter("role", "Agent")
-                    .getResultList();
+            // إزالة الشرط "WHERE"
+            String hql = "FROM User"; // استعلام يجلب كل السجلات
+            return session.createQuery(hql, User.class).getResultList();
         } finally {
             session.close();
         }
@@ -110,6 +109,25 @@ public User login(String email, String password) {
 
     return user; // Returns null if no user is found with the given credentials
 }
+    @Override
+    public long getUserCount() {
+        Session session = sessionFactory.openSession();
+        long count = 0;
+
+        try {
+            String hql = "SELECT COUNT(u) FROM User u";
+            Query query = session.createQuery(hql);
+            count = (Long) query.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error fetching user count", e);
+        } finally {
+            session.close();
+        }
+
+        return count;
+    }
+
 
     public boolean emailExists(String email) {
         Session session = sessionFactory.openSession();
@@ -129,6 +147,7 @@ public User login(String email, String password) {
 
         return exists;
     }
+
     @Override
     public boolean updatePassword(String email, String newPassword) {
         return false;

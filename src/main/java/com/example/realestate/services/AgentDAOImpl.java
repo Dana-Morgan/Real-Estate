@@ -8,7 +8,7 @@ import org.hibernate.SessionFactory;
 import javax.persistence.Query;
 import java.util.List;
 
-public class AgentDOAImpl implements AgentDOA{
+public class AgentDAOImpl implements AgentDAO {
 
     HibernateUtil hibernateUtil;
     SessionFactory sessionFactory;
@@ -19,12 +19,22 @@ public class AgentDOAImpl implements AgentDOA{
         sessionFactory = (SessionFactory) hibernateUtil.getSessionFactory();
     }
      */
-    public AgentDOAImpl() {
+    public AgentDAOImpl() {
         hibernateUtil = HibernateUtil.getInstance();
         sessionFactory = hibernateUtil.getSessionFactory();
     }
 
     @Override
+    public long getAgentCount() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("SELECT COUNT(a) FROM Agent a", Long.class).uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+        @Override
     public void save(Agent agent) {
         SessionFactory sessionFactory =  hibernateUtil.getInstance().getSessionFactory();
         Session session = sessionFactory.openSession();

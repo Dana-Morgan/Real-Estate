@@ -5,7 +5,6 @@ import com.example.realestate.services.CustomerDAO;
 import com.example.realestate.services.CustomerDAOimp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,7 +20,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class customerTableController implements Initializable {
+public class CustomerTableController implements Initializable {
 
     @FXML
     private TableView<Customer> CustomerTable;
@@ -44,6 +43,8 @@ public class customerTableController implements Initializable {
     @FXML
     private TableColumn<Customer, Void> deleteColumn;
     @FXML
+    private TableColumn<Customer, Void> updateColumn;
+    @FXML
     private Button AddNewCustomer_btn;
 
     private CustomerDAO customerDAO;
@@ -63,9 +64,10 @@ public class customerTableController implements Initializable {
 
         loadCustomers();
         addDeleteButtonToTable();
+        addUpdateButtonToTable();
     }
 
-    public void navigateToAddCustomerDetails(ActionEvent event) throws IOException {
+    public void navigateToAddCustomerDetails() throws IOException {
         Stage stage = (Stage) AddNewCustomer_btn.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/addCustomerDetails.fxml"));
         Parent root = loader.load();
@@ -105,12 +107,10 @@ public class customerTableController implements Initializable {
         });
     }
 
-
     private void deleteCustomer(Customer customer) {
         try {
             if (confirmDelete()) {
                 customerDAO.delete(customer);
-
                 CustomerTable.getItems().remove(customer);
             }
         } catch (Exception e) {
@@ -133,4 +133,48 @@ public class customerTableController implements Initializable {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
+    private void addUpdateButtonToTable() {
+        updateColumn.setCellFactory(param -> new TableCell<>() {
+            private final Button updateButton = new Button("Update");
+            {
+                updateButton.setOnAction(event -> {
+                    Customer customer = getTableView().getItems().get(getIndex());
+                    navigateToUpdateCustomerDetails(customer);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    HBox hBox = new HBox(updateButton);
+                    hBox.setAlignment(Pos.CENTER);
+                    setGraphic(hBox);
+                }
+            }
+        });
+    }
+
+    private void navigateToUpdateCustomerDetails(Customer customer) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/UpdateCustomerDetails.fxml"));
+            Parent root = loader.load();
+            UpdateCustomerDetailsController controller = loader.getController();
+            controller.setCustomerData(customer);
+            Stage stage = (Stage) CustomerTable.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Update Customer Details");
+            stage.show();
+        } catch (IOException e) {
+            showAlert("Error", "Error navigating to update customer: " + e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
 }
+
+
+
+
+

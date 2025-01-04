@@ -9,7 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import com.example.realestate.services.AgentDOAImpl;
+import com.example.realestate.services.AgentDAOImpl;
 
 import java.io.IOException;
 
@@ -24,7 +24,7 @@ public class ResetPasswordController {
     @FXML
     private Button changePasswordButton;
 
-    private final AgentDOAImpl agentService = new AgentDOAImpl();
+    private final AgentDAOImpl agentService = new AgentDAOImpl();
 
     private String userEmail;
 

@@ -41,7 +41,7 @@ public class VerificationCodeController {
 
         if (enteredCode.equals(correctCode)) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/Resetyourpassword.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/ResetYourPassword.fxml"));
                 Stage stage = (Stage) nextButton.getScene().getWindow();
                 Scene scene = new Scene(loader.load());
                 stage.setScene(scene);
@@ -61,7 +61,7 @@ public class VerificationCodeController {
     @FXML
     private void handleCancelButton() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/forgetpassword.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/ForgetPassword.fxml"));
             Stage stage = (Stage) cancelButton.getScene().getWindow();
             Scene scene = new Scene(loader.load());
             stage.setScene(scene);
