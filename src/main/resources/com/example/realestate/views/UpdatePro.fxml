@@ -11,9 +11,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.AddProFormController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.UpdateProController">
    <children>
-      <Label layoutX="44.0" layoutY="46.0" minHeight="73.0" minWidth="523.0" prefHeight="91.0" prefWidth="523.0" style="-fx-font-weight: bold;" text=" Add Property Details">
+      <Label layoutX="44.0" layoutY="46.0" minHeight="73.0" minWidth="523.0" prefHeight="91.0" prefWidth="523.0" style="-fx-font-weight: bold;" text=" Update Property Details">
          <font>
             <Font size="30.0" />
          </font>
@@ -85,7 +85,7 @@
       <ChoiceBox fx:id="PropertyType" layoutX="320.0" layoutY="284.0" prefHeight="55.0" prefWidth="300.0" style="-fx-background-radius: 10;" />
       <ChoiceBox fx:id="SellingType" layoutX="320.0" layoutY="373.0" prefHeight="55.0" prefWidth="300.0" style="-fx-background-radius: 10;" />
       <TextField fx:id="Title" layoutX="317.0" layoutY="183.0" prefHeight="55.0" prefWidth="825.0" promptText="Enter title" style="-fx-background-radius: 10;" />
-      <Button fx:id="AddPro_btn" layoutX="557.0" layoutY="767.0" onAction="#handleAddProperty" prefHeight="42.0" prefWidth="242.0" style="-fx-background-color: #A1D76E; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 10;" text="Add Property" />
+      <Button fx:id="Update_btn" layoutX="560.0" layoutY="746.0" onAction="#handleUpdateProperty" prefHeight="42.0" prefWidth="242.0" style="-fx-background-color: #A1D76E; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 10;" text="Update Property" />
       <Button fx:id="Back_btn" layoutX="1077.0" layoutY="72.0" onAction="#BackToProList" prefWidth="100" style="-fx-background-color: #55407D; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-color: #55407D; -fx-background-radius: 10;" text="Back" textFill="WHITE" />
       <DatePicker fx:id="Date" layoutX="840.0" layoutY="673.0" minHeight="55.0" minWidth="300.0" promptText="select date" style="-fx-background-radius: 7;" />
       <Label layoutX="677.0" layoutY="656.0" prefHeight="58.0" prefWidth="184.0" text="Date">
@@ -95,4 +95,3 @@
       </Label>
    </children>
 </AnchorPane>
-

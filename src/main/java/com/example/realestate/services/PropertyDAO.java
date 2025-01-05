@@ -10,4 +10,7 @@ public interface PropertyDAO {
    List<Property> getRandomProperties(int limit);
    List<Property> searchProperties(Map<String, Object> searchCriteria);
    long getPropertyCount();
+   void updateProperty(Property property);
+   void addProperty(Property property);
+
 }

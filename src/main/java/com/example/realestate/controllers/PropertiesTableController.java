@@ -94,8 +94,7 @@ public class PropertiesTableController {
 
     }
 
-
-    private void loadData() {
+    public void loadData() {
         try {
             List<Property> properties = propertyDAO.getAllProperties();
             ObservableList<Property> observableList = FXCollections.observableList(properties);
@@ -150,12 +149,27 @@ public class PropertiesTableController {
 
     private void addUpdateButton() {
         UpdatePColumn.setCellFactory(param -> new TableCell<>() {
-            private final Button updateButton;
+            private final Button updateButton = new Button("Update");
 
             {
-                updateButton = new Button("Update");
                 updateButton.setStyle("-fx-background-color: #508aa8; -fx-text-fill: white;");
-                // No functionality for now "Hanan's part"
+                updateButton.setOnAction(event -> {
+                    Property property = getTableView().getItems().get(getIndex());
+                    if (property != null) {
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/UpdatePro.fxml"));
+                            Parent root = loader.load();
+                            UpdateProController controller = loader.getController();
+                            controller.setPropertyToUpdate(property);  // Pass the property to be updated
+                            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            Scene scene = new Scene(root, 1280, 832);
+                            stage.setScene(scene);
+                            stage.show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
             }
 
             @Override
@@ -168,6 +182,11 @@ public class PropertiesTableController {
                 }
             }
         });
+    }
+
+    // Reload the table after update
+    public void reloadPropertiesTable() {
+        loadData();
     }
 
 
@@ -202,5 +221,5 @@ public class PropertiesTableController {
         scene = new Scene(root, 1280, 832);
         stage.setScene(scene);
         stage.show();
-    }
+}
 }

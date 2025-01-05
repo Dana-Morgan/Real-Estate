@@ -3,6 +3,7 @@ package com.example.realestate.models;
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.List;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "property")
@@ -11,8 +12,8 @@ public class Property {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private static final List<String> PROPERTY_TYPES = Arrays.asList("Residential", "Commercial", "Industrial");
-    private static final List<String> STATUSES = Arrays.asList("Available", "Sold", "Rented");
+    private static final List<String> PROPERTY_TYPES = Arrays.asList("Residential", "Commercial", "Land","Vacation");
+    private static final List<String> STATUSES = Arrays.asList("Available", "Rented","Soled","Pending");
 
     @Column(name = "image")
     private String image;
@@ -30,7 +31,7 @@ public class Property {
     private String propertyType;
 
     @Column(name = "number_of_rooms")
-    private Integer numberOfRooms;
+    private int numberOfRooms;
 
     @Column(name = "property_features")
     private String propertyFeatures;
@@ -42,18 +43,17 @@ public class Property {
     private String status;
 
     @Column(name = "date")
-    private String date;
+    private LocalDate date;
 
-    public Property() {
-    }
-
-    public Property(String image, String name, String location, String price, String propertyType, String status, Integer numberOfRooms, String propertyFeatures, String area, String date) {
+    public Property(String name, String location, String price, String area, int numberOfRooms,
+                    String propertyFeatures, String image, String propertyType, String status, LocalDate date) {
         if (!PROPERTY_TYPES.contains(propertyType)) {
             throw new IllegalArgumentException("Invalid property type. Must be one of: " + PROPERTY_TYPES);
         }
         if (!STATUSES.contains(status)) {
             throw new IllegalArgumentException("Invalid status. Must be one of: " + STATUSES);
         }
+
 
         this.image = image;
         this.name = name;
@@ -65,6 +65,10 @@ public class Property {
         this.propertyFeatures = propertyFeatures;
         this.area = area;
         this.date = date;
+    }
+
+    public Property() {
+
     }
 
 
@@ -148,11 +152,11 @@ public class Property {
         this.status = status;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 }
