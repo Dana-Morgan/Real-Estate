@@ -156,7 +156,7 @@
                                 <Font name="System Bold" size="18.0" />
                             </font>
                         </Label>
-                        <Label style="-fx-font-size: 24; -fx-text-fill: white;" text="50">
+                        <Label style="-fx-font-size: 24; -fx-text-fill: white;" text="50" fx:id="agentCountLabel">
                             <font>
                                 <Font name="System Bold" size="24.0" />
                             </font>
