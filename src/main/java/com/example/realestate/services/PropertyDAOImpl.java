@@ -124,8 +124,3 @@ public class PropertyDAOImpl implements PropertyDAO {
         return count;
     }
 }
-
-
-
-
-
