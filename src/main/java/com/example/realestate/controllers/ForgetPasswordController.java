@@ -8,8 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.util.Random;
-import com.example.realestate.services.AgentDAOImpl;
-import com.example.realestate.models.Agent;
+import com.example.realestate.services.UserDOAImpl;
+import com.example.realestate.models.User;
 import com.example.realestate.utils.SendEmail;
 public class ForgetPasswordController {
 
@@ -22,7 +22,7 @@ public class ForgetPasswordController {
     @FXML
     private Button sendButton;
 
-    private final AgentDAOImpl agentService = new AgentDAOImpl();
+    private final UserDOAImpl agentService = new UserDOAImpl();
 
     private String verificationCode;
     @FXML
@@ -44,8 +44,8 @@ public class ForgetPasswordController {
             showAlert("Error", "Please enter your email!", Alert.AlertType.ERROR);
             return;
         }
-        Agent agent = agentService.getByEmail(userEmail);
-        if (agent == null) {
+        User user = agentService.getByEmail(userEmail);
+        if (user == null) {
             showAlert("Error", "This email is not registered!", Alert.AlertType.ERROR);
             return;
         }
