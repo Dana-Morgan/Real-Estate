@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class UpdateCustomerDetailsController implements Initializable {
+public class UpdateProController implements Initializable {
 
     @FXML
     private TextField customerName;
