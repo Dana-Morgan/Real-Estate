@@ -90,7 +90,7 @@
                         </graphic>
                     </Button>
 
-                    <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="197.0" style="-fx-background-color: #BDB4C8;">
+                    <Button mnemonicParsing="false" onAction="#goToLoginPage" prefHeight="46.0" prefWidth="197.0" style="-fx-background-color: #BDB4C8;">
                         <graphic>
                             <HBox alignment="CENTER_LEFT">
                                 <ImageView fitHeight="37.0" fitWidth="37.0">
@@ -124,7 +124,7 @@
                                 <Font name="System Bold" size="18.0" />
                             </font>
                         </Label>
-                        <Label style="-fx-font-size: 24; -fx-text-fill: white;" text="50">
+                        <Label fx:id="agentCountLabel" style="-fx-font-size: 24; -fx-text-fill: white;" text="0">
                             <font>
                                 <Font name="System Bold" size="24.0" />
                             </font>
@@ -136,19 +136,20 @@
                                 <Font name="System Bold" size="18.0" />
                             </font>
                         </Label>
-                        <Label style="-fx-font-size: 24; -fx-text-fill: white;" text="120">
+                        <Label fx:id="propertyCountLabel" style="-fx-font-size: 24; -fx-text-fill: white;" text="Loading...">
                             <font>
                                 <Font name="System Bold" size="24.0" />
                             </font>
                         </Label>
                     </VBox>
+
                     <VBox alignment="CENTER" prefWidth="150" spacing="10" style="-fx-background-color: #BDB4C8; -fx-padding: 15; -fx-background-radius: 10;">
-                        <Label text="Active Agents">
+                        <Label text="Users">
                             <font>
                                 <Font name="System Bold" size="18.0" />
                             </font>
                         </Label>
-                        <Label style="-fx-font-size: 24; -fx-text-fill: white;" text="30">
+                        <Label style="-fx-font-size: 24; -fx-text-fill: white;" fx:id="userCountLabel"  text="0">
                             <font>
                                 <Font name="System Bold" size="24.0" />
                             </font>

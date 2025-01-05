@@ -9,9 +9,7 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 public class RealEstate extends Application {
-
     private static final Logger LOGGER = Logger.getLogger(RealEstate.class.getName());
-
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(RealEstate.class.getResource("/com/example/realestate/views/Login.fxml"));
