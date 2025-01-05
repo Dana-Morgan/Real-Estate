@@ -94,7 +94,6 @@ public class PropertiesTableController {
 
     }
 
-
     public void loadData() {
         try {
             List<Property> properties = propertyDAO.getAllProperties();
@@ -158,20 +157,14 @@ public class PropertiesTableController {
                     Property property = getTableView().getItems().get(getIndex());
                     if (property != null) {
                         try {
-                            // Passing selected property to the AddProFormController
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/AddProForm.fxml"));
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/UpdatePro.fxml"));
                             Parent root = loader.load();
-
-                            AddProFormController controller = loader.getController();
-                            controller.setPropertyToUpdate(property); // Passing the selected property to the form controller
-
-                            // Switch to AddProForm scene
+                            UpdateProController controller = loader.getController();
+                            controller.setPropertyToUpdate(property);  // Pass the property to be updated
                             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             Scene scene = new Scene(root, 1280, 832);
                             stage.setScene(scene);
                             stage.show();
-
-                            System.out.println("Navigated to Add Property Form with property data for update!");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -189,6 +182,11 @@ public class PropertiesTableController {
                 }
             }
         });
+    }
+
+    // Reload the table after update
+    public void reloadPropertiesTable() {
+        loadData();
     }
 
 
@@ -223,5 +221,5 @@ public class PropertiesTableController {
         scene = new Scene(root, 1280, 832);
         stage.setScene(scene);
         stage.show();
-    }
+}
 }

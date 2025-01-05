@@ -1,100 +1,121 @@
+
 package com.example.realestate.controllers;
 
-import com.example.realestate.models.Customer;
-import com.example.realestate.services.CustomerDAO;
-import com.example.realestate.services.CustomerDAOimp;
+import com.example.realestate.models.Property;
+import com.example.realestate.services.PropertyDAO;
+import com.example.realestate.services.PropertyDAOImpl;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.time.LocalDate;
 
-public class UpdateProController implements Initializable {
+
+public class UpdateProController {
 
     @FXML
-    private TextField customerName;
+    private TextField Title, Location, Price, Area, NumberOfRooms, Feature, UploadImage;
     @FXML
-    private TextField customerEmail;
+    private ChoiceBox<String> PropertyType, SellingType;
     @FXML
-    private TextField customerPhoneNumber;
-    @FXML
-    private ChoiceBox<String> ActivityStatus;
-    @FXML
-    private ChoiceBox<String> Preferences;
-    @FXML
-    private TextField AdditionalNotes;
-    @FXML
-    private Button cancelButton;
+    private Button Update_btn;
 
-    private CustomerDAO customerDAO;
-    private Customer customer;
+    private Property propertyToUpdate = null;
+    private final PropertyDAO propertyDAO = new PropertyDAOImpl();
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        customerDAO = new CustomerDAOimp();
-
-        ActivityStatus.getItems().addAll("tenant", "Inactive", "Buyer");
-        Preferences.getItems().addAll("house", "villa", "plot of land", "Chalet", "store");
+    public void setPropertyToUpdate(Property property) {
+        this.propertyToUpdate = property;
+        populateFormWithData(property);
     }
 
-    public void setCustomerData(Customer customer) {
-        this.customer = customer;
-
-        customerName.setText(customer.getCustomerName());
-        customerEmail.setText(customer.getCustomerEmail());
-        customerPhoneNumber.setText(customer.getCustomerPhoneNumber());
-        ActivityStatus.setValue(customer.getCustomerActivityStatus());
-        Preferences.setValue(customer.getCustomerPrefernces());
-        AdditionalNotes.setText(customer.getAdditionNote());
+    private void populateFormWithData(Property property) {
+        Title.setText(property.getName());
+        Location.setText(property.getLocation());
+        Price.setText(property.getPrice());
+        Area.setText(property.getArea());
+        NumberOfRooms.setText(String.valueOf(property.getNumberOfRooms()));
+        Feature.setText(property.getPropertyFeatures());
+        UploadImage.setText(property.getImage());
+        PropertyType.setValue(property.getPropertyType());
+        SellingType.setValue(property.getStatus());
     }
 
     @FXML
-    private void updateCustomer() {
+    public void handleUpdateProperty(ActionEvent event) {
+        String title = Title.getText();
+        String location = Location.getText();
+        String price = Price.getText();
+        String area = Area.getText();
+        String numberOfRooms = NumberOfRooms.getText();
+        String feature = Feature.getText();
+        String uploadImage = UploadImage.getText();
+        String propertyType = PropertyType.getValue();
+        String sellingType = SellingType.getValue();
+
+        if (title.isEmpty() || location.isEmpty() || price.isEmpty() || area.isEmpty() ||
+                numberOfRooms.isEmpty() || feature.isEmpty() || uploadImage.isEmpty() || propertyType == null || sellingType == null) {
+            showError("Please fill in all fields!");
+            return;
+        }
+
         try {
-            if (customerName.getText().isEmpty() || customerEmail.getText().isEmpty()) {
-                showAlert("Validation Error", "Name and Email cannot be empty!", Alert.AlertType.ERROR);
-                return;
-            }
-            customer.setCustomerName(customerName.getText().trim());
-            customer.setCustomerEmail(customerEmail.getText().trim());
-            customer.setCustomerPhoneNumber(customerPhoneNumber.getText().trim());
-            customer.setCustomerActivityStatus(ActivityStatus.getValue());
-            customer.setCustomerPrefernces(Preferences.getValue());
-            customer.setAdditionNote(AdditionalNotes.getText().trim());
+            LocalDate currentDate = LocalDate.now();
 
-            customerDAO.update(customer);
-            showAlert("Success", "Customer updated successfully!", Alert.AlertType.INFORMATION);
-            goBack();
+            // Set the updated values on the property
+            propertyToUpdate.setName(title);
+            propertyToUpdate.setLocation(location);
+            propertyToUpdate.setPrice(price);
+            propertyToUpdate.setArea(area);
+            propertyToUpdate.setNumberOfRooms(Integer.parseInt(numberOfRooms));  // Make sure this is a valid number
+            propertyToUpdate.setPropertyFeatures(feature);
+            propertyToUpdate.setImage(uploadImage);
+            propertyToUpdate.setPropertyType(propertyType);
+            propertyToUpdate.setStatus(sellingType);
+            propertyToUpdate.setDate(currentDate);
+
+
+            propertyDAO.updateProperty(propertyToUpdate);
+
+            showInfo("Property updated successfully!");
+
+        } catch (NumberFormatException e) {
+            showError("Price and Area must be valid numbers!");
         } catch (Exception e) {
-            showAlert("Error", "Error updating customer: " + e.getMessage(), Alert.AlertType.ERROR);
+            showError("An error occurred while updating the property!");
         }
     }
 
-    @FXML
-    private void goBack() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/customerTable.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) cancelButton.getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Customer Table");
-            stage.show();
-        } catch (IOException e) {
-            showAlert("Error", "Error navigating back to customer table: " + e.getMessage(), Alert.AlertType.ERROR);
-        }
-    }
 
-    private void showAlert(String title, String content, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
+
+    private void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText(content);
+        alert.setContentText(message);
         alert.showAndWait();
     }
+
+    private void showInfo(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    public void BackToProList(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/com/example/realestate/views/PropertiesTable.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 1280, 832);
+        stage.setScene(scene);
+        stage.show();
+}
 }
