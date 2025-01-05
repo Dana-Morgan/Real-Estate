@@ -3,8 +3,10 @@ package com.example.realestate.controllers;
 import com.example.realestate.models.Customer;
 import com.example.realestate.services.CustomerDAO;
 import com.example.realestate.services.CustomerDAOimp;
+import com.example.realestate.utils.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,10 +20,17 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static org.hibernate.tool.schema.SchemaToolingLogging.LOGGER;
 
 public class CustomerTableController implements Initializable {
 
+    @FXML
+    public Button homeButton;
     @FXML
     private TableView<Customer> CustomerTable;
     @FXML
@@ -48,6 +57,8 @@ public class CustomerTableController implements Initializable {
     private Button AddNewCustomer_btn;
 
     private CustomerDAO customerDAO;
+    private static final Logger LOGGER = Logger.getLogger(AgreementTableController.class.getName());
+    private String userRole;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -170,6 +181,41 @@ public class CustomerTableController implements Initializable {
             stage.show();
         } catch (IOException e) {
             showAlert("Error", "Error navigating to update customer: " + e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
+    public void handleHomeButtonAction(ActionEvent actionEvent) {
+        userRole = SessionManager.getUserRole();
+
+        System.out.println("User role from session: " + userRole);
+
+        if (userRole == null) {
+            System.out.println("User role is null! Make sure to set it before initialization.");
+        } else {
+            System.out.println("User role: " + userRole);
+        }
+        if (Objects.equals(SessionManager.getUserRole(), "Admin")) {
+            System.out.println("Navigating to Admin home page");
+            navigateTo("/com/example/realestate/views/HomePageForAdmin.fxml", "Admin Home Page");
+        } else if (Objects.equals(SessionManager.getUserRole(), "Agent")) {
+            System.out.println("Navigating to Agent home page");
+            navigateTo("/com/example/realestate/views/HomePageForAgent.fxml", "Agent Home Page");
+        }
+
+
+    }
+    private void navigateTo(String fxmlPath, String title) {
+        System.out.println("Entering load FXML function.");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        try {
+            Parent root = loader.load();
+            System.out.println("FXML file loaded successfully.");
+            Stage stage = (Stage) homeButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle(title);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Error loading FXML: " + e.getMessage());
         }
     }
 }

@@ -26,9 +26,6 @@ public class Agent {
     @Column(name="licensenumber")
     private String LicenseNumber;
 
-
-
-
     public int getAgentId() {
         return AgentId;
     }

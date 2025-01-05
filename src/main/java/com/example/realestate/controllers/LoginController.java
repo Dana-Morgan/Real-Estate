@@ -94,39 +94,37 @@ public class LoginController {
         String email = EmailIDLogin.getText();
         String password = passordLogin.getText();
 
-        // تحقق من صحة بيانات المستخدم
         User user = userDAO.login(email, password);
 
         if (user != null) {
-            // تخزين المستخدم في الجلسة
             SessionManager.setLoggedInUser(user);
             System.out.println("User role after login: " + user.getRole());
 
-            String role = user.getRole(); // الحصول على دور المستخدم
+            String role = user.getRole();
+            String fxmlFile = null;
 
-            // تحديد الصفحة بناءً على الدور
-            String fxmlFile;
             if ("Agent".equalsIgnoreCase(role)) {
                 fxmlFile = "/com/example/realestate/views/HomePageForAgent.fxml";
             } else if ("Admin".equalsIgnoreCase(role)) {
                 fxmlFile = "/com/example/realestate/views/HomePageForAdmin.fxml";
             } else {
-                // إذا كان الدور غير معرّف
                 System.out.println("Unknown role: " + role);
                 return;
             }
 
-            // تحميل الصفحة المناسبة
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent root = loader.load();
+            Scene scene = new Scene(root, 1400, 780);
 
-            // عرض الصفحة
             Stage stage = (Stage) loginbut.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(scene);
             stage.show();
         } else {
-            // في حالة فشل تسجيل الدخول
-            System.out.println("Invalid email or password");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Login Failed");
+            alert.setHeaderText(null);
+            alert.setContentText("Invalid email or password. Please try again.");
+            alert.showAndWait();
         }
     }
 

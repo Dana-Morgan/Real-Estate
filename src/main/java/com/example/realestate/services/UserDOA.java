@@ -13,4 +13,5 @@ public interface UserDOA {
     public User getByEmail(String Email);
     User login(String email, String password);
     public boolean updatePassword(String email, String newPassword);
+    long getUserCount();
 }

@@ -163,7 +163,7 @@
                         </Label>
                     </VBox>
                     <VBox alignment="CENTER" prefWidth="150" spacing="10" style="-fx-background-color: #BDB4C8; -fx-padding: 15; -fx-background-radius: 10;">
-                        <Label text="Properties">
+                        <Label text="Properties" fx:id="propertyCountLabel">
                             <font>
                                 <Font name="System Bold" size="18.0" />
                             </font>
@@ -175,12 +175,12 @@
                         </Label>
                     </VBox>
                     <VBox alignment="CENTER" prefWidth="150" spacing="10" style="-fx-background-color: #BDB4C8; -fx-padding: 15; -fx-background-radius: 10;">
-                        <Label text="Active Agents">
+                        <Label text="Users">
                             <font>
                                 <Font name="System Bold" size="18.0" />
                             </font>
                         </Label>
-                        <Label style="-fx-font-size: 24; -fx-text-fill: white;" text="30">
+                        <Label style="-fx-font-size: 24; -fx-text-fill: white;" fx:id="userCountLabel"  text="0">
                             <font>
                                 <Font name="System Bold" size="24.0" />
                             </font>
