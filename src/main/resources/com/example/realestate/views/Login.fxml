@@ -3,6 +3,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.paint.Color?>
@@ -11,54 +13,63 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.layout.GridPane?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="832.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.LoginController">
    <left>
-      <AnchorPane layoutX="72.0" prefHeight="832.0" prefWidth="640.0" style="-fx-background-color: BDB4C8;" BorderPane.alignment="CENTER">
+      <AnchorPane layoutX="72.0" prefHeight="832.0" prefWidth="578.0" style="-fx-background-color: BDB4C8;" BorderPane.alignment="CENTER">
          <children>
 
-            <Text layoutX="69.0" layoutY="289.0" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.0" text="Welcome Back !" wrappingWidth="353.53871154785156">
+            <Text layoutX="103.0" layoutY="304.0" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.0" text="Welcome Back !" textAlignment="CENTER" wrappingWidth="353.53871154785156">
                <font>
                   <Font name="System Italic" size="40.0" />
                </font>
             </Text>
-            <Text layoutX="69.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to keep connected with us please login with your personal info" wrappingWidth="334.19879150390625">
+            <Text layoutX="125.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;To keep connected with us, please log in with your personal info and enjoy seamless access to our property listings, and personalized recommendations tailored just for you!&quot;" textAlignment="CENTER" wrappingWidth="334.19879150390625">
                <font>
-                  <Font size="25.0" />
+                  <Font size="24.0" />
                </font>
             </Text>
+            <ImageView fitHeight="230.0" fitWidth="219.0" layoutX="180.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/logo-icon.jpg" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </left>
    <right>
-      <AnchorPane prefHeight="832.0" prefWidth="640.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="780.0" prefWidth="836.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="EmailIDLogin" layoutX="99.0" layoutY="271.0" prefHeight="58.0" prefWidth="400.0" promptText="Enter Your Email/Id" style="-fx-background-color: #F0EDED;" />
-            <PasswordField fx:id="passordLogin" layoutX="99.0" layoutY="411.0" prefHeight="58.0" prefWidth="400.0" promptText="Enter Your Password" style="-fx-background-color: #F0EDED;" />
-            <Text layoutX="99.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email/Name">
+            <TextField fx:id="EmailIDLogin" layoutX="121.0" layoutY="272.0" prefHeight="58.0" prefWidth="470.0" promptText="Enter Your Email" style="-fx-background-color: #F0EDED;">
+               <font>
+                  <Font size="17.0" />
+               </font></TextField>
+            <PasswordField fx:id="passordLogin" layoutX="121.0" layoutY="412.0" prefHeight="58.0" prefWidth="470.0" promptText="Enter Your Password" style="-fx-background-color: #F0EDED;">
+               <font>
+                  <Font size="17.0" />
+               </font></PasswordField>
+            <Text layoutX="121.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
                <font>
                   <Font size="26.0" />
                </font>
             </Text>
-            <Text layoutX="103.0" layoutY="398.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+            <Text layoutX="125.0" layoutY="399.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
                <font>
                   <Font size="26.0" />
                </font>
             </Text>
-            <Button fx:id="loginbut" layoutX="103.0" layoutY="618.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="400.0" style="-fx-background-color: #ADC867;" text="Login" onAction="#loginbutton">
+            <Button fx:id="loginbut" layoutX="126.0" layoutY="606.0" mnemonicParsing="false" onAction="#loginbutton" prefHeight="59.0" prefWidth="470.0" style="-fx-background-color: #ADC867;" text="Login">
                <font>
                   <Font size="28.0" />
                </font>
             </Button>
-            <Text fx:id="forgetbut" layoutX="378.0" layoutY="512.0" onDragDetected="#handleResetPassword" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-cursor: hand;" text="Forget Password" onMouseClicked="#handleResetPassword">
+            <Text fx:id="forgetbut" layoutX="473.0" layoutY="502.0" onDragDetected="#handleResetPassword" onMouseClicked="#handleResetPassword" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-cursor: hand;" text="Forget Password">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Line endX="58.9453125" endY="0.015625" layoutX="436.0" layoutY="516.0" startX="-58.0" startY="0.015625" style="-fx-background-color: #ADC867; -fx-fill: #ADC867;" />
-            <Text layoutX="103.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
+            <Line endX="58.9453125" endY="0.015625" layoutX="531.0" layoutY="506.0" startX="-58.0" startY="0.015625" style="-fx-background-color: #ADC867; -fx-fill: #ADC867;" />
+            <Text layoutX="125.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
                <font>
                   <Font size="42.0" />
                </font>

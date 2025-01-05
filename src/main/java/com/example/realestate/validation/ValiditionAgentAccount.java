@@ -1,16 +1,7 @@
 package com.example.realestate.validation;
 
 import com.example.realestate.utils.HibernateUtil;
-import com.mysql.cj.Session;
 import org.hibernate.SessionFactory;
-
-import javax.persistence.Query;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
-import static com.example.realestate.utils.HibernateUtil.getSessionFactory;
-
 
 public class ValiditionAgentAccount {
 
@@ -18,15 +9,14 @@ public class ValiditionAgentAccount {
 
     // Validate if the name is empty
     public static boolean isNameValid(String name) {
-        // Check if the name is not null, not empty, and starts with a letter (case insensitive)
-        return name != null && !name.trim().isEmpty() && Character.isLetter(name.charAt(0));
+        // Check if the name is not null and not empty after trimming
+        return name != null && !name.trim().isEmpty();
     }
 
-
+    //Validate if Email contain @ and .com
     public static boolean isEmailValid(String email) {
-        return email != null && email.matches("^(?=.*\\d)[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
+        return email != null && email.matches("^[A-Za-z+_.-]+@[A-Za-z.-]+\\.[A-Za-z]{2,}$");
     }
-
 
     // Validate phone number (10 digits)
     public static boolean isPhoneValid(String phone) {
@@ -39,6 +29,7 @@ public class ValiditionAgentAccount {
                 password.matches("^(?=.*[A-Z])(?=.*\\d).{8,}$");
     }
 
+    //Validate if role not empty
     public static boolean isRoleValid(String role) {
         return role != null && !role.trim().isEmpty();
     }
@@ -46,19 +37,19 @@ public class ValiditionAgentAccount {
     // Method to validate all input fields
     public static String validateAllInputs(String name, String email, String phone, String password, String role) {
         if (!isNameValid(name)) {
-            return "Name must start with a letter!";
+            return "Name is required example: jana";
         }
         if (!isEmailValid(email)) {
-            return "Email must end with '@' and '.com'! and numbers! jana123@gmail.com).";
+            return "Email must end with '@' and '.com'! example: jana@gmail.com).";
         }
         if (!isPhoneValid(phone)) {
-            return "Phone number must be 10 digits.";
+            return "Phone number must be 10 digits example: 0123456789.";
         }
         if (!isPasswordValid(password)) {
-            return "Password must contain at least one uppercase letter, one number, and be at least 8 characters long!";
+            return "Password must contain at least one uppercase letter, one number, and be at least 8 characters long! example: Jana0123456";
         }
         if (!isRoleValid(role)){
-            return "Please select a one role!";
+            return "Please Select One -Agent- Or -Admin-";
         }
         return null;
     }
