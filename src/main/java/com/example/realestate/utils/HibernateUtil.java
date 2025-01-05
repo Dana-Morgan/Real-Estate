@@ -34,8 +34,12 @@ public class HibernateUtil {
     }
 
     public static HibernateUtil getInstance(){
-        if(instance == null){
-            instance  = new HibernateUtil();
+        if(instance == null) {
+            synchronized (HibernateUtil.class) {
+                if (instance == null) {
+                    instance = new HibernateUtil();
+                }
+            }
         }
         return instance;
     }
