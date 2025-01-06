@@ -123,9 +123,55 @@ public class PropertyDAOImpl implements PropertyDAO {
         }
         return count;
     }
+    @Override
+    public void updateProperty(Property property) {
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
+
+            Property existingProperty = session.get(Property.class, property.getId());
+
+
+            if (existingProperty != null) {
+
+                existingProperty.setName(property.getName());
+                existingProperty.setLocation(property.getLocation());
+                existingProperty.setPrice(property.getPrice());
+                existingProperty.setArea(property.getArea());
+                existingProperty.setNumberOfRooms(property.getNumberOfRooms());
+                existingProperty.setPropertyFeatures(property.getPropertyFeatures());
+                existingProperty.setImage(property.getImage());
+                existingProperty.setPropertyType(property.getPropertyType());
+                existingProperty.setStatus(property.getStatus());
+                existingProperty.setDate(property.getDate());
+
+                session.update(existingProperty);
+                transaction.commit();
+                System.out.println("Property updated successfully: " + property.getId());
+            } else {
+                System.out.println("Property not found: " + property.getId());
+            }
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            throw new RuntimeException("Error updating property", e);
+        }
+    }
+
+    @Override
+    public void addProperty(Property property) {
+        Transaction transaction = null;
+        try (Session session = sessionFactory.openSession()) {
+            transaction = session.beginTransaction();
+            session.save(property);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) transaction.rollback();
+            e.printStackTrace();
+  }
+
+
 }
-
-
-
-
-
+}
