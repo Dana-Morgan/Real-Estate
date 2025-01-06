@@ -113,5 +113,11 @@ public class Agreement {
         this.additionalNotes = additionalNotes;
     }
 
+    public String getPdfPath() {
+        return pdfPath;
+    }
 
+    public void setPdfPath(String pdfPath) {
+        this.pdfPath = pdfPath;
+    }
 }
