@@ -5,6 +5,8 @@ import com.example.realestate.services.InteractionDAO;
 import com.example.realestate.services.InteractionDOAImpl;
 import com.example.realestate.utils.SessionManager;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,7 +35,7 @@ public class InteractionTableController implements Initializable {
 
     @FXML private TableView<Interaction> interactionTable;
     @FXML private TableColumn<Interaction, Integer> interactionIDColumn, customerIDColumn;
-    @FXML private TableColumn<Interaction, String> interactionTypeColumn, additionalNotesColumn;
+    @FXML private TableColumn<Interaction, String> customerNameColumn, interactionTypeColumn, additionalNotesColumn;
     @FXML private TableColumn<Interaction, LocalDate> interactionDateColumn;
     @FXML private TableColumn<Interaction, String> updateColumn, deleteColumn;
 
@@ -65,7 +67,13 @@ public class InteractionTableController implements Initializable {
 
     private void initializeColumns() {
         interactionIDColumn.setCellValueFactory(new PropertyValueFactory<>("interactionID"));
-        customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
+
+        // تعديل هنا لربط عمود customerID من كائن الـ Customer
+        customerIDColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getCustomer().getCustomerId()).asObject());
+
+        // إضافة ربط عمود Customer Name
+        customerNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCustomer().getCustomerName()));
+
         interactionTypeColumn.setCellValueFactory(new PropertyValueFactory<>("interactionType"));
         interactionDateColumn.setCellValueFactory(new PropertyValueFactory<>("interactionDate"));
         additionalNotesColumn.setCellValueFactory(new PropertyValueFactory<>("additionalNotes"));
@@ -76,9 +84,10 @@ public class InteractionTableController implements Initializable {
 
     private void bindColumnWidth() {
         interactionTable.widthProperty().addListener((obs, oldWidth, newWidth) -> {
-            double columnWidth = newWidth.doubleValue() / 5;
+            double columnWidth = newWidth.doubleValue() / 6; // We now have 6 columns
             interactionIDColumn.setPrefWidth(columnWidth);
             customerIDColumn.setPrefWidth(columnWidth);
+            customerNameColumn.setPrefWidth(columnWidth);  // Customer Name Column
             interactionTypeColumn.setPrefWidth(columnWidth);
             interactionDateColumn.setPrefWidth(columnWidth);
             additionalNotesColumn.setPrefWidth(columnWidth);
@@ -182,7 +191,7 @@ public class InteractionTableController implements Initializable {
 
     private boolean matchesSearchCriteria(Interaction interaction, String interactionIDInput, String customerIDInput, LocalDate dateInput, String interactionTypeInput) {
         return (interactionIDInput.isEmpty() || String.valueOf(interaction.getInteractionID()).contains(interactionIDInput)) &&
-                (customerIDInput.isEmpty() || String.valueOf(interaction.getCustomerID()).contains(customerIDInput)) &&
+                (customerIDInput.isEmpty() || String.valueOf(interaction.getCustomer().getCustomerId()).contains(customerIDInput)) &&
                 (dateInput == null || interaction.getInteractionDate().equals(dateInput)) &&
                 (interactionTypeInput == null || interaction.getInteractionType().equalsIgnoreCase(interactionTypeInput));
     }
@@ -213,7 +222,7 @@ public class InteractionTableController implements Initializable {
         if (Objects.equals(SessionManager.getUserRole(), "Admin")) {
             System.out.println(userRole);
             navigateTo("/com/example/realestate/views/HomePageForAdmin.fxml", "Admin Home Page");
-        } else if (Objects.equals(SessionManager.getUserRole(), "Agent")) {  // تم تعديل هنا للتحقق من Agent
+        } else if (Objects.equals(SessionManager.getUserRole(), "Agent")) {
             System.out.println(userRole);
             navigateTo("/com/example/realestate/views/HomePageForAgent.fxml", "Agent Home Page");
         }
@@ -229,19 +238,10 @@ public class InteractionTableController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
 
-            Stage stage = (Stage) addInteractionbtn.getScene().getWindow();
-            if (title.equals("Add Interaction")) {
-                Scene scene = new Scene(root, 600, 780);
-            stage.setScene(scene);}
+            Stage stage = (Stage) interactionTable.getScene().getWindow();
+            Scene scene = new Scene(root);
 
-         else {
-            Scene scene = new Scene(root, 1400, 780);
-           stage.setScene(scene);}
-
-            stage.sizeToScene();
-            stage.setMinWidth(root.minWidth(-1));
-            stage.setMinHeight(root.minHeight(-1));
-
+            stage.setScene(scene);
             stage.setTitle(title);
             stage.show();
         } catch (IOException e) {

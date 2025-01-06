@@ -12,8 +12,9 @@ public class Interaction {
     @Column(name = "interaction_id")
     private int interactionID;
 
-    @Column(name = "customer_id")
-    private int customerID;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 
     @Column(name = "interaction_type")
     private String interactionType;
@@ -25,7 +26,6 @@ public class Interaction {
     private String additionalNotes;
 
     public Interaction(int customerID, String interactionType, LocalDate interactionDate, String additionalNotes) {
-        this.customerID = customerID;
         this.interactionType = interactionType;
         this.interactionDate = interactionDate;
         this.additionalNotes = additionalNotes;
@@ -43,12 +43,13 @@ public class Interaction {
         this.interactionID = interactionID;
     }
 
-    public int getCustomerID() {
-        return customerID;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public String getInteractionType() {

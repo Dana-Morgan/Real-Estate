@@ -100,7 +100,7 @@ public class AgreementTableController implements Initializable {
 
     private void bindColumnWidth() {
         agreementTable.widthProperty().addListener((obs, oldWidth, newWidth) -> {
-            double columnWidth = newWidth.doubleValue() / 10;
+            double columnWidth = newWidth.doubleValue() / 9;
             displayIDColumn.setPrefWidth(columnWidth);
             customerIDColumn.setPrefWidth(columnWidth);
             propertyIDColumn.setPrefWidth(columnWidth);

@@ -63,11 +63,18 @@ public class InteractionDOAImpl implements InteractionDAO {
     @Override
     public boolean isCustomerExist(int customerID) {
         try (Session session = sessionFactory.openSession()) {
-            // تنفيذ استعلام للتحقق من وجود العميل
             Query<Customer> query = session.createQuery("FROM Customer WHERE customerId = :customerID", Customer.class);
             query.setParameter("customerID", customerID);
-            Customer customer = query.uniqueResult();
-            return customer != null; // إذا كان العميل موجودًا، نعيد true، وإذا لم يكن موجودًا نعيد false
+            return query.uniqueResult() != null;
+        }
+    }
+
+    @Override
+    public Customer findCustomerById(int customerID) {
+        try (Session session = sessionFactory.openSession()) {
+            Query<Customer> query = session.createQuery("FROM Customer WHERE customerId = :customerID", Customer.class);
+            query.setParameter("customerID", customerID);
+            return query.uniqueResult();
         }
     }
 }

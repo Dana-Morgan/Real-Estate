@@ -1,15 +1,15 @@
 package com.example.realestate.models;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "customer")
 public class Customer {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerId;
 
     @Column(name = "customerName")
@@ -33,12 +33,14 @@ public class Customer {
     @Column(name = "customerPrefernces")
     private String customerPrefernces;
 
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Interaction> interactions;
 
-
-
+    // Getters and setters
     public int getCustomerId() {
         return customerId;
     }
+
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
@@ -46,27 +48,31 @@ public class Customer {
     public String getCustomerName() {
         return customerName;
     }
+
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
-    }
-
-    public Date getAddDate() {
-        return addDate;
-    }
-    public void setAddDate(Date addDate) {
-        this.addDate = addDate;
     }
 
     public String getCustomerEmail() {
         return customerEmail;
     }
+
     public void setCustomerEmail(String customerEmail) {
         this.customerEmail = customerEmail;
+    }
+
+    public Date getAddDate() {
+        return addDate;
+    }
+
+    public void setAddDate(Date addDate) {
+        this.addDate = addDate;
     }
 
     public String getAdditionNote() {
         return additionNote;
     }
+
     public void setAdditionNote(String additionNote) {
         this.additionNote = additionNote;
     }
@@ -74,6 +80,7 @@ public class Customer {
     public String getCustomerPhoneNumber() {
         return customerPhoneNumber;
     }
+
     public void setCustomerPhoneNumber(String customerPhoneNumber) {
         this.customerPhoneNumber = customerPhoneNumber;
     }
@@ -81,6 +88,7 @@ public class Customer {
     public String getCustomerActivityStatus() {
         return customerActivityStatus;
     }
+
     public void setCustomerActivityStatus(String customerActivityStatus) {
         this.customerActivityStatus = customerActivityStatus;
     }
@@ -88,7 +96,16 @@ public class Customer {
     public String getCustomerPrefernces() {
         return customerPrefernces;
     }
+
     public void setCustomerPrefernces(String customerPrefernces) {
         this.customerPrefernces = customerPrefernces;
+    }
+
+    public List<Interaction> getInteractions() {
+        return interactions;
+    }
+
+    public void setInteractions(List<Interaction> interactions) {
+        this.interactions = interactions;
     }
 }

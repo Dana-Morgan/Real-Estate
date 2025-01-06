@@ -1,6 +1,8 @@
 package com.example.realestate.controllers;
 
 import com.example.realestate.models.Interaction;
+import com.example.realestate.models.Customer;
+
 import com.example.realestate.services.InteractionDAO;
 import com.example.realestate.services.InteractionDOAImpl;
 import javafx.fxml.FXML;
@@ -87,24 +89,28 @@ public class InteractionDetailsController implements Initializable {
             }
 
             int customerIDInt = Integer.parseInt(customerIDValue);
-            if (!interactionDAO.isCustomerExist(customerIDInt)) {
+
+            Customer customer = interactionDAO.findCustomerById(customerIDInt);
+            if (customer == null) {
                 showAlert(Alert.AlertType.ERROR, "Customer Not Found", "The customer ID does not exist. Please use an existing customer ID.");
                 return;
             }
 
             if (currentInteraction == null) {
-                Interaction interaction = new Interaction(customerIDInt,
-                        interactionTypeValue,
-                        interactionDateValue,
-                        additionalNotesValue
-                );
+                Interaction interaction = new Interaction();
+                interaction.setCustomer(customer);
+                interaction.setInteractionType(interactionTypeValue);
+                interaction.setInteractionDate(interactionDateValue);
+
+                interaction.setAdditionalNotes(additionalNotesValue);
+
                 interactionDAO.save(interaction);
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Interaction added successfully!");
             } else {
                 boolean isModified = false;
 
-                if (currentInteraction.getCustomerID() != customerIDInt) {
-                    currentInteraction.setCustomerID(customerIDInt);
+                if (!currentInteraction.getCustomer().equals(customer)) {
+                    currentInteraction.setCustomer(customer);
                     isModified = true;
                 }
 
@@ -148,7 +154,7 @@ public class InteractionDetailsController implements Initializable {
     public void setInteractionDetails(Interaction interaction) {
         if (interaction != null) {
             this.currentInteraction = interaction;
-            customerID.setText(String.valueOf(interaction.getCustomerID()));
+            customerID.setText(String.valueOf(interaction.getCustomer().getCustomerId()));
             interactionType.setValue(interaction.getInteractionType());
             interactionDate.setValue(interaction.getInteractionDate());
             addtionalnotesCID.setText(interaction.getAdditionalNotes());

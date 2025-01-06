@@ -62,6 +62,7 @@
         <columns>
             <TableColumn fx:id="interactionIDColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Interaction ID" />
             <TableColumn fx:id="customerIDColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Customer ID" />
+            <TableColumn fx:id="customerNameColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Customer Name" />
             <TableColumn fx:id="interactionTypeColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Interaction Type" />
             <TableColumn fx:id="interactionDateColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Interaction Date" />
             <TableColumn fx:id="additionalNotesColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Additional Notes" />
