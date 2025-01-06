@@ -162,6 +162,8 @@ public class AgreementTableController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/AgreementDetails.fxml"));
             Parent root = loader.load();
+            AgreementDetailsController controller = loader.getController();
+            controller.setAgreementDetails(agreement);
 
             Stage stage = (Stage) agreementTable.getScene().getWindow();
             Scene scene = new Scene(root, 600, 800);

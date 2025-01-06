@@ -54,6 +54,9 @@ public class AgreementDetailsController implements Initializable {
     @FXML
     private TextField pdfFilePath;
 
+    @FXML
+    private Button uploadPDF;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         offerType.getItems().addAll("Sale", "Rent", "Lease");
@@ -65,6 +68,8 @@ public class AgreementDetailsController implements Initializable {
         backAD.setOnAction(event -> navigateTo("/com/example/realestate/views/AgreementTable.fxml", "Agreement Table"));
 
         saveAD.setOnAction(event -> handleSaveAgreement());
+
+        uploadPDF.setOnAction(event -> handleUploadPDF());
     }
 
     private void navigateTo(String fxmlPath, String title) {
@@ -96,8 +101,7 @@ public class AgreementDetailsController implements Initializable {
             String offerStatusValue = offerStatus.getValue();
             LocalDate presentationDateValue = presentationDate.getValue();
             String additionalNotesValue = additionalNotesAD.getText().trim();
-            String  pdfPath =  pdfFilePath.getText().trim();
-
+            String pdfPath = pdfFilePath.getText().trim();
 
             if (customerIDValue.isEmpty() || propertyIDValue.isEmpty()
                     || offerTypeValue == null || offerStatusValue == null || presentationDateValue == null) {
@@ -163,6 +167,11 @@ public class AgreementDetailsController implements Initializable {
                     isModified = true;
                 }
 
+                if (!currentAgreement.getPdfPath().equals(pdfPath)) {
+                    currentAgreement.setPdfPath(pdfPath);
+                    isModified = true;
+                }
+
                 if (isModified) {
                     agreementDAO.update(currentAgreement);
                     showAlert(Alert.AlertType.INFORMATION, "Success", "Agreement updated successfully!");
@@ -200,6 +209,7 @@ public class AgreementDetailsController implements Initializable {
             offerStatus.setValue(agreement.getOfferStatus());
             presentationDate.setValue(agreement.getPresentationDate());
             additionalNotesAD.setText(agreement.getAdditionalNotes());
+            pdfFilePath.setText(agreement.getPdfPath());
         }
     }
 
