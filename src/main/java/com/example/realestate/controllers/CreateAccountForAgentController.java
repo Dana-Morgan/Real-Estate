@@ -93,7 +93,7 @@ public class CreateAccountForAgentController {
         NameColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getName()));
         EmailColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getEmail()));
         PhoneColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getPhone()));
-        passwordColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getPassword()));
+        //passwordColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getPassword()));
         roleColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getRole()));
         ObservableList<String> roles = FXCollections.observableArrayList("Admin", "Agent");
         roleChoiceBox.setItems(roles);
