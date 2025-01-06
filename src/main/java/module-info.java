@@ -16,7 +16,7 @@ module com.example.realestate {
     requires java.sql;
     requires mysql.connector.java;
 
-
+    requires java.desktop;
     requires jakarta.mail;
     requires jakarta.activation;
 

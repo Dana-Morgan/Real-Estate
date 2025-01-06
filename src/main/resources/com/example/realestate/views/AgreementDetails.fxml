@@ -50,6 +50,10 @@
 
                 <Label alignment="CENTER_RIGHT" maxWidth="Infinity" style="-fx-font-weight: bold;" text="Additional Notes    " textAlignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="5" />
                 <TextArea fx:id="additionalNotesAD" maxWidth="Infinity" prefHeight="80.0" promptText="Enter Additional Notes" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.rowSpan="2" />
+
+                <Label alignment="CENTER_RIGHT" maxWidth="Infinity" style="-fx-font-weight: bold;" text="Upload PDF File: " textAlignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+                <Button fx:id="uploadPDFButton" text="Choose PDF" onAction="#handleUploadPDF" GridPane.columnIndex="1" GridPane.rowIndex="7" style="-fx-background-color: #7F5B97; -fx-text-fill: white; -fx-font-size: 14px;" />
+                <TextField fx:id="pdfFilePath" maxWidth="Infinity" editable="false" promptText="No file chosen" GridPane.columnIndex="1" GridPane.rowIndex="8" style="-fx-background-color: #D8D4D9; -fx-font-size: 14px;" />
             </children>
             <rowConstraints>
                 <RowConstraints minHeight="25.0" vgrow="ALWAYS" />
@@ -57,20 +61,20 @@
                 <RowConstraints minHeight="25.0" vgrow="ALWAYS" />
                 <RowConstraints minHeight="25.0" vgrow="ALWAYS" />
                 <RowConstraints minHeight="25.0" vgrow="ALWAYS" />
-            <RowConstraints />
-            <RowConstraints />
+                <RowConstraints minHeight="25.0" vgrow="ALWAYS" />
+                <RowConstraints minHeight="25.0" vgrow="ALWAYS" />
             </rowConstraints>
         </GridPane>
 
         <GridPane hgap="20" vgap="50" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="50.0" GridPane.columnIndex="0" GridPane.rowIndex="7">
             <Button fx:id="saveAD" onAction="#handleSaveAgreement" prefWidth="200" style="-fx-background-color: #A1D76E; -fx-text-fill: white; -fx-font-size: 14px;" text="Save" GridPane.columnIndex="1" />
-         <columnConstraints>
-            <ColumnConstraints />
-            <ColumnConstraints />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints />
-         </rowConstraints>
+            <columnConstraints>
+                <ColumnConstraints />
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
         </GridPane>
     </children>
 </AnchorPane>

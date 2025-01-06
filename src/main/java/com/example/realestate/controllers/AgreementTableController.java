@@ -3,6 +3,9 @@ package com.example.realestate.controllers;
 import com.example.realestate.models.Agreement;
 import com.example.realestate.services.AgreementDAO;
 import com.example.realestate.services.AgreementDAOImpl;
+import java.io.File;
+import java.awt.Desktop;
+import java.io.IOException;
 
 import com.example.realestate.utils.SessionManager;
 import javafx.collections.FXCollections;
@@ -35,7 +38,7 @@ public class AgreementTableController implements Initializable {
     @FXML private TableColumn<Agreement, Integer> displayIDColumn, customerIDColumn, propertyIDColumn;
     @FXML private TableColumn<Agreement, String> offerTypeColumn, offerStatusColumn, additionalNotesColumn;
     @FXML private TableColumn<Agreement, LocalDate> presentationDateColumn;
-    @FXML private TableColumn<Agreement, String> updateColumn, deleteColumn;
+    @FXML private TableColumn<Agreement, String> updateColumn, deleteColumn, pdfFileColumn;
 
     @FXML private DatePicker presentationDateField, agreementDateSearchField;
     @FXML private TextArea additionalNotesArea;
@@ -46,7 +49,6 @@ public class AgreementTableController implements Initializable {
     private ObservableList<Agreement> agreementList;
 
     private String userRole;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -59,6 +61,7 @@ public class AgreementTableController implements Initializable {
         } else {
             System.out.println("User role: " + userRole);
         }
+
         initializeColumns();
         initializeChoiceBoxes();
         initializeButtons();
@@ -74,13 +77,30 @@ public class AgreementTableController implements Initializable {
         presentationDateColumn.setCellValueFactory(new PropertyValueFactory<>("presentationDate"));
         additionalNotesColumn.setCellValueFactory(new PropertyValueFactory<>("additionalNotes"));
 
-        configureTableColumnActions();
+        pdfFileColumn.setCellValueFactory(new PropertyValueFactory<>("pdfPath"));
+        pdfFileColumn.setCellFactory(param -> new TableCell<Agreement, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    Button openButton = new Button("Open PDF");
+                    openButton.setOnAction(event -> openPDF(item));
+                    setGraphic(openButton);
+                }
+            }
+        });
+
+        updateColumn.setCellFactory(col -> createTableCellWithButton("Update", this::handleUpdateAgreementPage));
+        deleteColumn.setCellFactory(col -> createTableCellWithButton("Delete", this::handleDeleteAgreement));
+
         bindColumnWidth();
     }
 
     private void bindColumnWidth() {
         agreementTable.widthProperty().addListener((obs, oldWidth, newWidth) -> {
-            double columnWidth = newWidth.doubleValue() / 9;
+            double columnWidth = newWidth.doubleValue() / 10;
             displayIDColumn.setPrefWidth(columnWidth);
             customerIDColumn.setPrefWidth(columnWidth);
             propertyIDColumn.setPrefWidth(columnWidth);
@@ -101,11 +121,6 @@ public class AgreementTableController implements Initializable {
     private void initializeButtons() {
         addAgreementbtn.setOnAction(event -> handleAddAgreementPage());
         searchButton.setOnAction(event -> handleSearch());
-    }
-
-    private void configureTableColumnActions() {
-        updateColumn.setCellFactory(col -> createTableCellWithButton("Update", this::handleUpdateAgreementPage));
-        deleteColumn.setCellFactory(col -> createTableCellWithButton("Delete", this::handleDeleteAgreement));
     }
 
     private TableCell<Agreement, String> createTableCellWithButton(String buttonText, ButtonHandler handler) {
@@ -133,19 +148,6 @@ public class AgreementTableController implements Initializable {
         void handle(Agreement agreement);
     }
 
-
-
-
-    private boolean areFieldsValid() {
-        if (displayIDSearchField.getText().isEmpty() || customerIDSearchField.getText().isEmpty() ||
-                propertyIDSearchField.getText().isEmpty() || offerTypeChoiceBox.getValue().isEmpty() ||
-                offerStatusChoiceBox.getValue().isEmpty() || presentationDateField.getValue() == null) {
-            showAlert(Alert.AlertType.ERROR, "Validation Error", "Please fill in all required fields.");
-            return false;
-        }
-        return true;
-    }
-
     private void handleDeleteAgreement(Agreement agreement) {
         if (agreement != null) {
             agreementDAO.delete(agreement);
@@ -160,14 +162,15 @@ public class AgreementTableController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/AgreementDetails.fxml"));
             Parent root = loader.load();
-            AgreementDetailsController controller = loader.getController();
-            controller.setAgreementDetails(agreement);
 
             Stage stage = (Stage) agreementTable.getScene().getWindow();
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root, 600, 800);
 
             stage.setScene(scene);
             stage.sizeToScene();
+            stage.setMinWidth(root.minWidth(-1));
+            stage.setMinHeight(root.minHeight(-1));
+
             stage.setMinWidth(root.minWidth(-1));
             stage.setMinHeight(root.minHeight(-1));
             stage.setTitle("Update Agreement");
@@ -227,12 +230,9 @@ public class AgreementTableController implements Initializable {
 
     @FXML
     private void handleHomeButtonAction() {
-
         if (Objects.equals(SessionManager.getUserRole(), "Admin")) {
-            System.out.println(userRole);
             navigateTo("/com/example/realestate/views/HomePageForAdmin.fxml", "Admin Home Page");
-        } else if (Objects.equals(SessionManager.getUserRole(), "Agent")) {  // تم تعديل هنا للتحقق من Agent
-            System.out.println(userRole);
+        } else if (Objects.equals(SessionManager.getUserRole(), "Agent")) {
             navigateTo("/com/example/realestate/views/HomePageForAgent.fxml", "Agent Home Page");
         }
     }
@@ -248,14 +248,9 @@ public class AgreementTableController implements Initializable {
             Parent root = loader.load();
 
             Stage stage = (Stage) addAgreementbtn.getScene().getWindow();
-            if (title.equals("Add Agreement")) {
-                Scene scene = new Scene(root, 600, 780);
-                stage.setScene(scene);}
+            Scene scene = new Scene(root, 600, 800);
 
-            else {
-                Scene scene = new Scene(root, 1400, 780);
-                stage.setScene(scene);}
-
+            stage.setScene(scene);
             stage.sizeToScene();
             stage.setMinWidth(root.minWidth(-1));
             stage.setMinHeight(root.minHeight(-1));
@@ -266,6 +261,23 @@ public class AgreementTableController implements Initializable {
             LOGGER.log(Level.SEVERE, "Error: Unable to load " + fxmlPath, e);
         }
     }
+
+    private void openPDF(String filePath) {
+        if (filePath != null) {
+            try {
+                File pdfFile = new File(filePath);
+                if (pdfFile.exists()) {
+                    Desktop.getDesktop().open(pdfFile);
+                } else {
+                    showAlert(Alert.AlertType.ERROR, "File Not Found", "PDF file not found.");
+                }
+            } catch (IOException e) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Failed to open the PDF file.");
+                LOGGER.log(Level.SEVERE, "Error: Unable to open the PDF file", e);
+            }
+        }
+    }
+
     public void setUserRole(String role) {
         this.userRole = role;
     }

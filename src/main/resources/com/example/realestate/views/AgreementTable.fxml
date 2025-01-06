@@ -69,6 +69,7 @@
             <TableColumn fx:id="offerStatusColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Offer Status" />
             <TableColumn fx:id="presentationDateColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Presentation Date" />
             <TableColumn fx:id="additionalNotesColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Additional Notes" />
+            <TableColumn fx:id="pdfFileColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="PDF File" />
             <TableColumn fx:id="updateColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Update" />
             <TableColumn fx:id="deleteColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Delete" />
         </columns>

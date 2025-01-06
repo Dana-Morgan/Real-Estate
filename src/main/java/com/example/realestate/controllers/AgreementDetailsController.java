@@ -9,8 +9,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -48,6 +50,9 @@ public class AgreementDetailsController implements Initializable {
 
     @FXML
     private Button backAD;
+
+    @FXML
+    private TextField pdfFilePath;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -91,6 +96,8 @@ public class AgreementDetailsController implements Initializable {
             String offerStatusValue = offerStatus.getValue();
             LocalDate presentationDateValue = presentationDate.getValue();
             String additionalNotesValue = additionalNotesAD.getText().trim();
+            String  pdfPath =  pdfFilePath.getText().trim();
+
 
             if (customerIDValue.isEmpty() || propertyIDValue.isEmpty()
                     || offerTypeValue == null || offerStatusValue == null || presentationDateValue == null) {
@@ -118,7 +125,8 @@ public class AgreementDetailsController implements Initializable {
                         offerTypeValue,
                         offerStatusValue,
                         presentationDateValue,
-                        additionalNotesValue
+                        additionalNotesValue,
+                        pdfPath
                 );
                 agreementDAO.save(agreement);
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Agreement added successfully!");
@@ -192,6 +200,16 @@ public class AgreementDetailsController implements Initializable {
             offerStatus.setValue(agreement.getOfferStatus());
             presentationDate.setValue(agreement.getPresentationDate());
             additionalNotesAD.setText(agreement.getAdditionalNotes());
+        }
+    }
+
+    public void handleUploadPDF() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+        File file = fileChooser.showOpenDialog(pdfFilePath.getScene().getWindow());
+
+        if (file != null) {
+            pdfFilePath.setText(file.getAbsolutePath());
         }
     }
 }

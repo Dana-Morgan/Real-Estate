@@ -12,7 +12,6 @@ public class Agreement {
     @Column(name = "displayID")
     private int displayID;
 
-
     @Column(name = "customerID")
     private int customerID;
 
@@ -30,19 +29,23 @@ public class Agreement {
 
     @Column(name = "additionalNotes")
     private String additionalNotes;
+    @Column(name = "pdfPath") // حقل جديد لتخزين مسار الملف
+    private String pdfPath;
 
     public Agreement() {
     }
 
-    public Agreement( int customerID, int propertyID, String offerType, String offerStatus, LocalDate presentationDate, String additionalNotes) {
+    public Agreement(int customerID, int propertyID, String offerType, String offerStatus, LocalDate presentationDate, String additionalNotes, String pdfPath) {
         this.customerID = customerID;
         this.propertyID = propertyID;
         this.offerType = offerType;
         this.offerStatus = offerStatus;
         this.presentationDate = presentationDate;
         this.additionalNotes = additionalNotes;
+        this.pdfPath = pdfPath;
     }
-    public Agreement(int displayID, int customerID, int propertyID, String offerType, String offerStatus, LocalDate presentationDate, String additionalNotes) {
+
+    public Agreement(int displayID, int customerID, int propertyID, String offerType, String offerStatus, LocalDate presentationDate, String additionalNotes, String pdfPath) {
         this.displayID = displayID;
         this.customerID = customerID;
         this.propertyID = propertyID;
@@ -50,6 +53,7 @@ public class Agreement {
         this.offerStatus = offerStatus;
         this.presentationDate = presentationDate;
         this.additionalNotes = additionalNotes;
+        this.pdfPath = pdfPath;
     }
 
 
@@ -108,4 +112,6 @@ public class Agreement {
     public void setAdditionalNotes(String additionalNotes) {
         this.additionalNotes = additionalNotes;
     }
+
+
 }
