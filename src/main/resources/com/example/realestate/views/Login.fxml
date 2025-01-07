@@ -3,64 +3,74 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.layout.GridPane?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="832.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.LoginController">
    <left>
-      <AnchorPane layoutX="72.0" prefHeight="832.0" prefWidth="640.0" style="-fx-background-color: BDB4C8;" BorderPane.alignment="CENTER">
+      <AnchorPane layoutX="72.0" prefHeight="832.0" prefWidth="578.0" style="-fx-background-color: BDB4C8;" BorderPane.alignment="CENTER">
          <children>
 
-            <Text layoutX="69.0" layoutY="289.0" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.0" text="Welcome Back !" wrappingWidth="353.53871154785156">
-               <font>
-                  <Font name="System Italic" size="40.0" />
-               </font>
-            </Text>
-            <Text layoutX="69.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to keep connected with us please login with your personal info" wrappingWidth="334.19879150390625">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Text>
+            <ImageView fitHeight="512.0" fitWidth="534.0" layoutX="37.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/logo-icon.jpg" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </left>
    <right>
-      <AnchorPane prefHeight="832.0" prefWidth="640.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="780.0" prefWidth="836.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="EmailIDLogin" layoutX="99.0" layoutY="271.0" prefHeight="58.0" prefWidth="400.0" promptText="Enter Your Email/Id" style="-fx-background-color: #F0EDED;" />
-            <PasswordField fx:id="passordLogin" layoutX="99.0" layoutY="411.0" prefHeight="58.0" prefWidth="400.0" promptText="Enter Your Password" style="-fx-background-color: #F0EDED;" />
-            <Text layoutX="99.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email/Name">
+            <TextField fx:id="EmailIDLogin" layoutX="126.0" layoutY="271.0" prefHeight="58.0" prefWidth="470.0" promptText="Enter Your Email" style="-fx-background-color: #F0EDED;">
                <font>
-                  <Font size="26.0" />
-               </font>
-            </Text>
-            <Text layoutX="103.0" layoutY="398.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password">
+                  <Font size="17.0" />
+               </font></TextField>
+            <PasswordField fx:id="passordLogin" layoutX="125.0" layoutY="361.0" prefHeight="58.0" prefWidth="470.0" promptText="Enter Your Password" style="-fx-background-color: #F0EDED;">
                <font>
-                  <Font size="26.0" />
-               </font>
-            </Text>
-            <Button fx:id="loginbut" layoutX="103.0" layoutY="618.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="400.0" style="-fx-background-color: #ADC867;" text="Login" onAction="#loginbutton">
+                  <Font size="17.0" />
+               </font></PasswordField>
+            <Button fx:id="loginbut" layoutX="126.0" layoutY="527.0" mnemonicParsing="false" onAction="#loginbutton" prefHeight="59.0" prefWidth="470.0" style="-fx-background-color: #ADC867;" text="Login">
                <font>
                   <Font size="28.0" />
                </font>
             </Button>
-            <Text fx:id="forgetbut" layoutX="378.0" layoutY="512.0" onDragDetected="#handleResetPassword" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-cursor: hand;" text="Forget Password" onMouseClicked="#handleResetPassword">
+            <Text fx:id="forgetbut" fill="#adc867" layoutX="465.0" layoutY="445.0" onDragDetected="#handleResetPassword" onMouseClicked="#handleResetPassword" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-cursor: hand;" text="Forget Password?" wrappingWidth="129.7171630859375">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Line endX="58.9453125" endY="0.015625" layoutX="436.0" layoutY="516.0" startX="-58.0" startY="0.015625" style="-fx-background-color: #ADC867; -fx-fill: #ADC867;" />
-            <Text layoutX="103.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
+            <Text layoutX="253.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello Again!">
                <font>
-                  <Font size="42.0" />
+                  <Font size="40.0" />
+               </font>
+               <stroke>
+                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </stroke>
+            </Text>
+            <Text layoutX="240.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Next Real Estate Journey Starts Here!">
+               <font>
+                  <Font size="13.0" />
                </font>
                <stroke>
                   <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
