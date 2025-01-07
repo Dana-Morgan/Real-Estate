@@ -15,10 +15,10 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.LoginController">
    <left>
-      <AnchorPane layoutX="72.0" prefHeight="832.0" prefWidth="578.0" style="-fx-background-color: BDB4C8;" BorderPane.alignment="CENTER">
+      <AnchorPane layoutX="72.0" prefHeight="780.0" prefWidth="544.0" style="-fx-background-color: BDB4C8;" BorderPane.alignment="CENTER">
          <children>
 
-            <ImageView fitHeight="512.0" fitWidth="534.0" layoutX="37.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="408.0" fitWidth="504.0" layoutX="68.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/logo-icon.jpg" />
                </image>
@@ -27,27 +27,29 @@
       </AnchorPane>
    </left>
    <right>
-      <AnchorPane prefHeight="780.0" prefWidth="836.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="780.0" prefWidth="857.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="EmailIDLogin" layoutX="126.0" layoutY="271.0" prefHeight="58.0" prefWidth="470.0" promptText="Enter Your Email" style="-fx-background-color: #F0EDED;">
+            <TextField fx:id="EmailIDLogin" layoutX="154.0" layoutY="295.0" prefHeight="60.0" prefWidth="455.0" promptText="Enter Your Email" style="-fx-background-color: #F0EDED;">
                <font>
                   <Font size="17.0" />
-               </font></TextField>
-            <PasswordField fx:id="passordLogin" layoutX="125.0" layoutY="361.0" prefHeight="58.0" prefWidth="470.0" promptText="Enter Your Password" style="-fx-background-color: #F0EDED;">
+               </font>
+            </TextField>
+            <PasswordField fx:id="passordLogin" layoutX="154.0" layoutY="378.0" prefHeight="60.0" prefWidth="455.0" promptText="Enter Your Password" style="-fx-background-color: #F0EDED;">
                <font>
                   <Font size="17.0" />
-               </font></PasswordField>
-            <Button fx:id="loginbut" layoutX="126.0" layoutY="527.0" mnemonicParsing="false" onAction="#loginbutton" prefHeight="59.0" prefWidth="470.0" style="-fx-background-color: #ADC867;" text="Login">
+               </font>
+            </PasswordField>
+            <Button fx:id="loginbut" layoutX="154.0" layoutY="524.0" mnemonicParsing="false" onAction="#loginbutton" prefHeight="43.0" prefWidth="455.0" style="-fx-background-color: #ADC867; -fx-font-size: 20;" text="Login" textFill="WHITE">
                <font>
                   <Font size="28.0" />
                </font>
             </Button>
-            <Text fx:id="forgetbut" fill="#adc867" layoutX="465.0" layoutY="445.0" onDragDetected="#handleResetPassword" onMouseClicked="#handleResetPassword" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-cursor: hand;" text="Forget Password?" wrappingWidth="129.7171630859375">
+            <Text fx:id="forgetbut" fill="#adc867" layoutX="479.0" layoutY="462.0" onDragDetected="#handleResetPassword" onMouseClicked="#handleResetPassword" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-cursor: hand;" text="Forget Password?" wrappingWidth="129.7171630859375">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text layoutX="253.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello Again!">
+            <Text layoutX="273.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello Again!">
                <font>
                   <Font size="40.0" />
                </font>
@@ -68,7 +70,7 @@
                   </RadialGradient>
                </stroke>
             </Text>
-            <Text layoutX="240.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Next Real Estate Journey Starts Here!">
+            <Text layoutX="261.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Next Real Estate Journey Starts Here!">
                <font>
                   <Font size="13.0" />
                </font>
