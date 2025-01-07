@@ -188,26 +188,33 @@ public class AgreementTableController implements Initializable {
         }
     }
 
+
     @FXML
     private void handleSearch() {
         String displayIDInput = displayIDSearchField.getText().trim();
         String customerIDInput = customerIDSearchField.getText().trim();
         String propertyIDInput = propertyIDSearchField.getText().trim();
+        String customerNameInput = customerNameSearchField.getText().trim();
+        String propertyNameInput = propertyNameSearchField.getText().trim();
         LocalDate dateInput = agreementDateSearchField.getValue();
         String offerTypeInput = offerTypeChoiceBox.getValue();
         String offerStatusInput = offerStatusChoiceBox.getValue();
 
         List<Agreement> filteredAgreements = agreementDAO.getAll().stream()
-                .filter(agreement -> matchesSearchCriteria(agreement, displayIDInput, customerIDInput, propertyIDInput, dateInput, offerTypeInput, offerStatusInput))
+                .filter(agreement -> matchesSearchCriteria(agreement, displayIDInput, customerIDInput, propertyIDInput, customerNameInput, propertyNameInput, dateInput, offerTypeInput, offerStatusInput))
                 .collect(Collectors.toList());
 
         agreementTable.setItems(FXCollections.observableList(filteredAgreements));
     }
 
-    private boolean matchesSearchCriteria(Agreement agreement, String displayIDInput, String customerIDInput, String propertyIDInput, LocalDate dateInput, String offerTypeInput, String offerStatusInput) {
+
+
+    private boolean matchesSearchCriteria(Agreement agreement, String displayIDInput, String customerIDInput, String propertyIDInput, String customerNameInput, String propertyNameInput, LocalDate dateInput, String offerTypeInput, String offerStatusInput) {
         return (displayIDInput.isEmpty() || String.valueOf(agreement.getDisplayID()).contains(displayIDInput)) &&
                 (customerIDInput.isEmpty() || String.valueOf(agreement.getCustomer().getCustomerId()).contains(customerIDInput)) &&
                 (propertyIDInput.isEmpty() || String.valueOf(agreement.getProperty().getId()).contains(propertyIDInput)) &&
+                (customerNameInput.isEmpty() || agreement.getCustomer().getCustomerName().toLowerCase().contains(customerNameInput.toLowerCase())) &&
+                (propertyNameInput.isEmpty() || agreement.getProperty().getName().toLowerCase().contains(propertyNameInput.toLowerCase())) &&
                 (dateInput == null || agreement.getPresentationDate().equals(dateInput)) &&
                 (offerTypeInput == null || agreement.getOfferType().equalsIgnoreCase(offerTypeInput)) &&
                 (offerStatusInput == null || agreement.getOfferStatus().equalsIgnoreCase(offerStatusInput));
