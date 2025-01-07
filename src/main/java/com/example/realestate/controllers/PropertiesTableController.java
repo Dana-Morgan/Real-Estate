@@ -24,6 +24,8 @@ public class PropertiesTableController {
     @FXML
     private TableView<Property> PropertiesTable;
     @FXML
+    private TableColumn<Property, Integer> PIDColumn;
+    @FXML
     private TableColumn<Property, String> PNameColumn;
     @FXML
     private TableColumn<Property, String> PImageColumn;
@@ -60,7 +62,8 @@ public class PropertiesTableController {
 
     @FXML
     public void initialize() {
-
+        // Bind data to columns
+        PIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         PNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         PImageColumn.setCellValueFactory(new PropertyValueFactory<>("image"));
         PPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -72,7 +75,8 @@ public class PropertiesTableController {
         PStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         PDateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-
+        // Adjust column widths
+        PIDColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(100.0 / 2200)); // Adjust width as necessary
         PNameColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(200.0 / 2200));
         PImageColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(250.0 / 2200));
         PLocationColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(200.0 / 2200));
@@ -86,8 +90,7 @@ public class PropertiesTableController {
         UpdatePColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(200.0 / 2200));
         DeletePColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(200.0 / 2200));
 
-
-        loadData();
+    loadData();
         addDeleteButton();
         addUpdateButton();
 
@@ -194,14 +197,11 @@ public class PropertiesTableController {
     @FXML
     private void handleNavigateToHomeButton(ActionEvent event) {
         try {
-            // Load the FXML file for the home page
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePageForAdmin.fxml"));
             Parent root = loader.load();
 
-            // Get the current stage from the button's event source
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // Set the new scene with the loaded FXML
             Scene scene = new Scene(root, 1400, 780);
             stage.setScene(scene);
             stage.show();

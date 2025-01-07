@@ -2,14 +2,19 @@ package com.example.realestate.controllers;
 
 import com.example.realestate.models.Property;
 import com.example.realestate.services.PropertyDAO;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import com.example.realestate.services.PropertyDAOImpl;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -163,5 +168,23 @@ public class ListingPageControllers {
         alert.setTitle(title);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+    @FXML
+    private void handleNavigateToHomeButton(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePageForAdmin.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            Scene scene = new Scene(root, 1400, 780);
+            stage.setScene(scene);
+            stage.show();
+
+            System.out.println("Navigated to HomePage successfully!");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error loading HomePageForAdmin.fxml: " + e.getMessage());
+        }
     }
 }
