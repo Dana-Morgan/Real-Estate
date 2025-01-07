@@ -44,6 +44,7 @@
     <TableView fx:id="PropertiesTable" layoutX="40.0" layoutY="220.0" prefHeight="400.0" prefWidth="1189.0" style=" " styleClass="properties-table" AnchorPane.bottomAnchor="60" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="220">
 
         <columns>
+            <TableColumn fx:id="PIDColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="ID" />
             <TableColumn fx:id="PNameColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Property Name" />
             <TableColumn fx:id="PImageColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Image" />
             <TableColumn fx:id="PLocationColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Location" />
