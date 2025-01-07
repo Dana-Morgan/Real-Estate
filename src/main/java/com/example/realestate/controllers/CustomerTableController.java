@@ -211,7 +211,13 @@ public class CustomerTableController implements Initializable {
             Parent root = loader.load();
             System.out.println("FXML file loaded successfully.");
             Stage stage = (Stage) homeButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            Scene scene;
+                scene = new Scene(root, 1400, 780);
+            stage.setScene(scene);
+            stage.sizeToScene();
+            stage.setMinWidth(root.minWidth(-1));
+            stage.setMinHeight(root.minHeight(-1));
+
             stage.setTitle(title);
             stage.show();
         } catch (IOException e) {

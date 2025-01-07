@@ -1,6 +1,5 @@
 package com.example.realestate.services;
 
-import com.example.realestate.models.Agent;
 import com.example.realestate.models.User;
 import com.example.realestate.utils.HibernateUtil;
 import org.hibernate.Session;

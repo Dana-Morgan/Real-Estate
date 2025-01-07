@@ -10,7 +10,7 @@
           AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
         <ImageView fx:id="imageView" fitHeight="180" fitWidth="300" preserveRatio="true">
             <image>
-                <Image url="@../images/aqar.jpg"/>
+                <Image url="@../images/Aqar.jpg"/>
             </image>
         </ImageView>
         <VBox spacing="8" style="-fx-padding: 5 10 5 10;">

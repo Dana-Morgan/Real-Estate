@@ -58,7 +58,7 @@
     <Button fx:id="cancelButton" layoutX="46.0" layoutY="60.0" onAction="#goBack" prefHeight="35.0" prefWidth="77.0" style="-fx-background-color: #000000; -fx-background-radius: 20;" text="Back" textFill="WHITE" />
     <ImageView fitHeight="150.0" fitWidth="203.0" layoutX="244.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
         <image>
-            <Image url="@../images/logo-icon.jpg" />
+            <Image url="@../images/Logo.jpg" />
         </image>
     </ImageView>
 </AnchorPane>

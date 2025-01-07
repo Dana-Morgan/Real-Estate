@@ -13,6 +13,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -62,7 +64,6 @@ public class PropertiesTableController {
 
     @FXML
     public void initialize() {
-        // Bind data to columns
         PIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         PNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         PImageColumn.setCellValueFactory(new PropertyValueFactory<>("image"));
@@ -75,8 +76,32 @@ public class PropertiesTableController {
         PStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         PDateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-        // Adjust column widths
-        PIDColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(100.0 / 2200)); // Adjust width as necessary
+        PImageColumn.setCellFactory(column -> new TableCell<>() {
+            private final ImageView imageView = new ImageView();
+
+            @Override
+            protected void updateItem(String imagePath, boolean empty) {
+                super.updateItem(imagePath, empty);
+
+                if (empty || imagePath == null || imagePath.isEmpty()) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    try {
+                        Image image = new Image(imagePath, 100, 100, true, true); // Resize image
+                        imageView.setImage(image);
+                        setGraphic(imageView);
+                        setText(null);
+                    } catch (Exception e) {
+                        System.err.println("Failed to load image: " + imagePath);
+                        e.printStackTrace();
+                        setGraphic(null);
+                    }
+                }
+            }
+        });
+
+        PIDColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(100.0 / 2200));
         PNameColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(200.0 / 2200));
         PImageColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(250.0 / 2200));
         PLocationColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(200.0 / 2200));
@@ -90,11 +115,9 @@ public class PropertiesTableController {
         UpdatePColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(200.0 / 2200));
         DeletePColumn.prefWidthProperty().bind(PropertiesTable.widthProperty().multiply(200.0 / 2200));
 
-    loadData();
+        loadData();
         addDeleteButton();
         addUpdateButton();
-
-
     }
 
     public void loadData() {
@@ -121,7 +144,6 @@ public class PropertiesTableController {
                             propertyDAO.deleteProperty(property);
                             getTableView().getItems().remove(property);
 
-
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("Success");
                             alert.setHeaderText(null);
@@ -135,7 +157,6 @@ public class PropertiesTableController {
                         }
                     }
                 });
-
             }
 
             @Override
@@ -160,17 +181,22 @@ public class PropertiesTableController {
                     Property property = getTableView().getItems().get(getIndex());
                     if (property != null) {
                         try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/UpdatePro.fxml"));
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/UpdateProperty.fxml"));
                             Parent root = loader.load();
+
                             UpdateProController controller = loader.getController();
-                            controller.setPropertyToUpdate(property);  // Pass the property to be updated
+                            controller.setPropertyToUpdate(property);
+
                             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             Scene scene = new Scene(root, 1280, 832);
                             stage.setScene(scene);
                             stage.show();
                         } catch (IOException e) {
+                            System.err.println("Failed to load UpdatePro.fxml: " + e.getMessage());
                             e.printStackTrace();
                         }
+                    } else {
+                        System.err.println("No property selected for update.");
                     }
                 });
             }
@@ -187,13 +213,6 @@ public class PropertiesTableController {
         });
     }
 
-    // Reload the table after update
-    public void reloadPropertiesTable() {
-        loadData();
-    }
-
-
-
     @FXML
     private void handleNavigateToHomeButton(ActionEvent event) {
         try {
@@ -201,22 +220,19 @@ public class PropertiesTableController {
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
             Scene scene = new Scene(root, 1400, 780);
             stage.setScene(scene);
             stage.show();
 
             System.out.println("Navigated to HomePage successfully!");
         } catch (IOException e) {
-            e.printStackTrace();
             System.err.println("Error loading HomePageForAdmin.fxml: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
-
-
     public void goToPF(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/realestate/views/AddProForm.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/realestate/views/AddProperty.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root, 1280, 832);
         stage.setScene(scene);

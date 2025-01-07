@@ -18,8 +18,6 @@ public class HibernateUtil {
     private HibernateUtil(){
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(User.class);
-        configuration.addAnnotatedClass(Agent.class);
-        configuration.addAnnotatedClass(Admin.class);
         configuration.addAnnotatedClass(Interaction.class);
         configuration.addAnnotatedClass(Agreement.class);
         configuration.addAnnotatedClass(Customer.class);

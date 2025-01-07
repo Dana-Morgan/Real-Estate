@@ -1,7 +1,6 @@
 package com.example.realestate.controllers;
 
 import com.example.realestate.models.User;
-import com.example.realestate.services.AgentDAOImpl;
 import com.example.realestate.services.UserDOAImpl;
 import com.example.realestate.validation.ValiditionAgentAccount;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -81,9 +80,7 @@ public class CreateAccountForAgentController {
 
     @FXML
     private Button backbut1;
-    private AgentDAOImpl agentDOA = new AgentDAOImpl();
     private UserDOAImpl userDOA = new UserDOAImpl();
-    //private ObservableList<Agent> agentList = FXCollections.observableArrayList();
     private ObservableList<User> userList = FXCollections.observableArrayList();
 
     @FXML

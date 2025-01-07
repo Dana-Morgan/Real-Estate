@@ -1,14 +1,11 @@
 package com.example.realestate.controllers;
 
 import com.example.realestate.models.User;
-import com.example.realestate.services.AdminDAOImpl;
-import com.example.realestate.services.AgentDAOImpl;
 import com.example.realestate.services.UserDOAImpl;
 import com.example.realestate.utils.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -34,8 +31,7 @@ public class LoginController {
 
     @FXML
     private PasswordField passordLogin;
-    private AgentDAOImpl agentDAO = new AgentDAOImpl(); // Instantiate AgentDOAImpl
-    private AdminDAOImpl adminDOA = new AdminDAOImpl(); // Instantiate AgentDOAImpl
+
     private UserDOAImpl userDAO = new UserDOAImpl();
     private MouseEvent event;
 

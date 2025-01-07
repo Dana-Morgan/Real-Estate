@@ -12,7 +12,7 @@
 <AnchorPane style="-fx-background-color: BDB4C8;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.PropertiesTableController">
     <ImageView fitHeight="155.0" fitWidth="153.0" layoutX="1067.0" layoutY="7.0" AnchorPane.rightAnchor="13.599999999999909" AnchorPane.topAnchor="7.0">
         <image>
-            <Image url="@../images/logo-icon.jpg" />
+            <Image url="@../images/Logo.jpg" />
         </image>
     </ImageView>
 
@@ -33,7 +33,7 @@
     <Button fx:id="homeButton" onAction="#handleNavigateToHomeButton" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="38.0">
         <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0">
-                <Image url="@../images/img.png" />
+                <Image url="@../images/HomeButton.png" />
             </ImageView>
         </graphic>
     </Button>

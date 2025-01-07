@@ -1,6 +1,5 @@
 package com.example.realestate.services;
 
-import com.example.realestate.models.Agent;
 import com.example.realestate.models.User;
 
 import java.util.List;

@@ -14,7 +14,7 @@
     <Button fx:id="homeButton" onAction="#handleHomeButtonAction" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="38.0">
         <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0">
-                <Image url="@../images/img.png" />
+                <Image url="@../images/HomeButton.png" />
             </ImageView>
         </graphic>
     </Button>
@@ -44,7 +44,7 @@
     </TableView>
     <ImageView fitHeight="170.0" fitWidth="170.0" layoutX="1070.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
         <image>
-            <Image url="@../images/logo-icon.jpg" />
+            <Image url="@../images/Logo.jpg" />
         </image>
     </ImageView>
 </AnchorPane>

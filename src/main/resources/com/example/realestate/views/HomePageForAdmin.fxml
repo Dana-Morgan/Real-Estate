@@ -31,7 +31,7 @@
             <children>
                 <ImageView fitHeight="200.0" fitWidth="200.0" preserveRatio="true" GridPane.halignment="CENTER">
                     <image>
-                        <Image url="@../images/logo-icon.jpg" />
+                        <Image url="@../images/Logo.jpg" />
                     </image>
                 </ImageView>
 
@@ -46,7 +46,7 @@
                             <HBox  alignment="CENTER_LEFT" style="-fx-background-color: #BDB4C8;">
                                 <ImageView fitHeight="37.0" fitWidth="37.0">
                                     <image>
-                                        <Image url="@../images/profile.png" />
+                                        <Image url="@../images/ProfileLogo.png" />
                                     </image>
                                 </ImageView>
                                 <Label prefHeight="30.0" prefWidth="94.0" style="-fx-font-size: 24;" text="  User" textFill="BLACK">
@@ -62,7 +62,7 @@
                             <HBox  alignment="CENTER_LEFT" style="-fx-background-color: #BDB4C8;">
                                 <ImageView fitHeight="37.0" fitWidth="37.0">
                                     <image>
-                                        <Image url="@../images/rental-service.png" />
+                                        <Image url="@../images/AgreementLogo.png" />
                                     </image>
                                 </ImageView>
                                 <Label style="-fx-font-size: 24;" text="  Agreement" textFill="BLACK">
@@ -78,7 +78,7 @@
                             <HBox  alignment="CENTER_LEFT">
                                 <ImageView fitHeight="37.0" fitWidth="37.0">
                                     <image>
-                                        <Image url="@../images/property.png" />
+                                        <Image url="@../images/PropertyLogo.png" />
                                     </image>
                                 </ImageView>
                                 <Label prefHeight="35.0" prefWidth="137.0" style="-fx-font-size: 24; -fx-background-color: #BDB4C8;" text="  Property" textFill="BLACK">
@@ -94,7 +94,7 @@
                             <HBox  alignment="CENTER_LEFT" style="-fx-background-color: #BDB4C8;">
                                 <ImageView fitHeight="37.0" fitWidth="37.0">
                                     <image>
-                                        <Image url="@../images/interaction.png" />
+                                        <Image url="@../images/InteractionLogo.png" />
                                     </image>
                                 </ImageView>
                                 <Label style="-fx-font-size: 24;" text="  Interaction" textFill="BLACK">
@@ -110,7 +110,7 @@
                             <HBox  alignment="CENTER_LEFT" style="-fx-background-color: #BDB4C8;">
                                 <ImageView fitHeight="37.0" fitWidth="37.0">
                                     <image>
-                                        <Image url="@../images/support.png" />
+                                        <Image url="@../images/CustomerLogo.png" />
                                     </image>
                                 </ImageView>
                                 <Label style="-fx-font-size: 24;" text="  Customer" textFill="BLACK">
@@ -127,7 +127,7 @@
                            <HBox alignment="CENTER_LEFT">
                                <ImageView fitHeight="37.0" fitWidth="37.0">
                                    <image>
-                                       <Image url="@../images/logout.png" />
+                                       <Image url="@../images/LogoutLogo.png" />
                                    </image>
                                </ImageView>
                                <Label style="-fx-font-size: 24; -fx-background-color: #BDB4C8;" text="  Logout" textFill="BLACK">

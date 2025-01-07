@@ -18,7 +18,7 @@
 
     <ImageView fitHeight="150.0" fitWidth="150.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
         <image>
-            <Image url="@../images/logo-icon.jpg" />
+            <Image url="@../images/Logo.jpg" />
         </image>
     </ImageView>
 
@@ -32,7 +32,7 @@
     <Button fx:id="homeButton" onAction="#handleHomeButtonAction" style="-fx-background-color: transparent;" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="38.0">
         <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0">
-                <Image url="@../images/img.png" />
+                <Image url="@../images/HomeButton.png" />
             </ImageView>
         </graphic>
     </Button>
