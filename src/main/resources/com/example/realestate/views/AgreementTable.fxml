@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane prefHeight="832.0" prefWidth="1280.0" style="-fx-background-color: BDB4C8;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.realestate.controllers.AgreementTableController">
 
     <ImageView fitHeight="150.0" fitWidth="150.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
@@ -64,7 +65,9 @@
         <columns>
             <TableColumn fx:id="displayIDColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Display ID" />
             <TableColumn fx:id="customerIDColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Customer ID" />
+            <TableColumn fx:id="customerNameColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Customer Name" />
             <TableColumn fx:id="propertyIDColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Property ID" />
+            <TableColumn fx:id="propertyNameColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Property Name" />
             <TableColumn fx:id="offerTypeColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Offer Type" />
             <TableColumn fx:id="offerStatusColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Offer Status" />
             <TableColumn fx:id="presentationDateColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Presentation Date" />

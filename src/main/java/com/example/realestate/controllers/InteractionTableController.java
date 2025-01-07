@@ -68,10 +68,8 @@ public class InteractionTableController implements Initializable {
     private void initializeColumns() {
         interactionIDColumn.setCellValueFactory(new PropertyValueFactory<>("interactionID"));
 
-        // تعديل هنا لربط عمود customerID من كائن الـ Customer
         customerIDColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getCustomer().getCustomerId()).asObject());
 
-        // إضافة ربط عمود Customer Name
         customerNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCustomer().getCustomerName()));
 
         interactionTypeColumn.setCellValueFactory(new PropertyValueFactory<>("interactionType"));
@@ -84,10 +82,10 @@ public class InteractionTableController implements Initializable {
 
     private void bindColumnWidth() {
         interactionTable.widthProperty().addListener((obs, oldWidth, newWidth) -> {
-            double columnWidth = newWidth.doubleValue() / 6; // We now have 6 columns
+            double columnWidth = newWidth.doubleValue() / 6;
             interactionIDColumn.setPrefWidth(columnWidth);
             customerIDColumn.setPrefWidth(columnWidth);
-            customerNameColumn.setPrefWidth(columnWidth);  // Customer Name Column
+            customerNameColumn.setPrefWidth(columnWidth);
             interactionTypeColumn.setPrefWidth(columnWidth);
             interactionDateColumn.setPrefWidth(columnWidth);
             additionalNotesColumn.setPrefWidth(columnWidth);

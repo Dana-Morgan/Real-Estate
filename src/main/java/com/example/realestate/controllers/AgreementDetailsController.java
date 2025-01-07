@@ -1,6 +1,8 @@
 package com.example.realestate.controllers;
 
 import com.example.realestate.models.Agreement;
+import com.example.realestate.models.Customer;
+import com.example.realestate.models.Property;
 import com.example.realestate.services.AgreementDAO;
 import com.example.realestate.services.AgreementDAOImpl;
 import javafx.fxml.FXML;
@@ -57,6 +59,12 @@ public class AgreementDetailsController implements Initializable {
     @FXML
     private Button uploadPDF;
 
+    @FXML
+    private TextField customerName;
+    @FXML
+    private TextField propertyName;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         offerType.getItems().addAll("Sale", "Rent", "Lease");
@@ -109,41 +117,45 @@ public class AgreementDetailsController implements Initializable {
                 return;
             }
 
-            boolean isCustomerExists = agreementDAO.isCustomerExists(Integer.parseInt(customerIDValue));
-            boolean isPropertyExists = agreementDAO.isPropertyExists(Integer.parseInt(propertyIDValue));
+            int customerIDInt = Integer.parseInt(customerIDValue);
+            int propertyIDInt = Integer.parseInt(propertyIDValue);
 
-            if (!isCustomerExists) {
-                showAlert(Alert.AlertType.ERROR, "Validation Error", "Customer ID does not exist.");
+            Customer customer = agreementDAO.findCustomerById(customerIDInt);
+            Property property = agreementDAO.findPropertyById(propertyIDInt);
+
+
+            if (customer == null) {
+                showAlert(Alert.AlertType.ERROR, "Customer Not Found", "The customer ID does not exist.");
                 return;
             }
 
-            if (!isPropertyExists) {
-                showAlert(Alert.AlertType.ERROR, "Validation Error", "Property ID does not exist.");
+            if (property == null) {
+                showAlert(Alert.AlertType.ERROR, "Property Not Found", "The property ID does not exist.");
                 return;
             }
 
             if (currentAgreement == null) {
-                Agreement agreement = new Agreement(
-                        Integer.parseInt(customerIDValue),
-                        Integer.parseInt(propertyIDValue),
-                        offerTypeValue,
-                        offerStatusValue,
-                        presentationDateValue,
-                        additionalNotesValue,
-                        pdfPath
-                );
+                Agreement agreement = new Agreement();
+                agreement.setCustomer(customer);
+                agreement.setProperty(property);
+                agreement.setOfferType(offerTypeValue);
+                agreement.setOfferStatus(offerStatusValue);
+                agreement.setPresentationDate(presentationDateValue);
+                agreement.setAdditionalNotes(additionalNotesValue);
+                agreement.setPdfPath(pdfPath);
+
                 agreementDAO.save(agreement);
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Agreement added successfully!");
             } else {
                 boolean isModified = false;
 
-                if (currentAgreement.getCustomerID() != Integer.parseInt(customerIDValue)) {
-                    currentAgreement.setCustomerID(Integer.parseInt(customerIDValue));
+                if (!currentAgreement.getCustomer().equals(customer)) {
+                    currentAgreement.setCustomer(customer);
                     isModified = true;
                 }
 
-                if (currentAgreement.getPropertyID() != Integer.parseInt(propertyIDValue)) {
-                    currentAgreement.setPropertyID(Integer.parseInt(propertyIDValue));
+                if (!currentAgreement.getProperty().equals(property)) {
+                    currentAgreement.setProperty(property);
                     isModified = true;
                 }
 
@@ -203,13 +215,15 @@ public class AgreementDetailsController implements Initializable {
     public void setAgreementDetails(Agreement agreement) {
         if (agreement != null) {
             this.currentAgreement = agreement;
-            customerID.setText(String.valueOf(agreement.getCustomerID()));
-            propertyID.setText(String.valueOf(agreement.getPropertyID()));
+            customerID.setText(String.valueOf(agreement.getCustomer().getCustomerId()));
+            propertyID.setText(String.valueOf(agreement.getProperty().getId()));
             offerType.setValue(agreement.getOfferType());
             offerStatus.setValue(agreement.getOfferStatus());
             presentationDate.setValue(agreement.getPresentationDate());
             additionalNotesAD.setText(agreement.getAdditionalNotes());
             pdfFilePath.setText(agreement.getPdfPath());
+
+
         }
     }
 

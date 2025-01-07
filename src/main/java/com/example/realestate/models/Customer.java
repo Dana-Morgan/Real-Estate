@@ -36,7 +36,9 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Interaction> interactions;
 
-    // Getters and setters
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Agreement> agreements;
+
     public int getCustomerId() {
         return customerId;
     }
@@ -107,5 +109,13 @@ public class Customer {
 
     public void setInteractions(List<Interaction> interactions) {
         this.interactions = interactions;
+    }
+
+    public List<Agreement> getAgreements() {
+        return agreements;
+    }
+
+    public void setAgreements(List<Agreement> agreements) {
+        this.agreements = agreements;
     }
 }

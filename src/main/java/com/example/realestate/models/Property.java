@@ -12,8 +12,8 @@ public class Property {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private static final List<String> PROPERTY_TYPES = Arrays.asList("Residential", "Commercial", "Land","Vacation");
-    private static final List<String> STATUSES = Arrays.asList("Available", "Rented","Soled","Pending");
+    private static final List<String> PROPERTY_TYPES = Arrays.asList("Residential", "Commercial", "Land", "Vacation");
+    private static final List<String> STATUSES = Arrays.asList("Available", "Rented", "Sold", "Pending");
 
     @Column(name = "image")
     private String image;
@@ -45,6 +45,9 @@ public class Property {
     @Column(name = "date")
     private LocalDate date;
 
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Agreement> agreements;
+
     public Property(String name, String location, String price, String area, int numberOfRooms,
                     String propertyFeatures, String image, String propertyType, String status, LocalDate date) {
         if (!PROPERTY_TYPES.contains(propertyType)) {
@@ -53,7 +56,6 @@ public class Property {
         if (!STATUSES.contains(status)) {
             throw new IllegalArgumentException("Invalid status. Must be one of: " + STATUSES);
         }
-
 
         this.image = image;
         this.name = name;
@@ -68,10 +70,9 @@ public class Property {
     }
 
     public Property() {
-
     }
 
-
+    // Getters and setters
     public int getId() {
         return id;
     }
@@ -120,11 +121,11 @@ public class Property {
         this.propertyType = propertyType;
     }
 
-    public Integer getNumberOfRooms() {
+    public int getNumberOfRooms() {
         return numberOfRooms;
     }
 
-    public void setNumberOfRooms(Integer numberOfRooms) {
+    public void setNumberOfRooms(int numberOfRooms) {
         this.numberOfRooms = numberOfRooms;
     }
 
@@ -158,5 +159,13 @@ public class Property {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public List<Agreement> getAgreements() {
+        return agreements;
+    }
+
+    public void setAgreements(List<Agreement> agreements) {
+        this.agreements = agreements;
     }
 }

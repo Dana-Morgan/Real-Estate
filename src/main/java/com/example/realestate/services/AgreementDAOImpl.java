@@ -4,7 +4,9 @@ import com.example.realestate.models.Agreement;
 import com.example.realestate.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
+import com.example.realestate.models.Customer;
+import com.example.realestate.models.Property;
+import org.hibernate.query.Query;
 import java.util.List;
 
 public class AgreementDAOImpl implements AgreementDAO {
@@ -75,6 +77,24 @@ public class AgreementDAOImpl implements AgreementDAO {
                     .setParameter("propertyId", propertyId)
                     .uniqueResult();
             return count > 0;
+        }
+    }
+
+    @Override
+    public Customer findCustomerById(int customerID) {
+        try (Session session = sessionFactory.openSession()) {
+            Query<Customer> query = session.createQuery("FROM Customer WHERE customerId = :customerID", Customer.class);
+            query.setParameter("customerID", customerID);
+            return query.uniqueResult();
+        }
+    }
+
+    @Override
+    public Property findPropertyById(int propertyID) {
+        try (Session session = sessionFactory.openSession()) {
+            Query<Property> query = session.createQuery("FROM Property WHERE id = :propertyID", Property.class);
+            query.setParameter("propertyID", propertyID);
+            return query.uniqueResult();
         }
     }
 }

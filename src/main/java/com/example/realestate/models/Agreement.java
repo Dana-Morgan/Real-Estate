@@ -2,7 +2,6 @@ package com.example.realestate.models;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-
 @Entity
 @Table(name = "agreement")
 public class Agreement {
@@ -11,12 +10,6 @@ public class Agreement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "displayID")
     private int displayID;
-
-    @Column(name = "customerID")
-    private int customerID;
-
-    @Column(name = "propertyID")
-    private int propertyID;
 
     @Column(name = "offerType")
     private String offerType;
@@ -29,15 +22,25 @@ public class Agreement {
 
     @Column(name = "additionalNotes")
     private String additionalNotes;
-    @Column(name = "pdfPath") // حقل جديد لتخزين مسار الملف
+
+    @Column(name = "pdfPath")
     private String pdfPath;
+
+    @ManyToOne
+    @JoinColumn(name = "customerID", nullable = false)
+    private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "propertyID", nullable = false)
+    private Property property;
 
     public Agreement() {
     }
 
-    public Agreement(int customerID, int propertyID, String offerType, String offerStatus, LocalDate presentationDate, String additionalNotes, String pdfPath) {
-        this.customerID = customerID;
-        this.propertyID = propertyID;
+    public Agreement(Customer customer, Property property, String offerType, String offerStatus,
+                     LocalDate presentationDate, String additionalNotes, String pdfPath) {
+        this.customer = customer;
+        this.property = property;
         this.offerType = offerType;
         this.offerStatus = offerStatus;
         this.presentationDate = presentationDate;
@@ -45,40 +48,13 @@ public class Agreement {
         this.pdfPath = pdfPath;
     }
 
-    public Agreement(int displayID, int customerID, int propertyID, String offerType, String offerStatus, LocalDate presentationDate, String additionalNotes, String pdfPath) {
-        this.displayID = displayID;
-        this.customerID = customerID;
-        this.propertyID = propertyID;
-        this.offerType = offerType;
-        this.offerStatus = offerStatus;
-        this.presentationDate = presentationDate;
-        this.additionalNotes = additionalNotes;
-        this.pdfPath = pdfPath;
-    }
-
-
+    // Getters and setters
     public int getDisplayID() {
         return displayID;
     }
 
     public void setDisplayID(int displayID) {
         this.displayID = displayID;
-    }
-
-    public int getCustomerID() {
-        return customerID;
-    }
-
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
-    }
-
-    public int getPropertyID() {
-        return propertyID;
-    }
-
-    public void setPropertyID(int propertyID) {
-        this.propertyID = propertyID;
     }
 
     public String getOfferType() {
@@ -111,6 +87,22 @@ public class Agreement {
 
     public void setAdditionalNotes(String additionalNotes) {
         this.additionalNotes = additionalNotes;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public void setProperty(Property property) {
+        this.property = property;
     }
 
     public String getPdfPath() {

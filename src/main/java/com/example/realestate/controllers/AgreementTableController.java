@@ -8,6 +8,8 @@ import java.awt.Desktop;
 import java.io.IOException;
 
 import com.example.realestate.utils.SessionManager;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,7 +21,6 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.application.Platform;
 import javafx.scene.control.cell.PropertyValueFactory;
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -28,6 +29,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+
+
 
 public class AgreementTableController implements Initializable {
 
@@ -39,15 +42,17 @@ public class AgreementTableController implements Initializable {
     @FXML private TableColumn<Agreement, String> offerTypeColumn, offerStatusColumn, additionalNotesColumn;
     @FXML private TableColumn<Agreement, LocalDate> presentationDateColumn;
     @FXML private TableColumn<Agreement, String> updateColumn, deleteColumn, pdfFileColumn;
+    @FXML private TableColumn<Agreement, String> customerNameColumn, propertyNameColumn;
 
     @FXML private DatePicker presentationDateField, agreementDateSearchField;
     @FXML private TextArea additionalNotesArea;
     @FXML private Button addAgreementbtn, deleteAgreementButton, searchButton;
     @FXML private ChoiceBox<String> offerTypeChoiceBox, offerStatusChoiceBox;
-    @FXML private TextField displayIDSearchField, customerIDSearchField, propertyIDSearchField;
+    @FXML private TextField displayIDSearchField, customerNameSearchField, propertyNameSearchField;
+    @FXML private TextField propertyIDSearchField;
+    @FXML private TextField customerIDSearchField;
 
     private ObservableList<Agreement> agreementList;
-
     private String userRole;
 
     @Override
@@ -70,8 +75,12 @@ public class AgreementTableController implements Initializable {
 
     private void initializeColumns() {
         displayIDColumn.setCellValueFactory(new PropertyValueFactory<>("displayID"));
-        customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-        propertyIDColumn.setCellValueFactory(new PropertyValueFactory<>("propertyID"));
+        customerIDColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCustomer().getCustomerId()));
+        propertyIDColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getProperty().getId()));
+
+        customerNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCustomer().getCustomerName()));
+        propertyNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProperty().getName()));
+
         offerTypeColumn.setCellValueFactory(new PropertyValueFactory<>("offerType"));
         offerStatusColumn.setCellValueFactory(new PropertyValueFactory<>("offerStatus"));
         presentationDateColumn.setCellValueFactory(new PropertyValueFactory<>("presentationDate"));
@@ -100,10 +109,10 @@ public class AgreementTableController implements Initializable {
 
     private void bindColumnWidth() {
         agreementTable.widthProperty().addListener((obs, oldWidth, newWidth) -> {
-            double columnWidth = newWidth.doubleValue() / 9;
+            double columnWidth = newWidth.doubleValue() / 11;
             displayIDColumn.setPrefWidth(columnWidth);
-            customerIDColumn.setPrefWidth(columnWidth);
-            propertyIDColumn.setPrefWidth(columnWidth);
+            customerNameColumn.setPrefWidth(columnWidth);
+            propertyNameColumn.setPrefWidth(columnWidth);
             offerTypeColumn.setPrefWidth(columnWidth);
             offerStatusColumn.setPrefWidth(columnWidth);
             presentationDateColumn.setPrefWidth(columnWidth);
@@ -166,13 +175,10 @@ public class AgreementTableController implements Initializable {
             controller.setAgreementDetails(agreement);
 
             Stage stage = (Stage) agreementTable.getScene().getWindow();
-            Scene scene = new Scene(root, 600, 800);
+            Scene scene = new Scene(root);
 
             stage.setScene(scene);
             stage.sizeToScene();
-            stage.setMinWidth(root.minWidth(-1));
-            stage.setMinHeight(root.minHeight(-1));
-
             stage.setMinWidth(root.minWidth(-1));
             stage.setMinHeight(root.minHeight(-1));
             stage.setTitle("Update Agreement");
@@ -200,8 +206,8 @@ public class AgreementTableController implements Initializable {
 
     private boolean matchesSearchCriteria(Agreement agreement, String displayIDInput, String customerIDInput, String propertyIDInput, LocalDate dateInput, String offerTypeInput, String offerStatusInput) {
         return (displayIDInput.isEmpty() || String.valueOf(agreement.getDisplayID()).contains(displayIDInput)) &&
-                (customerIDInput.isEmpty() || String.valueOf(agreement.getCustomerID()).contains(customerIDInput)) &&
-                (propertyIDInput.isEmpty() || String.valueOf(agreement.getPropertyID()).contains(propertyIDInput)) &&
+                (customerIDInput.isEmpty() || String.valueOf(agreement.getCustomer().getCustomerId()).contains(customerIDInput)) &&
+                (propertyIDInput.isEmpty() || String.valueOf(agreement.getProperty().getId()).contains(propertyIDInput)) &&
                 (dateInput == null || agreement.getPresentationDate().equals(dateInput)) &&
                 (offerTypeInput == null || agreement.getOfferType().equalsIgnoreCase(offerTypeInput)) &&
                 (offerStatusInput == null || agreement.getOfferStatus().equalsIgnoreCase(offerStatusInput));
@@ -285,6 +291,7 @@ public class AgreementTableController implements Initializable {
             }
         }
     }
+
 
     public void setUserRole(String role) {
         this.userRole = role;
