@@ -33,7 +33,6 @@
                   <TableColumn fx:id="NameColumn" text="Name" />
                   <TableColumn fx:id="EmailColumn" text="Email" />
                   <TableColumn fx:id="PhoneColumn" text="Phone" />
-                  <TableColumn fx:id="passwordColumn" text="Password" />
                   <TableColumn fx:id="roleColumn" text="Role" />
                   <TableColumn fx:id="UpdateAgent" text="Update" />
                   <TableColumn fx:id="DeleteAgent" text="Delete" />

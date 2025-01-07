@@ -93,7 +93,7 @@ public class CreateAccountForAgentController {
         NameColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getName()));
         EmailColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getEmail()));
         PhoneColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getPhone()));
-        passwordColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getPassword()));
+        //passwordColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getPassword()));
         roleColumn.setCellValueFactory(data -> new ReadOnlyStringWrapper(data.getValue().getRole()));
         ObservableList<String> roles = FXCollections.observableArrayList("Admin", "Agent");
         roleChoiceBox.setItems(roles);
@@ -281,7 +281,7 @@ public class CreateAccountForAgentController {
             stage.showAndWait();
 
             // Refresh the TableView after updating
-           // agentTabel.setItems(FXCollections.observableArrayList(new AgentDOAImpl().getAll()));
+            // agentTabel.setItems(FXCollections.observableArrayList(new AgentDOAImpl().getAll()));
         } catch (IOException e) {
             e.printStackTrace();
         }
