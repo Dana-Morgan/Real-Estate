@@ -43,7 +43,7 @@ public class InteractionTableController implements Initializable {
     @FXML private TextArea additionalNotesArea;
     @FXML private Button addInteractionbtn, deleteInteractionButton, searchButton;
     @FXML private ChoiceBox<String> interactionTypeSearchField;
-    @FXML private TextField interactionIDSearchField, customerIDSearchField;
+    @FXML private TextField interactionIDSearchField, customerIDSearchField,customerNameSearchField;
 
     private ObservableList<Interaction> interactionList;
     private String userRole;
@@ -177,22 +177,26 @@ public class InteractionTableController implements Initializable {
     private void handleSearch() {
         String interactionIDInput = interactionIDSearchField.getText().trim();
         String customerIDInput = customerIDSearchField.getText().trim();
-        LocalDate dateInput = interactionDateSearchField.getValue();
+        String customerNameInput = customerNameSearchField.getText().trim();  // قراءة قيمة حقل اسم العميل
         String interactionTypeInput = interactionTypeSearchField.getValue();
+        LocalDate interactionDateInput = interactionDateSearchField.getValue();
 
+        // فلترة البيانات بناءً على المدخلات
         List<Interaction> filteredInteractions = interactionDAO.getAll().stream()
-                .filter(interaction -> matchesSearchCriteria(interaction, interactionIDInput, customerIDInput, dateInput, interactionTypeInput))
+                .filter(interaction -> matchesSearchCriteria(interaction, interactionIDInput, customerIDInput, customerNameInput, interactionTypeInput, interactionDateInput))
                 .collect(Collectors.toList());
 
         interactionTable.setItems(FXCollections.observableList(filteredInteractions));
     }
 
-    private boolean matchesSearchCriteria(Interaction interaction, String interactionIDInput, String customerIDInput, LocalDate dateInput, String interactionTypeInput) {
+    private boolean matchesSearchCriteria(Interaction interaction, String interactionIDInput, String customerIDInput, String customerNameInput, String interactionTypeInput, LocalDate interactionDateInput) {
         return (interactionIDInput.isEmpty() || String.valueOf(interaction.getInteractionID()).contains(interactionIDInput)) &&
                 (customerIDInput.isEmpty() || String.valueOf(interaction.getCustomer().getCustomerId()).contains(customerIDInput)) &&
-                (dateInput == null || interaction.getInteractionDate().equals(dateInput)) &&
-                (interactionTypeInput == null || interaction.getInteractionType().equalsIgnoreCase(interactionTypeInput));
+                (customerNameInput.isEmpty() || interaction.getCustomer().getCustomerName().toLowerCase().contains(customerNameInput.toLowerCase())) &&  // فلترة حسب اسم العميل
+                (interactionTypeInput == null || interaction.getInteractionType().equalsIgnoreCase(interactionTypeInput)) &&
+                (interactionDateInput == null || interaction.getInteractionDate().equals(interactionDateInput));
     }
+
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);

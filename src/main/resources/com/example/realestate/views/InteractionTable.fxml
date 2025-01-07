@@ -48,6 +48,7 @@
         <HBox alignment="CENTER" spacing="10.0">
             <TextField fx:id="interactionIDSearchField" prefHeight="30.0" prefWidth="200.0" promptText="Interaction ID" />
             <TextField fx:id="customerIDSearchField" prefHeight="30.0" prefWidth="200.0" promptText="Customer ID" />
+            <TextField fx:id="customerNameSearchField" prefHeight="30.0" prefWidth="200.0" promptText="Customer Name" /> <!-- حقل البحث الجديد -->
             <ChoiceBox fx:id="interactionTypeSearchField" prefHeight="30.0" prefWidth="200.0"  />
             <DatePicker fx:id="interactionDateSearchField" prefHeight="30.0" prefWidth="200.0" promptText="Interaction Date"/>
             <Button fx:id="searchButton" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ADC867;" text="Search" textFill="WHITE">
@@ -56,6 +57,7 @@
                 </font>
             </Button>
         </HBox>
+
     </VBox>
 
     <TableView fx:id="interactionTable" AnchorPane.topAnchor="248.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
