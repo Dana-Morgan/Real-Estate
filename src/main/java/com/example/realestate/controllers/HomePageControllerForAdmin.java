@@ -111,10 +111,15 @@ public class HomePageControllerForAdmin {
         Label locationLabel = (Label) card.lookup("#locationLabel");
         Label roomCountLabel = (Label) card.lookup("#roomCountLabel");
         Label propertyTypeLabel = (Label) card.lookup("#propertyTypeLabel");
+        Label idLabel = (Label) card.lookup("#idLabel");
         ImageView imageView = (ImageView) card.lookup("#imageView");
 
         if (nameLabel != null) {
             nameLabel.setText(property.getName() != null ? property.getName() : "");
+        }
+        if (idLabel != null) {
+            int id = property.getId();
+            idLabel.setText("ID: " + (id != 0 ? String.valueOf(id) : "ID not available"));
         }
 
         if (priceLabel != null) {

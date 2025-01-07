@@ -149,7 +149,7 @@ public class ListingPageControllers {
         Label locationLabel = (Label) card.lookup("#locationLabel");
         Label roomCountLabel = (Label) card.lookup("#roomCountLabel");
         Label propertyTypeLabel = (Label) card.lookup("#propertyTypeLabel");
-        Label idLabel = (Label) card.lookup("#idLabel"); // إضافة الـ Label لعرض ID
+        Label idLabel = (Label) card.lookup("#idLabel");
         ImageView imageView = (ImageView) card.lookup("#imageView");
 
         nameLabel.setText(property.getName());
@@ -159,7 +159,7 @@ public class ListingPageControllers {
         locationLabel.setText(property.getLocation());
         roomCountLabel.setText(property.getNumberOfRooms() + " rooms");
         propertyTypeLabel.setText(property.getPropertyType());
-        idLabel.setText("ID: " + property.getId()); // عرض الـ ID في البطاقة
+        idLabel.setText("ID: " + property.getId());
 
         String imageUrl = property.getImage();
         if (imageUrl != null && !imageUrl.isEmpty()) {

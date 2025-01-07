@@ -112,6 +112,7 @@ public class HomePageControllerForAgent {
         Label locationLabel = (Label) card.lookup("#locationLabel");
         Label roomCountLabel = (Label) card.lookup("#roomCountLabel");
         Label propertyTypeLabel = (Label) card.lookup("#propertyTypeLabel");
+        Label idLabel = (Label) card.lookup("#idLabel");
         ImageView imageView = (ImageView) card.lookup("#imageView");
 
         if (nameLabel != null) {
@@ -135,6 +136,11 @@ public class HomePageControllerForAgent {
         if (statusLabel != null) {
             statusLabel.setText(property.getStatus() != null ? property.getStatus() : "Status not available");
         }
+        if (idLabel != null) {
+            int id = property.getId();
+            idLabel.setText("ID: " + (id != 0 ? String.valueOf(id) : "ID not available"));
+        }
+
 
 
         if (areaLabel != null) {
