@@ -9,5 +9,6 @@ public interface CustomerDAO {
     List<Customer> getAllCustomers();
     void delete(Customer customer);
     void update(Customer customer);
+    long getCustomerCount();
 
 }

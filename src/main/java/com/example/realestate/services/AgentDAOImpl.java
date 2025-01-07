@@ -24,15 +24,7 @@ public class AgentDAOImpl implements AgentDAO {
         sessionFactory = hibernateUtil.getSessionFactory();
     }
 
-    @Override
-    public long getAgentCount() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("SELECT COUNT(a) FROM Agent a", Long.class).uniqueResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
-        }
-    }
+
 
         @Override
     public void save(Agent agent) {

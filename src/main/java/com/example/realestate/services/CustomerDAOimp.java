@@ -92,5 +92,14 @@ public class CustomerDAOimp implements CustomerDAO {
             session.close();
         }
     }
+    @Override
+    public long getCustomerCount() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("SELECT COUNT(a) FROM Customer a", Long.class).uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 
 }

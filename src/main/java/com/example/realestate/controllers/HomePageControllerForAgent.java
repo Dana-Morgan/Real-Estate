@@ -2,7 +2,6 @@ package com.example.realestate.controllers;
 
 import com.example.realestate.services.*;
 import com.example.realestate.models.Property;
-import com.example.realestate.utils.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,9 +24,10 @@ public class HomePageControllerForAgent {
     private Stage stage;
     private Scene scene;
 
-    private final PropertyDAO propertyDAO;
-    private final AgentDAO agentDAO;
-    private final UserDOA userDAO;
+    // الحقول النهائية مع التهيئة الفورية
+    private final PropertyDAO propertyDAO = new PropertyDAOImpl();
+    private final CustomerDAO customerDAO = new CustomerDAOimp();
+    private final UserDOA userDAO = new UserDOAImpl();
 
     @FXML
     private TilePane tilePane;
@@ -36,27 +36,20 @@ public class HomePageControllerForAgent {
     private Label propertyCountLabel;
 
     @FXML
-    private Label agentCountLabel;
+    private Label customerCountLabel;
 
     @FXML
     private Label userCountLabel;
-
-    private String userRole;
-
-    public HomePageControllerForAgent() {
-        this.propertyDAO = new PropertyDAOImpl();
-        this.agentDAO = new AgentDAOImpl();
-        this.userDAO = new UserDOAImpl();
-    }
 
     @FXML
     public void initialize() {
         loadPropertiesFromDatabase();
         loadPropertyCount();
-        loadAgentCount();
+        loadCustomerCount();
         loadUserCount();
     }
- @FXML
+
+    @FXML
     private void loadUserCount() {
         try {
             long userCount = userDAO.getUserCount();
@@ -66,21 +59,23 @@ public class HomePageControllerForAgent {
             e.printStackTrace();
         }
     }
-@FXML
-    private void loadAgentCount() {
+
+    @FXML
+    private void loadCustomerCount() {
         try {
-            long count = agentDAO.getAgentCount();
-            agentCountLabel.setText(String.valueOf(count));
+            long customerCount = customerDAO.getCustomerCount();
+            customerCountLabel.setText(String.valueOf(customerCount));
         } catch (Exception e) {
-            agentCountLabel.setText("Error");
+            customerCountLabel.setText("Error");
             e.printStackTrace();
         }
     }
-@FXML
+
+    @FXML
     private void loadPropertyCount() {
         try {
-            long count = propertyDAO.getPropertyCount();
-            propertyCountLabel.setText(String.valueOf(count));
+            long propertyCount = propertyDAO.getPropertyCount();
+            propertyCountLabel.setText(String.valueOf(propertyCount));
         } catch (Exception e) {
             propertyCountLabel.setText("Error");
             e.printStackTrace();
@@ -114,6 +109,9 @@ public class HomePageControllerForAgent {
         Label priceLabel = (Label) card.lookup("#priceLabel");
         Label statusLabel = (Label) card.lookup("#statusLabel");
         Label areaLabel = (Label) card.lookup("#areaLabel");
+        Label locationLabel = (Label) card.lookup("#locationLabel");
+        Label roomCountLabel = (Label) card.lookup("#roomCountLabel");
+        Label propertyTypeLabel = (Label) card.lookup("#propertyTypeLabel");
         ImageView imageView = (ImageView) card.lookup("#imageView");
 
         if (nameLabel != null) {
@@ -138,6 +136,7 @@ public class HomePageControllerForAgent {
             statusLabel.setText(property.getStatus() != null ? property.getStatus() : "Status not available");
         }
 
+
         if (areaLabel != null) {
             String areaStr = property.getArea();
             if (areaStr != null && !areaStr.isEmpty()) {
@@ -150,6 +149,18 @@ public class HomePageControllerForAgent {
             } else {
                 areaLabel.setText("Area not available");
             }
+        }
+
+        if (propertyTypeLabel != null) {
+            propertyTypeLabel.setText(property.getPropertyType() != null ? property.getPropertyType() : "Type not available");
+        }
+        if (roomCountLabel != null) {
+            roomCountLabel.setText(property.getNumberOfRooms() != 0
+                    ? String.valueOf(property.getNumberOfRooms())
+                    : "Rooms not available");
+        }
+        if (locationLabel != null) {
+            locationLabel.setText(property.getLocation() != null ? property.getLocation() : "location not available");
         }
 
         if (imageView != null && property.getImage() != null) {
@@ -196,42 +207,16 @@ public class HomePageControllerForAgent {
 
     @FXML
     public void goToCustomerInteractionTable(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/InteractionTable.fxml"));
-            Parent root = loader.load();
-            InteractionTableController controller = loader.getController();
-            controller.setUserRole(SessionManager.getUserRole());
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1280, 832));
-            stage.show();
-        } catch (IOException e) {
-            System.err.println("Failed to load InteractionTable.fxml: " + e.getMessage());
-            e.printStackTrace();
-        }
+        loadPage(event, "/com/example/realestate/views/InteractionTable.fxml");
     }
 
     @FXML
     public void goToAgreementTable(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/AgreementTable.fxml"));
-            Parent root = loader.load();
-            AgreementTableController controller = loader.getController();
-            controller.setUserRole(SessionManager.getUserRole());
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root, 1280, 832));
-            stage.show();
-        } catch (IOException e) {
-            System.err.println("Failed to load AgreementTable.fxml: " + e.getMessage());
-            e.printStackTrace();
-        }
+        loadPage(event, "/com/example/realestate/views/AgreementTable.fxml");
     }
 
     @FXML
     public void goToLoginPage(ActionEvent event) {
         loadPage(event, "/com/example/realestate/views/Login.fxml");
-    }
-
-    public void setUserRole(String role) {
-        this.userRole = role;
     }
 }

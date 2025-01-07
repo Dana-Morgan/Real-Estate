@@ -16,8 +16,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
-import com.example.realestate.services.AgentDAO;
-import com.example.realestate.services.AgentDAOImpl;
+import com.example.realestate.services.CustomerDAO;
+import com.example.realestate.services.CustomerDAOimp;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,10 +30,10 @@ public class HomePageControllerForAdmin {
 
 
     private final PropertyDAO propertyDAO = new PropertyDAOImpl();
-    private final AgentDAO agentDAO = new AgentDAOImpl();
+    private final CustomerDAO customerDAO= new CustomerDAOimp();
     private final UserDOA userDAO = new UserDOAImpl();
     @FXML
-    private Label agentCountLabel;
+    private Label customerCountLabel;
 @FXML
     private Label userCountLabel;
 
@@ -44,7 +44,7 @@ public class HomePageControllerForAdmin {
     public void initialize() {
         loadPropertiesFromDatabase();
         loadPropertyCount();
-        loadAgentCount();
+        loadCustomerCount();
         loadUserCount();
 
     }
@@ -59,12 +59,12 @@ public class HomePageControllerForAdmin {
         }
     }
 @FXML
-    private void loadAgentCount() {
+    private void loadCustomerCount() {
         try {
-            long count = agentDAO.getAgentCount();
-            agentCountLabel.setText(String.valueOf(count));
+            long count = customerDAO.getCustomerCount();
+            customerCountLabel.setText(String.valueOf(count));
         } catch (Exception e) {
-            agentCountLabel.setText("Error");
+            customerCountLabel.setText("Error");
             e.printStackTrace();
         }
     }
@@ -108,6 +108,9 @@ public class HomePageControllerForAdmin {
         Label priceLabel = (Label) card.lookup("#priceLabel");
         Label statusLabel = (Label) card.lookup("#statusLabel");
         Label areaLabel = (Label) card.lookup("#areaLabel");
+        Label locationLabel = (Label) card.lookup("#locationLabel");
+        Label roomCountLabel = (Label) card.lookup("#roomCountLabel");
+        Label propertyTypeLabel = (Label) card.lookup("#propertyTypeLabel");
         ImageView imageView = (ImageView) card.lookup("#imageView");
 
         if (nameLabel != null) {
@@ -144,6 +147,18 @@ public class HomePageControllerForAdmin {
             } else {
                 areaLabel.setText("Area not available");
             }
+        }
+
+        if (propertyTypeLabel != null) {
+            propertyTypeLabel.setText(property.getPropertyType() != null ? property.getPropertyType() : "Type not available");
+        }
+        if (roomCountLabel != null) {
+            roomCountLabel.setText(property.getNumberOfRooms() != 0
+                    ? String.valueOf(property.getNumberOfRooms())
+                    : "Rooms not available");
+        }
+        if (locationLabel != null) {
+            locationLabel.setText(property.getLocation() != null ? property.getLocation() : "location not available");
         }
 
         if (imageView != null && property.getImage() != null) {
