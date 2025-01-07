@@ -268,7 +268,7 @@ public class CreateAccountForAgentController {
             Parent root = loader.load();
 
             // Pass the selected agent to the update form controller
-            AgentUpdateController controller = loader.getController();
+            UserUpdateController controller = loader.getController();
             controller.setAgent(user, new UserDOAImpl());
 
             // Show the update form in a new stage

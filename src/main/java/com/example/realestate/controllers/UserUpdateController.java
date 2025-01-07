@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class AgentUpdateController {
+public class UserUpdateController {
 
     @FXML
     public ChoiceBox<String> roleChoiceBox;
