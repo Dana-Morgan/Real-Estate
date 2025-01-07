@@ -2,6 +2,7 @@ package com.example.realestate.controllers;
 
 import com.example.realestate.models.Property;
 import com.example.realestate.services.PropertyDAO;
+import com.example.realestate.utils.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+
 
 public class ListingPageControllers {
 
@@ -39,6 +42,9 @@ public class ListingPageControllers {
     private final PropertyDAO propertyDAO = new PropertyDAOImpl();
 
 
+    private String userRole;
+    @FXML
+    public Button homeButton;
 
     @FXML
     public void initialize() {
@@ -135,6 +141,7 @@ public class ListingPageControllers {
     }
 
     private void updateCardComponents(AnchorPane card, Property property) {
+        // تحديث الـ Labels الأخرى
         Label nameLabel = (Label) card.lookup("#nameLabel");
         Label priceLabel = (Label) card.lookup("#priceLabel");
         Label statusLabel = (Label) card.lookup("#statusLabel");
@@ -142,6 +149,7 @@ public class ListingPageControllers {
         Label locationLabel = (Label) card.lookup("#locationLabel");
         Label roomCountLabel = (Label) card.lookup("#roomCountLabel");
         Label propertyTypeLabel = (Label) card.lookup("#propertyTypeLabel");
+        Label idLabel = (Label) card.lookup("#idLabel"); // إضافة الـ Label لعرض ID
         ImageView imageView = (ImageView) card.lookup("#imageView");
 
         nameLabel.setText(property.getName());
@@ -151,6 +159,7 @@ public class ListingPageControllers {
         locationLabel.setText(property.getLocation());
         roomCountLabel.setText(property.getNumberOfRooms() + " rooms");
         propertyTypeLabel.setText(property.getPropertyType());
+        idLabel.setText("ID: " + property.getId()); // عرض الـ ID في البطاقة
 
         String imageUrl = property.getImage();
         if (imageUrl != null && !imageUrl.isEmpty()) {
@@ -171,20 +180,42 @@ public class ListingPageControllers {
     }
     @FXML
     private void handleNavigateToHomeButton(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/realestate/views/HomePageForAdmin.fxml"));
-            Parent root = loader.load();
+        userRole = SessionManager.getUserRole();
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        System.out.println("User role from session: " + userRole);
 
-            Scene scene = new Scene(root, 1400, 780);
-            stage.setScene(scene);
-            stage.show();
-
-            System.out.println("Navigated to HomePage successfully!");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Error loading HomePageForAdmin.fxml: " + e.getMessage());
+        if (userRole == null) {
+            System.out.println("User role is null! Make sure to set it before initialization.");
+        } else {
+            System.out.println("User role: " + userRole);
         }
+        if (Objects.equals(SessionManager.getUserRole(), "Admin")) {
+            System.out.println("Navigating to Admin home page");
+            navigateTo("/com/example/realestate/views/HomePageForAdmin.fxml", "Admin Home Page");
+        } else if (Objects.equals(SessionManager.getUserRole(), "Agent")) {
+            System.out.println("Navigating to Agent home page");
+            navigateTo("/com/example/realestate/views/HomePageForAgent.fxml", "Agent Home Page");
+        }
+
+
     }
+    private void navigateTo(String fxmlPath, String title) {
+        System.out.println("Entering load FXML function.");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        try {
+            Parent root = loader.load();
+            System.out.println("FXML file loaded successfully.");
+            Stage stage = (Stage) homeButton.getScene().getWindow();
+            Scene scene;
+            scene = new Scene(root, 1400, 780);
+            stage.setScene(scene);
+            stage.sizeToScene();
+            stage.setMinWidth(root.minWidth(-1));
+            stage.setMinHeight(root.minHeight(-1));
+
+            stage.setTitle(title);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Error loading FXML: " + e.getMessage());
 }
+}}

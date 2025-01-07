@@ -64,6 +64,13 @@
                 </font>
             </Label>
 
+            <!-- New ID Label -->
+            <Label fx:id="idLabel" style="-fx-font-weight: bold; -fx-font-size: 12px; color: #757575;">
+                <font>
+                    <Font size="12.0"/>
+                </font>
+            </Label>
+
             <Button text="More Details" style="-fx-background-color: #BDB4C8; -fx-text-fill: white; -fx-background-radius: 5;">
                 <font>
                     <Font size="14.0"/>
